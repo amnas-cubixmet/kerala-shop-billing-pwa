@@ -3,7 +3,7 @@ const RELEASE_ID = '__RELEASE_ID__';
 const SHELL_PREFIX = 'ksb-shell-';
 const SHELL_CACHE = `${SHELL_PREFIX}${RELEASE_ID}`;
 const PHOTO_CACHE = 'ksb-photos-v1';
-const SHELL_URLS = ['/', '/offline.html', '/icons/icon-192.png', '/icons/icon-512.png'];
+const SHELL_URLS = ['/', '/offline.html', '/icons/icon-192.png', '/icons/icon-512.png', '/apple-touch-icon.png', '/favicon.png'];
 
 function linkedBuildFiles(html) {
   const matches = html.matchAll(/(?:src|href)=["'](\/_next\/static\/[^"'?]+)(?:\?[^"']*)?["']/g);
@@ -108,7 +108,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if (url.pathname.startsWith('/_next/static/') || url.pathname.startsWith('/icons/') || url.pathname === '/manifest.webmanifest') {
+  if (url.pathname.startsWith('/_next/static/') || url.pathname.startsWith('/icons/') || url.pathname === '/apple-touch-icon.png' || url.pathname === '/favicon.png' || url.pathname === '/manifest.webmanifest') {
     event.respondWith((async () => {
       const cache = await caches.open(SHELL_CACHE);
       const saved = await cache.match(request);

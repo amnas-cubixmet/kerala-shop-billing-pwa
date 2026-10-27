@@ -22,7 +22,7 @@ function download(name: string, text: string) {
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
-export async function exportBackup(): Promise<void> {
+export async function prepareBackupFile(): Promise<File> {
   // Single readonly snapshot transaction. Do NOT call crypto inside Dexie transaction.
   const data = await db.transaction('r', [db.shops, db.products, db.customers, db.invoices, db.invoiceItems, db.stockMovements, db.expenses, db.counters], async (): Promise<Data> => ({
     shops: await db.shops.toArray(), products: await db.products.toArray(),
@@ -33,7 +33,11 @@ export async function exportBackup(): Promise<void> {
   const core = { app: 'FreeShopBilling' as const, version: BACKUP_VERSION, exportedAt: new Date().toISOString(), data };
   const sha256 = await digest(JSON.stringify(core));
   const backup: BackupEnvelope = { ...core, sha256 };
-  download(`shop-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(backup));
+  return new File([JSON.stringify(backup)],`shop-backup-${new Date().toISOString().slice(0,10)}.json`,{type:'application/json'});
+}
+export async function exportBackup(): Promise<void> {
+  const file=await prepareBackupFile();
+  download(file.name,await file.text());
 }
 function validateData(data: unknown): asserts data is Data {
   if (!data || typeof data !== 'object') throw new Error('Missing backup data.');

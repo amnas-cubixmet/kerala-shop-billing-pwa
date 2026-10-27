@@ -8,7 +8,7 @@ const texts: Record<string, [string,string]> = {
   dashboard:['Dashboard','ഡാഷ്ബോർഡ്'], billing:['Record Sale','വിൽപ്പന'], products:['Products & Stock','സാധനങ്ങളും സ്റ്റോക്കും'],
   expenses:['Expenses','ചെലവുകൾ'], reports:['Sales Reports','വിൽപ്പന റിപ്പോർട്ട്'], settings:['Settings & Backup','ക്രമീകരണങ്ങളും ബാക്കപ്പും'],
   home:['Home','ഹോം'], sale:['Sale','വിൽപ്പന'], stock:['Stock','സ്റ്റോക്ക്'], more:['More','കൂടുതൽ'], online:['Online','ഓൺലൈൻ'],offline:['Offline','ഓഫ്‌ലൈൻ'],
-  newSale:['New Sale','പുതിയ വിൽപ്പന'], shopWorkspace:['SHOP WORKSPACE','കടയുടെ കണക്കുകൾ'],
+  newSale:['New Sale','പുതിയ വിൽപ്പന'],
   welcome:['Welcome back!','നമസ്കാരം!'], welcomeSub:['Track your shop sales and expenses today.','ഇന്നത്തെ വിൽപ്പനയും ചെലവും ഇവിടെ അറിയാം.'],
   todaySales:["Today's sales",'ഇന്നത്തെ വിൽപ്പന'], todayExpenses:["Today's expenses",'ഇന്നത്തെ ചെലവ്'],
   todayCount:['Sales today','ഇന്നത്തെ വിൽപ്പനകൾ'], monthlySales:['Monthly sales','മാസത്തെ വിൽപ്പന'],

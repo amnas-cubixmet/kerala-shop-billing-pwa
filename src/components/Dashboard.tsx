@@ -25,7 +25,7 @@ export default function Dashboard({navigate}:{navigate:(next:string)=>void}) {
   const low=products.filter(p=>p.active&&p.stockMilli<=p.lowStockMilli);
   const recent=active([...invoices]).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,6);
   return <div className="stack">
-    <div className="welcome"><div><div className="eyebrow">{t('shopWorkspace')} <span className="eyebrow-star">✳</span></div><h1>{t('welcome')}</h1><p>{t('welcomeSub')}</p><div className="dashboard-date"><CalendarDays size={15}/>{new Date().toLocaleDateString(language==='ml'?'ml-IN':'en-IN',{day:'numeric',month:'long',year:'numeric'})}</div></div><button className="button primary dashboard-cta" onClick={()=>navigate('billing')}><Plus size={19}/>{t('newSale')}</button></div>
+    <div className="welcome"><div><h1>{t('welcome')}</h1><p>{t('welcomeSub')}</p><div className="dashboard-date"><CalendarDays size={15}/>{new Date().toLocaleDateString(language==='ml'?'ml-IN':'en-IN',{day:'numeric',month:'long',year:'numeric'})}</div></div><button className="button primary dashboard-cta" onClick={()=>navigate('billing')}><Plus size={19}/>{t('newSale')}</button></div>
     <div className="metrics">
       <Metric label={t('todaySales')} value={fmt(todaySales)} icon={<TrendingUp size={19}/>} variant="primary"/>
       <Metric label={t('todayCount')} value={String(todays.length)} icon={<Receipt size={19}/>}/>

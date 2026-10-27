@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useState} from 'react';
 import {useLiveQuery} from 'dexie-react-hooks';
-import {BarChart3, Boxes, ChevronDown, LayoutDashboard, Menu, Plus, Receipt, Settings2, ShieldCheck, Sparkles, Wallet, Wifi, WifiOff, X} from 'lucide-react';
+import {BarChart3, Boxes, ChevronDown, LayoutDashboard, Menu, Plus, Receipt, Settings2, HardDriveDownload, ShieldCheck, Wallet, Wifi, WifiOff, X} from 'lucide-react';
 import {db} from '@/db/database';
 import {initShop} from '@/services/store';
 import {useLanguage} from '@/lib/language';
@@ -44,14 +44,15 @@ export default function ShopApp(){
   return <div className="app-root"><PWAUpdateManager/>
     {sidebar&&<button className="overlay" aria-label="Close navigation" onClick={()=>setSidebar(false)}/>}
     <aside className={`sidebar ${sidebar?'open':''}`}>
-      <div className="brand"><div className="brand-mark"><span>SB</span></div><div><strong>Shop Billing<span className="brand-dot">.</span></strong><small>{t('shopWorkspace')}</small></div><button className="mobile-close icon-button" onClick={()=>setSidebar(false)} aria-label="Close menu"><X size={18}/></button></div>
-      <div className="nav-label">{t('shopWorkspace')}</div>
+      <div className="brand"><div className="brand-mark"><span>SB</span></div><div><strong>Shop Billing<span className="brand-dot">.</span></strong></div><button className="mobile-close icon-button" onClick={()=>setSidebar(false)} aria-label="Close menu"><X size={18}/></button></div>
+      <div className="nav-label">{language==='ml'?'മെനു':'MENU'}</div>
       <nav aria-label="Main navigation">{nav.map(n=>{const Icon=n.icon;return <button key={n.id} className={`nav-link ${selected===n.id?'active':''}`} onClick={()=>navigate(n.id)}><Icon size={19}/>{t(n.label)}</button>})}</nav>
       <div className="sidebar-bottom"><div className="device-private-note"><ShieldCheck size={17}/><div><strong>{t('storedHere')}</strong><span>IndexedDB</span></div></div><div className="store-mini"><div className="store-avatar">{(shop?.name||'S').charAt(0).toUpperCase()}</div><div><strong>{shop?.name||'My Shop'}</strong><span>{t('storage')}</span></div></div></div>
     </aside>
     <div className="content-area"><header className="topbar">
       <div className="topbar-left"><button className="hamburger icon-button" onClick={()=>setSidebar(true)} aria-label="Open menu"><Menu size={22}/></button><div className="mobile-brand-mark">SB</div><div className="topbar-titles"><div className="topbar-overline">{shop?.name||'MY STORE'} <ChevronDown size={13}/></div><div className="breadcrumb">{t(nav.find(n=>n.id===selected)?.label||'dashboard')}</div></div></div>
       <div className="topbar-actions">
+        <button type="button" className="header-backup-shortcut" aria-label={t('backupTitle')} title={t('backupTitle')} onClick={()=>navigate('settings')}><HardDriveDownload size={18}/></button>
         <div className="language-switch" role="group" aria-label={t('langToggle')}>
           <button type="button" aria-label="മലയാളം" aria-pressed={language==='ml'} className={language==='ml'?'chosen':''} onClick={()=>setLanguage('ml')}>മ</button>
           <button type="button" aria-label="English" aria-pressed={language==='en'} className={language==='en'?'chosen':''} onClick={()=>setLanguage('en')}>EN</button>
@@ -60,7 +61,7 @@ export default function ShopApp(){
         <button className="topbar-new-bill" onClick={()=>navigate('billing')} aria-label={t('newSale')}><Plus size={17}/><span>{t('newSale')}</span></button>
       </div>
     </header>
-      <main className="main-content"><div className="mobile-page-intro"><span><Sparkles size={14}/>{t('shopWorkspace')}</span></div>{message&&<div className={`toast ${message.kind}`} role="status"><span>{message.text}</span><button aria-label="Dismiss notification" onClick={()=>setMessage(null)}><X size={15}/></button></div>}
+      <main className="main-content">{message&&<div className={`toast ${message.kind}`} role="status"><span>{message.text}</span><button aria-label="Dismiss notification" onClick={()=>setMessage(null)}><X size={15}/></button></div>}
         {selected==='dashboard'&&<Dashboard navigate={navigate}/>}
         {selected==='billing'&&<Billing notify={notify}/>}
         {selected==='products'&&<Products notify={notify}/>}

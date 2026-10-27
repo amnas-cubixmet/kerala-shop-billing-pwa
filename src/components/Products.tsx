@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Database, Download, HardDrive, ImagePlus, PackagePlus, Pencil, Search, ToggleLeft, ToggleRight, Upload, X } from 'lucide-react';
 import { db } from '@/db/database';
@@ -39,6 +39,9 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
   const {language,t,productName,categoryName}=useLanguage();
   const products = useLiveQuery(()=>db.products.orderBy('name').toArray(),[]) ?? [];
   const [editing,setEditing] = useState<ProductInput|null>(null);
+  const editorRef=useRef<HTMLDivElement>(null);
+  const editorKey=editing?(editing.id||'new'):'';
+  useEffect(()=>{if(!editorKey)return;const id=window.requestAnimationFrame(()=>editorRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));return()=>window.cancelAnimationFrame(id);},[editorKey]);
   const [search,setSearch] = useState('');
   const [filter,setFilter] = useState('all');
   const [brandFilter,setBrandFilter] = useState('all');
@@ -68,7 +71,6 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
       sku:p.sku,category:p.category,unit:p.unit,price:p.isTemplate?'':String(p.pricePaise/100),
       cost:String(p.costPaise/100),tax:String(p.taxBps/100),stock:qtyText(p.stockMilli).replaceAll(',',''),
       lowStock:qtyText(p.lowStockMilli).replaceAll(',','')});
-    window.scrollTo({top:0,behavior:'smooth'});
   }
   async function insertPresets(group:PresetGroup) {
     if(busy)return;setBusy(true);
@@ -109,22 +111,11 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
   return <div className="stack">
     <div className="page-heading">
       <div><h1>{t('productCatalog')}</h1><p>{t('productsIntro')}</p></div>
-      <button className="button primary" onClick={()=>{setEditing({...blank});window.scrollTo({top:0,behavior:'smooth'});}}><PackagePlus size={17}/> {t('addProduct')}</button>
+      <button className="button primary" onClick={()=>setEditing({...blank})}><PackagePlus size={17}/> {t('addProduct')}</button>
     </div>
     <div className="notice good"><HardDrive size={19}/><span><strong>IndexedDB:</strong> {t('localPrivacy')}</span></div>
     <div className="notice"><span>📦 <strong>{language==='ml'?'ബ്രാൻഡ് ലിസ്റ്റ് മാതൃകയാണ്. സാധനത്തിന്റെ പാക്കറ്റ്, വില, ബാർകോഡ്, നികുതി എന്നിവ ശരിയായി പരിശോധിക്കുക. ഔദ്യോഗിക ബ്രാൻഡ് ഫോട്ടോകൾ ഉൾപ്പെടുത്തിയിട്ടില്ല.':'Brand catalog is a suggestion. Verify actual product, pack size, MRP, barcode and tax. Official brand photos are not included.'}</strong></span></div>
-    <div className="csv-toolbar"><button className="button primary" disabled={busy} onClick={()=>void insertAllPresets()}><PackagePlus size={17}/> {t('addAll')}</button><span className="small muted">{language==='ml'?'350 പഴയതും 500 പുതിയതും. പഴയ വിലയും ചിത്രങ്ങളും മാറ്റില്ല.':'350 existing + 500 new templates. Existing prices and images are preserved.'}</span></div>
-    <div className="catalog-cards">{categories.map(row=>{
-      const count= row.group==='vegetables'?KERALA_VEGETABLES.filter(v=>present.has(v.id)).length:row.group==='fruits'?KERALA_FRUITS.filter(v=>present.has(v.id)).length:row.group==='foods'?KERALA_FOODS.filter(v=>present.has(v.id)).length:KERALA_BRANDED_PRESETS.filter(v=>present.has(v.id) && (row.group==='bakery'?v.category.startsWith('Bakery'):row.group==='sweets'?v.category.startsWith('Sweets'):v.category.startsWith('Branded'))).length;
-      return <div className="catalog-card" key={row.group}><span className="catalog-card-icon" aria-hidden="true">{row.emoji}</span><strong>{row.label.split(' / ')[language==='en'?0:1]||row.label}</strong><p>{count} / {row.count} {t('alreadyAdded')}</p><button className="button secondary" disabled={busy||count===row.count} onClick={()=>void insertPresets(row.group)}>{count===row.count?t('alreadyAdded'):`${t('add')} ${row.count-count}`}</button></div>;
-    })}</div>
-    <Panel title={t('csvTools')} sub={t('csvIntro')}>
-      <div className="csv-toolbar"><button className="button secondary" onClick={downloadCsvTemplate}><Download size={16}/> {t('template')}</button>
-        <input className="sr-only" ref={csvRef} type="file" accept=".csv,text/csv" onChange={e=>void importCsv(e.target.files?.[0])}/>
-        <button className="button secondary" disabled={busy} onClick={()=>csvRef.current?.click()}><Upload size={16}/> {t('importCsv')} (1,000)</button></div>
-      <p className="small muted">{language==='ml'?'CSV-യിൽ മലയാളം/ഇംഗ്ലീഷ് പേര്, വിഭാഗം, വില, സ്റ്റോക്ക്, ബ്രാൻഡ് എന്നിവ ചേർക്കാം. ഫയൽ സെർവറിലേക്ക് അപ്‌ലോഡ് ചെയ്യില്ല.':'CSV supports Malayalam/English names, category, price, stock and brand. Nothing is uploaded to a server.'}</p>
-    </Panel>
-    {editing&&<Panel title={editing.id?t('editProduct'):t('addProduct')} sub={t('nameHint')}>
+    {editing&&<div className="product-editor-anchor" ref={editorRef}><Panel title={editing.id?t('editProduct'):t('addProduct')} sub={t('nameHint')}>
       <form onSubmit={submit} className="form-grid">
         <Field label={`${t('productName')} *`}><input required maxLength={100} value={language==='ml'?editing.malayalamName:editing.englishName} onChange={e=>update(language==='ml'?'malayalamName':'englishName',e.target.value)} placeholder={language==='ml'?'ഉദാ: ആപ്പിൾ':'e.g. Apple'}/></Field>
         <Field label={t('brand')}><input maxLength={100} value={editing.brand} onChange={e=>update('brand',e.target.value)} placeholder="Britannia / Parle / Local Bakery"/></Field>
@@ -148,7 +139,18 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
         <Field label={t('barcode')}><input maxLength={80} value={editing.sku} onChange={e=>update('sku',e.target.value)}/></Field>
         <div className="form-actions"><button className="button primary" disabled={busy||loadingImage}>{busy?t('saving'):t('saveProduct')}</button><button type="button" className="button ghost" onClick={()=>setEditing(null)}>{t('cancel')}</button></div>
       </form>
-    </Panel>}
+    </Panel></div>}
+    <div className="csv-toolbar"><button className="button primary" disabled={busy} onClick={()=>void insertAllPresets()}><PackagePlus size={17}/> {t('addAll')}</button><span className="small muted">{language==='ml'?'350 പഴയതും 500 പുതിയതും. പഴയ വിലയും ചിത്രങ്ങളും മാറ്റില്ല.':'350 existing + 500 new templates. Existing prices and images are preserved.'}</span></div>
+    <div className="catalog-cards">{categories.map(row=>{
+      const count= row.group==='vegetables'?KERALA_VEGETABLES.filter(v=>present.has(v.id)).length:row.group==='fruits'?KERALA_FRUITS.filter(v=>present.has(v.id)).length:row.group==='foods'?KERALA_FOODS.filter(v=>present.has(v.id)).length:KERALA_BRANDED_PRESETS.filter(v=>present.has(v.id) && (row.group==='bakery'?v.category.startsWith('Bakery'):row.group==='sweets'?v.category.startsWith('Sweets'):v.category.startsWith('Branded'))).length;
+      return <div className="catalog-card" key={row.group}><span className="catalog-card-icon" aria-hidden="true">{row.emoji}</span><strong>{row.label.split(' / ')[language==='en'?0:1]||row.label}</strong><p>{count} / {row.count} {t('alreadyAdded')}</p><button className="button secondary" disabled={busy||count===row.count} onClick={()=>void insertPresets(row.group)}>{count===row.count?t('alreadyAdded'):`${t('add')} ${row.count-count}`}</button></div>;
+    })}</div>
+    <Panel title={t('csvTools')} sub={t('csvIntro')}>
+      <div className="csv-toolbar"><button className="button secondary" onClick={downloadCsvTemplate}><Download size={16}/> {t('template')}</button>
+        <input className="sr-only" ref={csvRef} type="file" accept=".csv,text/csv" onChange={e=>void importCsv(e.target.files?.[0])}/>
+        <button className="button secondary" disabled={busy} onClick={()=>csvRef.current?.click()}><Upload size={16}/> {t('importCsv')} (1,000)</button></div>
+      <p className="small muted">{language==='ml'?'CSV-യിൽ മലയാളം/ഇംഗ്ലീഷ് പേര്, വിഭാഗം, വില, സ്റ്റോക്ക്, ബ്രാൻഡ് എന്നിവ ചേർക്കാം. ഫയൽ സെർവറിലേക്ക് അപ്‌ലോഡ് ചെയ്യില്ല.':'CSV supports Malayalam/English names, category, price, stock and brand. Nothing is uploaded to a server.'}</p>
+    </Panel>
     <Panel title={`${t('myProducts')} (${products.length})`} action={<div className="search"><Search size={16}/><input aria-label={t('searchProducts')} placeholder={t('searchProducts')} value={search} onChange={e=>{setSearch(e.target.value);setVisibleCount(60);}}/></div>}>
       <div className="catalog-filters" aria-label="Filter products">{[
         ['all',t('all')],['vegetables',t('vegetables')],['fruits',t('fruits')],['foods',t('foods')],['bakery',t('bakery')],['sweets',t('sweets')],['branded',t('branded')],['mine',t('mine')]
@@ -159,7 +161,7 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
         <td data-label="Price">{p.isTemplate?<span className="pill danger">{language==='ml'?'വില നൽകുക':'Set price'}</span>:<strong>{fmt(p.pricePaise)}/{p.unit}</strong>}</td>
         <td data-label="Stock"><span className={p.stockMilli<=p.lowStockMilli?'danger-text':''}>{qtyText(p.stockMilli)} {p.unit}</span></td>
         <td data-label="Status"><span className={`pill ${p.active?'green':'neutral'}`}>{p.active?t('active'):t('inactive')}</span></td>
-        <td data-label="Actions"><div className="actions"><button title="Edit name, picture, price, stock" aria-label={`Edit ${p.name}`} className="icon-button" onClick={()=>edit(p)}><Pencil size={17}/></button><button disabled={p.isTemplate} title={p.isTemplate?'Set price first':'Hide/show'} aria-label={`Toggle ${p.name}`} className="icon-button" onClick={async()=>{try{await toggleProduct(p.id)}catch(e){notify(safeError(e),'error')}}}>{p.active?<ToggleRight size={19}/>:<ToggleLeft size={19}/>}</button></div></td>
+        <td data-label="Actions"><div className="actions"><button title="Edit name, picture, price, stock" aria-label={`Edit ${p.name}`} className="button secondary product-edit-button" onClick={()=>edit(p)}><Pencil size={16}/><span>{language==='ml'?'മാറ്റുക':'Edit'}</span></button><button disabled={p.isTemplate} title={p.isTemplate?'Set price first':'Hide/show'} aria-label={`Toggle ${p.name}`} className="icon-button" onClick={async()=>{try{await toggleProduct(p.id)}catch(e){notify(safeError(e),'error')}}}>{p.active?<ToggleRight size={19}/>:<ToggleLeft size={19}/>}</button></div></td>
       </tr>)}</tbody></table><div className="csv-toolbar"><span className="small muted">Showing {Math.min(visibleCount,filtered.length)} of {filtered.length} products</span>{visibleCount<filtered.length && <button className="button secondary" onClick={()=>setVisibleCount(n=>n+60)}>Show more / കൂടുതൽ കാണുക</button>}</div></div>}
     </Panel>
   </div>;
