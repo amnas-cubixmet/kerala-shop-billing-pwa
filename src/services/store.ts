@@ -44,7 +44,6 @@ export async function saveProduct(data: ProductInput): Promise<void> {
   if (!data.name.trim() && !data.malayalamName.trim() && !data.englishName.trim()) throw new Error('Product name required.');
   const pricePaise = rupeeToPaise(data.price);
   const costPaise = rupeeToPaise(data.cost);
-  const stockMilli = unitsToMilli(data.stock);
   const lowStockMilli = unitsToMilli(data.lowStock);
   const tax = Number(data.tax);
   if (!['0', '3', '5', '12', '18', '28'].includes(String(tax))) throw new Error('Choose a valid tax rate.');
@@ -54,6 +53,8 @@ export async function saveProduct(data: ProductInput): Promise<void> {
   const now = new Date().toISOString();
   await db.transaction('rw', db.products, db.stockMovements, async () => {
     const existing = data.id ? await db.products.get(data.id) : undefined;
+    // Empty optional stock does not erase quantities previously saved on this device.
+    const stockMilli = data.stock.trim() === '' ? (existing?.stockMilli ?? 0) : unitsToMilli(data.stock);
     if (data.id && !existing) throw new Error('Product no longer exists.');
     if (data.sku.trim()) {
       const duplicate = await db.products.where('sku').equals(data.sku.trim()).first();
