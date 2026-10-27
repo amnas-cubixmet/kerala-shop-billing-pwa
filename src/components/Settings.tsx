@@ -30,7 +30,6 @@ export default function Settings({notify}:{notify:(text:string,kind?:'error'|'su
   function share(){if(!backupFile)return;const files=[backupFile];if(navigator.share&&(!navigator.canShare||navigator.canShare({files}))){
     void navigator.share({title:'Shop Billing backup',files}).then(()=>{setSavedCurrentBackup(true);notify(ml?'Share പൂർത്തിയായി. Files-ൽ ശരിയായി സേവ് ചെയ്തെന്ന് പരിശോധിക്കുക.':'Share completed. Verify the file is actually saved in Files.');}).catch(err=>{if((err as Error).name!=='AbortError')notify(safeError(err),'error');});
   }else notify(ml?'ഈ Browser-ൽ File Share ലഭ്യമല്ല. Download JSON ഉപയോഗിക്കുക.':'File sharing unavailable. Use Download JSON.','error');}
-  }
   async function restore(file?:File){if(!file)return;
     if(!savedCurrentBackup||!understood){notify(ml?'ആദ്യം ഇപ്പോഴത്തെ ബാക്കപ്പ് Downloads/Files-ൽ Save ചെയ്ത് Restore സമ്മതിക്കുക.':'Save a backup first and acknowledge the replacement risk.','error');return;}
     if(!confirm(ml?`${file.name} ഉപയോഗിച്ച് ഈ ഫോണിലെ എല്ലാ കട വിവരങ്ങളും മാറ്റണോ? മുമ്പത്തെ ബാക്കപ്പ് ഇല്ലെങ്കിൽ തിരികെ കിട്ടില്ല.`:`Replace ALL local shop data with ${file.name}? This cannot be undone without a backup.`))return;
