@@ -24,7 +24,7 @@ function download(name: string, text: string) {
 }
 export async function exportBackup(): Promise<void> {
   // Single readonly snapshot transaction. Do NOT call crypto inside Dexie transaction.
-  const data = await db.transaction('r', db.shops, db.products, db.customers, db.invoices, db.invoiceItems, db.stockMovements, db.expenses, db.counters, async (): Promise<Data> => ({
+  const data = await db.transaction('r', [db.shops, db.products, db.customers, db.invoices, db.invoiceItems, db.stockMovements, db.expenses, db.counters], async (): Promise<Data> => ({
     shops: await db.shops.toArray(), products: await db.products.toArray(),
     customers: await db.customers.toArray(), invoices: await db.invoices.toArray(),
     invoiceItems: await db.invoiceItems.toArray(), stockMovements: await db.stockMovements.toArray(),
@@ -70,7 +70,7 @@ export async function importBackup(file: File): Promise<{ products: number; invo
   const { app, version, exportedAt, data, sha256 } = backup as BackupEnvelope;
   if (await digest(JSON.stringify({ app, version, exportedAt, data })) !== sha256) throw new Error('Backup checksum mismatch.');
   // All tables replaced atomically, including invoice counter. The calling UI requires explicit approval.
-  await db.transaction('rw', db.shops, db.products, db.customers, db.invoices, db.invoiceItems, db.stockMovements, db.expenses, db.counters, async () => {
+  await db.transaction('rw', [db.shops, db.products, db.customers, db.invoices, db.invoiceItems, db.stockMovements, db.expenses, db.counters], async () => {
     await db.shops.clear(); await db.products.clear(); await db.customers.clear();
     await db.invoices.clear(); await db.invoiceItems.clear(); await db.stockMovements.clear();
     await db.expenses.clear(); await db.counters.clear();
