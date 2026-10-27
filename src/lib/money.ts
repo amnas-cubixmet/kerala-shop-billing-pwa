@@ -31,7 +31,6 @@ export function calculateQuote(cart: CartEntry[], products: Product[], discountP
     const p = map.get(productId);
     if (!p || !p.active) throw new Error('Product unavailable.');
     if (!Number.isSafeInteger(quantityMilli) || quantityMilli <= 0) throw new Error('Invalid quantity.');
-    if (quantityMilli > p.stockMilli) throw new Error(`Insufficient stock for ${p.name}.`);
     const subtotalPaise = Math.round(p.pricePaise * quantityMilli / 1000);
     if (!Number.isSafeInteger(subtotalPaise)) throw new Error('Bill amount too large.');
     return { p, quantityMilli, subtotalPaise };

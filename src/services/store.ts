@@ -2,8 +2,8 @@ import { db } from '@/db/database';
 import { KERALA_VEGETABLES } from '@/lib/vegetables';
 import { KERALA_FRUITS, KERALA_FOODS, type FoodPreset } from '@/lib/food-catalog';
 import { KERALA_BRANDED_PRESETS } from '@/lib/branded-catalog';
-import { calculateQuote, localDate, rupeeToPaise, unitsToMilli } from '@/lib/money';
-import type { CartEntry, Expense, Invoice, InvoiceItem, PaymentMethod, Product, Shop, StockMovement, Unit } from '@/types/models';
+import { calculateQuote, localDate, rupeeToPaise } from '@/lib/money';
+import type { CartEntry, Expense, Invoice, InvoiceItem, PaymentMethod, Product, Shop, Unit } from '@/types/models';
 
 export async function initShop(): Promise<Shop> {
   const first = await db.shops.toCollection().first();
@@ -37,24 +37,19 @@ export interface ProductInput {
   price: string;
   cost: string;
   tax: string;
-  stock: string;
-  lowStock: string;
 }
 export async function saveProduct(data: ProductInput): Promise<void> {
   if (!data.name.trim() && !data.malayalamName.trim() && !data.englishName.trim()) throw new Error('Product name required.');
   const pricePaise = rupeeToPaise(data.price);
   const costPaise = rupeeToPaise(data.cost);
-  const lowStockMilli = unitsToMilli(data.lowStock);
   const tax = Number(data.tax);
   if (!['0', '3', '5', '12', '18', '28'].includes(String(tax))) throw new Error('Choose a valid tax rate.');
   if (data.imageDataUrl && (!/^data:image\/(webp|png|jpeg);base64,[a-zA-Z0-9+/=]+$/.test(data.imageDataUrl) || data.imageDataUrl.length > 160_000)) {
     throw new Error('Invalid or oversized product photo.');
   }
   const now = new Date().toISOString();
-  await db.transaction('rw', db.products, db.stockMovements, async () => {
+  await db.transaction('rw', db.products, async () => {
     const existing = data.id ? await db.products.get(data.id) : undefined;
-    // Empty optional stock does not erase quantities previously saved on this device.
-    const stockMilli = data.stock.trim() === '' ? (existing?.stockMilli ?? 0) : unitsToMilli(data.stock);
     if (data.id && !existing) throw new Error('Product no longer exists.');
     if (data.sku.trim()) {
       const duplicate = await db.products.where('sku').equals(data.sku.trim()).first();
@@ -62,44 +57,19 @@ export async function saveProduct(data: ProductInput): Promise<void> {
     }
     const id = existing?.id ?? crypto.randomUUID();
     const product: Product = {
+      ...existing, // Keep legacy data without changing or using it.
       id, name: [data.malayalamName.trim(), data.englishName.trim()].filter(Boolean).join(' / ') || data.name.trim(),
       malayalamName: data.malayalamName.trim(), englishName: data.englishName.trim(),
       brand: data.brand.trim().slice(0, 100), packSize: data.packSize.trim().slice(0, 100),
       source: existing?.source ?? (existing?.isTemplate ? 'catalog' : 'custom'),
       icon: data.icon.trim().slice(0, 16), imageDataUrl: data.imageDataUrl, isTemplate: false,
       sku: data.sku.trim(), category: data.category.trim(),
-      unit: data.unit, pricePaise, costPaise, taxBps: tax * 100, stockMilli,
-      lowStockMilli, active: existing?.isTemplate ? pricePaise > 0 : existing?.active ?? true,
+      unit: data.unit, pricePaise, costPaise, taxBps: tax * 100, active: existing?.isTemplate ? pricePaise > 0 : existing?.active ?? true,
       createdAt: existing?.createdAt ?? now, updatedAt: now,
     };
     await db.products.put(product);
-    const changeMilli = stockMilli - (existing?.stockMilli ?? 0);
-    if (changeMilli !== 0) {
-      const movement: StockMovement = {
-        id: crypto.randomUUID(), productId: id, changeMilli,
-        reason: existing ? 'adjustment' : 'opening', refId: id, date: now,
-      };
-      await db.stockMovements.add(movement);
-    }
   });
 }
-/** Stock is adjusted separately, so product edits do not overwrite quantities. */
-export async function setProductStock(id:string, quantity:string):Promise<void> {
-  const stockMilli=unitsToMilli(quantity);
-  await db.transaction('rw',db.products,db.stockMovements,async()=>{
-    const product=await db.products.get(id);
-    if(!product)throw new Error('Product not found.');
-    const difference=stockMilli-product.stockMilli;
-    if(difference===0)return;
-    const now=new Date().toISOString();
-    await db.products.update(id,{stockMilli,updatedAt:now});
-    await db.stockMovements.add({
-      id:crypto.randomUUID(),productId:id,changeMilli:difference,
-      reason:'adjustment',refId:id,date:now,
-    });
-  });
-}
-
 export async function toggleProduct(id: string): Promise<void> {
   await db.transaction('rw', db.products, async () => {
     const p = await db.products.get(id);
@@ -132,8 +102,7 @@ export async function saveInvoice(args: {
   if (!args.cart.length) throw new Error('Cart is empty.');
   const discountPaise = rupeeToPaise(args.discount || '0');
   const shop = await initShop();
-  return db.transaction('rw', [db.products, db.invoices, db.invoiceItems, db.stockMovements, db.counters], async () => {
-    // Read product stock WITHIN transaction to prevent race with another tab.
+  return db.transaction('rw', [db.products, db.invoices, db.invoiceItems, db.counters], async () => {
     const products = await db.products.bulkGet(args.cart.map((c) => c.productId));
     if (products.some((p) => !p)) throw new Error('A product was removed.');
     const quote = calculateQuote(args.cart, products as Product[], discountPaise);
@@ -160,27 +129,15 @@ export async function saveInvoice(args: {
     }));
     await db.invoices.add(invoice);
     await db.invoiceItems.bulkAdd(lines);
-    for (const item of quote.items) {
-      const p = (products as Product[]).find((x) => x.id === item.productId)!;
-      await db.products.update(p.id, { stockMilli: p.stockMilli - item.quantityMilli, updatedAt: now });
-      await db.stockMovements.add({ id: crypto.randomUUID(), productId: p.id, changeMilli: -item.quantityMilli, reason: 'sale', refId: invoice.id, date: now });
-    }
     await db.counters.put({ id: counterId, nextNumber: number + 1 });
     return invoice;
   });
 }
 export async function voidInvoice(id: string): Promise<void> {
-  await db.transaction('rw', db.products, db.invoices, db.invoiceItems, db.stockMovements, async () => {
+  await db.transaction('rw', db.invoices, async () => {
     const invoice = await db.invoices.get(id);
     if (!invoice || invoice.status !== 'final') throw new Error('Invoice already void or not found.');
-    const items = await db.invoiceItems.where('invoiceId').equals(id).toArray();
-    const now = new Date().toISOString();
-    for (const item of items) {
-      const p = await db.products.get(item.productId);
-      if (p) await db.products.update(p.id, { stockMilli: p.stockMilli + item.quantityMilli, updatedAt: now });
-      await db.stockMovements.add({ id: crypto.randomUUID(), productId: item.productId, changeMilli: item.quantityMilli, reason: 'void', refId: id, date: now });
-    }
-    await db.invoices.update(id, { status: 'void', voidedAt: now });
+    await db.invoices.update(id, { status: 'void', voidedAt: new Date().toISOString() });
   });
 }
 
@@ -207,7 +164,7 @@ export async function addProductPresets(group: PresetGroup): Promise<number> {
       malayalamName:v.malayalamName, englishName:v.englishName,
       brand:'brand' in v ? String(v.brand) : '', packSize:'packSize' in v ? String(v.packSize) : '', source:'catalog',
       icon:v.icon, imageDataUrl:'', isTemplate:true, sku:'', category:v.category, unit:v.unit,
-      pricePaise:0, costPaise:0, taxBps:0, stockMilli:0, lowStockMilli:v.unit==='bundle'?3000:5000,
+      pricePaise:0, costPaise:0, taxBps:0,
       active:false, createdAt:now, updatedAt:now,
     }));
     if(toAdd.length) await db.products.bulkAdd(toAdd);

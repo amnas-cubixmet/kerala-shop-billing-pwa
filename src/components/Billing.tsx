@@ -5,7 +5,7 @@ import { CheckCircle2, FileDown, Minus, Plus, Search, ShoppingBasket, Trash2 } f
 import { db } from '@/db/database';
 import {useLanguage} from '@/lib/language';
 import { useUpdateHold } from '@/lib/update-guard';
-import { calculateQuote, fmt, qtyText, rupeeToPaise, unitsToMilli } from '@/lib/money';
+import { calculateQuote, fmt, rupeeToPaise, unitsToMilli } from '@/lib/money';
 import { downloadReceipt } from '@/services/exports';
 import { saveInvoice } from '@/services/store';
 import { Empty, Field, Panel, safeError } from '@/components/ui';
@@ -41,8 +41,8 @@ export default function Billing({notify}: {notify:(message:string,kind?:'error'|
     const p=products.find(p=>p.id===id); if(!p) return;
     setCart(prev=>{
       const current=prev.find(x=>x.productId===id);
-      if(current) return prev.map(x=>x.productId===id?{...x,quantityMilli:Math.min(p.stockMilli,x.quantityMilli+1000)}:x);
-      return [...prev,{productId:id,quantityMilli:Math.min(p.stockMilli,1000)}].filter(x=>x.quantityMilli>0);
+      if(current) return prev.map(x=>x.productId===id?{...x,quantityMilli:x.quantityMilli+1000}:x);
+      return [...prev,{productId:id,quantityMilli:1000}];
     });
   }
   function changeQty(id:string,value:string) {try {const quantityMilli=unitsToMilli(value); setCart(prev=>prev.map(x=>x.productId===id?{...x,quantityMilli}:x));}catch { /* incomplete input is ignored */ }}
@@ -68,7 +68,7 @@ export default function Billing({notify}: {notify:(message:string,kind?:'error'|
       <section className="ref-billing-catalog">
         <label className="ref-product-search"><Search size={19}/><input aria-label={t('findProduct')} placeholder={t('findProduct')} value={search} onChange={e=>setSearch(e.target.value)}/></label>
         <div className="ref-section-title"><h2>{t('selectProducts')}</h2><small>{t('selectHint')}</small></div>
-        {!shown.length?<Empty label={t('noProducts')}/>:<div className="ref-billing-products">{shown.map(p=><button type="button" key={p.id} disabled={p.stockMilli<=0} onClick={()=>add(p.id)} className="ref-billing-product"><ProductVisual product={p} large/><strong>{productName(p)}</strong><span>{fmt(p.pricePaise)}/{p.unit}</span><span className="ref-billing-plus"><Plus size={15}/></span></button>)}</div>}
+        {!shown.length?<Empty label={t('noProducts')}/>:<div className="ref-billing-products">{shown.map(p=><button type="button" key={p.id} onClick={()=>add(p.id)} className="ref-billing-product"><ProductVisual product={p} large/><strong>{productName(p)}</strong><span>{fmt(p.pricePaise)}/{p.unit}</span><span className="ref-billing-plus"><Plus size={15}/></span></button>)}</div>}
       </section>
       <section className="ref-cart-panel">
         <div className="ref-cart-heading"><h2>{t('currentSale')} <span>({cart.length})</span></h2>{cart.length>0&&<button type="button" onClick={()=>setCart([])}><Trash2 size={16}/>{language==='ml'?'എല്ലാം ഒഴിവാക്കുക':'Clear all'}</button>}</div>
