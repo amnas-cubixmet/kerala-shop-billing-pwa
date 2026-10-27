@@ -1,0 +1,3320 @@
+{
+  "schema_version": 1,
+  "description": "Tracks images committed individually to GitHub (not generic images unpacked at build). Existing product records and bundled fallbacks remain untouched.",
+  "total_products": 850,
+  "committed_product_image_count": 81,
+  "completed_product_ids": [
+    "kerala-veg-001",
+    "kerala-veg-002",
+    "kerala-veg-003",
+    "kerala-veg-004",
+    "kerala-veg-005",
+    "kerala-veg-006",
+    "kerala-veg-007",
+    "kerala-veg-008",
+    "kerala-veg-009",
+    "kerala-veg-010",
+    "kerala-veg-011",
+    "kerala-veg-012",
+    "kerala-veg-013",
+    "kerala-veg-014",
+    "kerala-veg-015",
+    "kerala-veg-016",
+    "kerala-veg-017",
+    "kerala-veg-018",
+    "kerala-veg-019",
+    "kerala-veg-020",
+    "kerala-veg-021",
+    "kerala-veg-022",
+    "kerala-veg-023",
+    "kerala-veg-024",
+    "kerala-veg-025",
+    "kerala-veg-026",
+    "kerala-veg-027",
+    "kerala-veg-028",
+    "kerala-veg-029",
+    "kerala-veg-030",
+    "kerala-veg-031",
+    "kerala-veg-032",
+    "kerala-veg-033",
+    "kerala-veg-034",
+    "kerala-veg-035",
+    "kerala-veg-036",
+    "kerala-veg-037",
+    "kerala-veg-038",
+    "kerala-veg-039",
+    "kerala-veg-040",
+    "kerala-veg-044",
+    "kerala-veg-045",
+    "kerala-veg-050",
+    "kerala-fruit-004",
+    "kerala-fruit-007",
+    "kerala-fruit-008",
+    "kerala-fruit-011",
+    "kerala-fruit-013",
+    "kerala-fruit-015",
+    "kerala-fruit-016",
+    "kerala-fruit-017",
+    "kerala-fruit-018",
+    "kerala-fruit-019",
+    "kerala-fruit-021",
+    "kerala-fruit-023",
+    "kerala-fruit-027",
+    "kerala-fruit-029",
+    "kerala-fruit-030",
+    "kerala-fruit-051",
+    "kerala-food-004",
+    "kerala-food-018",
+    "kerala-food-025",
+    "kerala-food-027",
+    "kerala-food-030",
+    "kerala-food-032",
+    "kerala-food-033",
+    "kerala-food-036",
+    "kerala-food-042",
+    "kerala-food-047",
+    "kerala-food-049",
+    "kerala-food-050",
+    "kerala-food-057",
+    "kerala-food-058",
+    "kerala-food-059",
+    "kerala-food-122",
+    "kerala-food-125",
+    "kerala-food-153",
+    "kerala-food-155",
+    "kerala-food-156",
+    "kerala-food-160",
+    "kerala-food-190"
+  ],
+  "verified_image_file_paths": [
+    "public/products/vegetables/kerala-veg-001.webp",
+    "public/products/vegetables/kerala-veg-002.webp",
+    "public/products/vegetables/kerala-veg-003.webp",
+    "public/products/vegetables/kerala-veg-004.webp",
+    "public/products/vegetables/kerala-veg-005.webp",
+    "public/products/vegetables/kerala-veg-006.webp",
+    "public/products/vegetables/kerala-veg-007.webp",
+    "public/products/vegetables/kerala-veg-008.webp",
+    "public/products/vegetables/kerala-veg-009.webp",
+    "public/products/vegetables/kerala-veg-010.webp",
+    "public/products/vegetables/kerala-veg-011.webp",
+    "public/products/vegetables/kerala-veg-012.webp",
+    "public/products/vegetables/kerala-veg-013.webp",
+    "public/products/vegetables/kerala-veg-014.webp",
+    "public/products/vegetables/kerala-veg-015.webp",
+    "public/products/vegetables/kerala-veg-016.webp",
+    "public/products/vegetables/kerala-veg-017.webp",
+    "public/products/vegetables/kerala-veg-018.webp",
+    "public/products/vegetables/kerala-veg-019.webp",
+    "public/products/vegetables/kerala-veg-020.webp",
+    "public/products/vegetables/kerala-veg-021.webp",
+    "public/products/vegetables/kerala-veg-022.webp",
+    "public/products/vegetables/kerala-veg-023.webp",
+    "public/products/vegetables/kerala-veg-024.webp",
+    "public/products/vegetables/kerala-veg-025.webp",
+    "public/products/vegetables/kerala-veg-026.webp",
+    "public/products/vegetables/kerala-veg-027.webp",
+    "public/products/vegetables/kerala-veg-028.webp",
+    "public/products/vegetables/kerala-veg-029.webp",
+    "public/products/vegetables/kerala-veg-030.webp",
+    "public/products/vegetables/kerala-veg-031.webp",
+    "public/products/vegetables/kerala-veg-032.webp",
+    "public/products/vegetables/kerala-veg-033.webp",
+    "public/products/vegetables/kerala-veg-034.webp",
+    "public/products/vegetables/kerala-veg-035.webp",
+    "public/products/vegetables/kerala-veg-036.webp",
+    "public/products/vegetables/kerala-veg-037.webp",
+    "public/products/vegetables/kerala-veg-038.webp",
+    "public/products/vegetables/kerala-veg-039.webp",
+    "public/products/vegetables/kerala-veg-040.webp",
+    "public/products/vegetables/kerala-veg-044.webp",
+    "public/products/vegetables/kerala-veg-045.webp",
+    "public/products/vegetables/kerala-veg-050.webp",
+    "public/products/fruits/kerala-fruit-004.webp",
+    "public/products/fruits/kerala-fruit-007.webp",
+    "public/products/fruits/kerala-fruit-008.webp",
+    "public/products/fruits/kerala-fruit-011.webp",
+    "public/products/fruits/kerala-fruit-013.webp",
+    "public/products/fruits/kerala-fruit-015.webp",
+    "public/products/fruits/kerala-fruit-016.webp",
+    "public/products/fruits/kerala-fruit-017.webp",
+    "public/products/fruits/kerala-fruit-018.webp",
+    "public/products/fruits/kerala-fruit-019.webp",
+    "public/products/fruits/kerala-fruit-021.webp",
+    "public/products/fruits/kerala-fruit-023.webp",
+    "public/products/fruits/kerala-fruit-027.webp",
+    "public/products/fruits/kerala-fruit-029.webp",
+    "public/products/fruits/kerala-fruit-030.webp",
+    "public/products/fruits/kerala-fruit-051.webp",
+    "public/products/foods/kerala-food-004.webp",
+    "public/products/foods/kerala-food-018.webp",
+    "public/products/foods/kerala-food-025.webp",
+    "public/products/foods/kerala-food-027.webp",
+    "public/products/foods/kerala-food-030.webp",
+    "public/products/foods/kerala-food-032.webp",
+    "public/products/foods/kerala-food-033.webp",
+    "public/products/foods/kerala-food-036.webp",
+    "public/products/foods/kerala-food-042.webp",
+    "public/products/foods/kerala-food-047.webp",
+    "public/products/foods/kerala-food-049.webp",
+    "public/products/foods/kerala-food-050.webp",
+    "public/products/foods/kerala-food-057.webp",
+    "public/products/foods/kerala-food-058.webp",
+    "public/products/foods/kerala-food-059.webp",
+    "public/products/bakery/kerala-food-122.webp",
+    "public/products/bakery/kerala-food-125.webp",
+    "public/products/foods/kerala-food-153.webp",
+    "public/products/foods/kerala-food-155.webp",
+    "public/products/foods/kerala-food-156.webp",
+    "public/products/foods/kerala-food-160.webp",
+    "public/products/foods/kerala-food-190.webp"
+  ],
+  "pending_products": [
+    {
+      "id": "kerala-veg-041",
+      "path": "public/products/vegetables/kerala-veg-041.webp"
+    },
+    {
+      "id": "kerala-veg-042",
+      "path": "public/products/vegetables/kerala-veg-042.webp"
+    },
+    {
+      "id": "kerala-veg-043",
+      "path": "public/products/vegetables/kerala-veg-043.webp"
+    },
+    {
+      "id": "kerala-veg-046",
+      "path": "public/products/vegetables/kerala-veg-046.webp"
+    },
+    {
+      "id": "kerala-veg-047",
+      "path": "public/products/vegetables/kerala-veg-047.webp"
+    },
+    {
+      "id": "kerala-veg-048",
+      "path": "public/products/vegetables/kerala-veg-048.webp"
+    },
+    {
+      "id": "kerala-veg-049",
+      "path": "public/products/vegetables/kerala-veg-049.webp"
+    },
+    {
+      "id": "kerala-fruit-001",
+      "path": "public/products/fruits/kerala-fruit-001.webp"
+    },
+    {
+      "id": "kerala-fruit-002",
+      "path": "public/products/fruits/kerala-fruit-002.webp"
+    },
+    {
+      "id": "kerala-fruit-003",
+      "path": "public/products/fruits/kerala-fruit-003.webp"
+    },
+    {
+      "id": "kerala-fruit-005",
+      "path": "public/products/fruits/kerala-fruit-005.webp"
+    },
+    {
+      "id": "kerala-fruit-006",
+      "path": "public/products/fruits/kerala-fruit-006.webp"
+    },
+    {
+      "id": "kerala-fruit-009",
+      "path": "public/products/fruits/kerala-fruit-009.webp"
+    },
+    {
+      "id": "kerala-fruit-010",
+      "path": "public/products/fruits/kerala-fruit-010.webp"
+    },
+    {
+      "id": "kerala-fruit-012",
+      "path": "public/products/fruits/kerala-fruit-012.webp"
+    },
+    {
+      "id": "kerala-fruit-014",
+      "path": "public/products/fruits/kerala-fruit-014.webp"
+    },
+    {
+      "id": "kerala-fruit-020",
+      "path": "public/products/fruits/kerala-fruit-020.webp"
+    },
+    {
+      "id": "kerala-fruit-022",
+      "path": "public/products/fruits/kerala-fruit-022.webp"
+    },
+    {
+      "id": "kerala-fruit-024",
+      "path": "public/products/fruits/kerala-fruit-024.webp"
+    },
+    {
+      "id": "kerala-fruit-025",
+      "path": "public/products/fruits/kerala-fruit-025.webp"
+    },
+    {
+      "id": "kerala-fruit-026",
+      "path": "public/products/fruits/kerala-fruit-026.webp"
+    },
+    {
+      "id": "kerala-fruit-028",
+      "path": "public/products/fruits/kerala-fruit-028.webp"
+    },
+    {
+      "id": "kerala-fruit-031",
+      "path": "public/products/fruits/kerala-fruit-031.webp"
+    },
+    {
+      "id": "kerala-fruit-032",
+      "path": "public/products/fruits/kerala-fruit-032.webp"
+    },
+    {
+      "id": "kerala-fruit-033",
+      "path": "public/products/fruits/kerala-fruit-033.webp"
+    },
+    {
+      "id": "kerala-fruit-034",
+      "path": "public/products/fruits/kerala-fruit-034.webp"
+    },
+    {
+      "id": "kerala-fruit-035",
+      "path": "public/products/fruits/kerala-fruit-035.webp"
+    },
+    {
+      "id": "kerala-fruit-036",
+      "path": "public/products/fruits/kerala-fruit-036.webp"
+    },
+    {
+      "id": "kerala-fruit-037",
+      "path": "public/products/fruits/kerala-fruit-037.webp"
+    },
+    {
+      "id": "kerala-fruit-038",
+      "path": "public/products/fruits/kerala-fruit-038.webp"
+    },
+    {
+      "id": "kerala-fruit-039",
+      "path": "public/products/fruits/kerala-fruit-039.webp"
+    },
+    {
+      "id": "kerala-fruit-040",
+      "path": "public/products/fruits/kerala-fruit-040.webp"
+    },
+    {
+      "id": "kerala-fruit-041",
+      "path": "public/products/fruits/kerala-fruit-041.webp"
+    },
+    {
+      "id": "kerala-fruit-042",
+      "path": "public/products/fruits/kerala-fruit-042.webp"
+    },
+    {
+      "id": "kerala-fruit-043",
+      "path": "public/products/fruits/kerala-fruit-043.webp"
+    },
+    {
+      "id": "kerala-fruit-044",
+      "path": "public/products/fruits/kerala-fruit-044.webp"
+    },
+    {
+      "id": "kerala-fruit-045",
+      "path": "public/products/fruits/kerala-fruit-045.webp"
+    },
+    {
+      "id": "kerala-fruit-046",
+      "path": "public/products/fruits/kerala-fruit-046.webp"
+    },
+    {
+      "id": "kerala-fruit-047",
+      "path": "public/products/fruits/kerala-fruit-047.webp"
+    },
+    {
+      "id": "kerala-fruit-048",
+      "path": "public/products/fruits/kerala-fruit-048.webp"
+    },
+    {
+      "id": "kerala-fruit-049",
+      "path": "public/products/fruits/kerala-fruit-049.webp"
+    },
+    {
+      "id": "kerala-fruit-050",
+      "path": "public/products/fruits/kerala-fruit-050.webp"
+    },
+    {
+      "id": "kerala-fruit-052",
+      "path": "public/products/fruits/kerala-fruit-052.webp"
+    },
+    {
+      "id": "kerala-fruit-053",
+      "path": "public/products/fruits/kerala-fruit-053.webp"
+    },
+    {
+      "id": "kerala-fruit-054",
+      "path": "public/products/fruits/kerala-fruit-054.webp"
+    },
+    {
+      "id": "kerala-fruit-055",
+      "path": "public/products/fruits/kerala-fruit-055.webp"
+    },
+    {
+      "id": "kerala-fruit-056",
+      "path": "public/products/fruits/kerala-fruit-056.webp"
+    },
+    {
+      "id": "kerala-fruit-057",
+      "path": "public/products/fruits/kerala-fruit-057.webp"
+    },
+    {
+      "id": "kerala-fruit-058",
+      "path": "public/products/fruits/kerala-fruit-058.webp"
+    },
+    {
+      "id": "kerala-fruit-059",
+      "path": "public/products/fruits/kerala-fruit-059.webp"
+    },
+    {
+      "id": "kerala-fruit-060",
+      "path": "public/products/fruits/kerala-fruit-060.webp"
+    },
+    {
+      "id": "kerala-food-001",
+      "path": "public/products/foods/kerala-food-001.webp"
+    },
+    {
+      "id": "kerala-food-002",
+      "path": "public/products/foods/kerala-food-002.webp"
+    },
+    {
+      "id": "kerala-food-003",
+      "path": "public/products/foods/kerala-food-003.webp"
+    },
+    {
+      "id": "kerala-food-005",
+      "path": "public/products/foods/kerala-food-005.webp"
+    },
+    {
+      "id": "kerala-food-006",
+      "path": "public/products/foods/kerala-food-006.webp"
+    },
+    {
+      "id": "kerala-food-007",
+      "path": "public/products/foods/kerala-food-007.webp"
+    },
+    {
+      "id": "kerala-food-008",
+      "path": "public/products/foods/kerala-food-008.webp"
+    },
+    {
+      "id": "kerala-food-009",
+      "path": "public/products/foods/kerala-food-009.webp"
+    },
+    {
+      "id": "kerala-food-010",
+      "path": "public/products/foods/kerala-food-010.webp"
+    },
+    {
+      "id": "kerala-food-011",
+      "path": "public/products/foods/kerala-food-011.webp"
+    },
+    {
+      "id": "kerala-food-012",
+      "path": "public/products/foods/kerala-food-012.webp"
+    },
+    {
+      "id": "kerala-food-013",
+      "path": "public/products/foods/kerala-food-013.webp"
+    },
+    {
+      "id": "kerala-food-014",
+      "path": "public/products/foods/kerala-food-014.webp"
+    },
+    {
+      "id": "kerala-food-015",
+      "path": "public/products/foods/kerala-food-015.webp"
+    },
+    {
+      "id": "kerala-food-016",
+      "path": "public/products/foods/kerala-food-016.webp"
+    },
+    {
+      "id": "kerala-food-017",
+      "path": "public/products/foods/kerala-food-017.webp"
+    },
+    {
+      "id": "kerala-food-019",
+      "path": "public/products/foods/kerala-food-019.webp"
+    },
+    {
+      "id": "kerala-food-020",
+      "path": "public/products/foods/kerala-food-020.webp"
+    },
+    {
+      "id": "kerala-food-021",
+      "path": "public/products/foods/kerala-food-021.webp"
+    },
+    {
+      "id": "kerala-food-022",
+      "path": "public/products/foods/kerala-food-022.webp"
+    },
+    {
+      "id": "kerala-food-023",
+      "path": "public/products/foods/kerala-food-023.webp"
+    },
+    {
+      "id": "kerala-food-024",
+      "path": "public/products/foods/kerala-food-024.webp"
+    },
+    {
+      "id": "kerala-food-026",
+      "path": "public/products/foods/kerala-food-026.webp"
+    },
+    {
+      "id": "kerala-food-028",
+      "path": "public/products/foods/kerala-food-028.webp"
+    },
+    {
+      "id": "kerala-food-029",
+      "path": "public/products/foods/kerala-food-029.webp"
+    },
+    {
+      "id": "kerala-food-031",
+      "path": "public/products/foods/kerala-food-031.webp"
+    },
+    {
+      "id": "kerala-food-034",
+      "path": "public/products/foods/kerala-food-034.webp"
+    },
+    {
+      "id": "kerala-food-035",
+      "path": "public/products/foods/kerala-food-035.webp"
+    },
+    {
+      "id": "kerala-food-037",
+      "path": "public/products/foods/kerala-food-037.webp"
+    },
+    {
+      "id": "kerala-food-038",
+      "path": "public/products/foods/kerala-food-038.webp"
+    },
+    {
+      "id": "kerala-food-039",
+      "path": "public/products/foods/kerala-food-039.webp"
+    },
+    {
+      "id": "kerala-food-040",
+      "path": "public/products/foods/kerala-food-040.webp"
+    },
+    {
+      "id": "kerala-food-041",
+      "path": "public/products/foods/kerala-food-041.webp"
+    },
+    {
+      "id": "kerala-food-043",
+      "path": "public/products/foods/kerala-food-043.webp"
+    },
+    {
+      "id": "kerala-food-044",
+      "path": "public/products/foods/kerala-food-044.webp"
+    },
+    {
+      "id": "kerala-food-045",
+      "path": "public/products/foods/kerala-food-045.webp"
+    },
+    {
+      "id": "kerala-food-046",
+      "path": "public/products/foods/kerala-food-046.webp"
+    },
+    {
+      "id": "kerala-food-048",
+      "path": "public/products/foods/kerala-food-048.webp"
+    },
+    {
+      "id": "kerala-food-051",
+      "path": "public/products/foods/kerala-food-051.webp"
+    },
+    {
+      "id": "kerala-food-052",
+      "path": "public/products/foods/kerala-food-052.webp"
+    },
+    {
+      "id": "kerala-food-053",
+      "path": "public/products/foods/kerala-food-053.webp"
+    },
+    {
+      "id": "kerala-food-054",
+      "path": "public/products/foods/kerala-food-054.webp"
+    },
+    {
+      "id": "kerala-food-055",
+      "path": "public/products/foods/kerala-food-055.webp"
+    },
+    {
+      "id": "kerala-food-056",
+      "path": "public/products/foods/kerala-food-056.webp"
+    },
+    {
+      "id": "kerala-food-060",
+      "path": "public/products/foods/kerala-food-060.webp"
+    },
+    {
+      "id": "kerala-food-061",
+      "path": "public/products/foods/kerala-food-061.webp"
+    },
+    {
+      "id": "kerala-food-062",
+      "path": "public/products/foods/kerala-food-062.webp"
+    },
+    {
+      "id": "kerala-food-063",
+      "path": "public/products/foods/kerala-food-063.webp"
+    },
+    {
+      "id": "kerala-food-064",
+      "path": "public/products/foods/kerala-food-064.webp"
+    },
+    {
+      "id": "kerala-food-065",
+      "path": "public/products/foods/kerala-food-065.webp"
+    },
+    {
+      "id": "kerala-food-066",
+      "path": "public/products/foods/kerala-food-066.webp"
+    },
+    {
+      "id": "kerala-food-067",
+      "path": "public/products/foods/kerala-food-067.webp"
+    },
+    {
+      "id": "kerala-food-068",
+      "path": "public/products/foods/kerala-food-068.webp"
+    },
+    {
+      "id": "kerala-food-069",
+      "path": "public/products/foods/kerala-food-069.webp"
+    },
+    {
+      "id": "kerala-food-070",
+      "path": "public/products/foods/kerala-food-070.webp"
+    },
+    {
+      "id": "kerala-food-071",
+      "path": "public/products/foods/kerala-food-071.webp"
+    },
+    {
+      "id": "kerala-food-072",
+      "path": "public/products/foods/kerala-food-072.webp"
+    },
+    {
+      "id": "kerala-food-073",
+      "path": "public/products/foods/kerala-food-073.webp"
+    },
+    {
+      "id": "kerala-food-074",
+      "path": "public/products/foods/kerala-food-074.webp"
+    },
+    {
+      "id": "kerala-food-075",
+      "path": "public/products/foods/kerala-food-075.webp"
+    },
+    {
+      "id": "kerala-food-076",
+      "path": "public/products/foods/kerala-food-076.webp"
+    },
+    {
+      "id": "kerala-food-077",
+      "path": "public/products/foods/kerala-food-077.webp"
+    },
+    {
+      "id": "kerala-food-078",
+      "path": "public/products/foods/kerala-food-078.webp"
+    },
+    {
+      "id": "kerala-food-079",
+      "path": "public/products/foods/kerala-food-079.webp"
+    },
+    {
+      "id": "kerala-food-080",
+      "path": "public/products/foods/kerala-food-080.webp"
+    },
+    {
+      "id": "kerala-food-081",
+      "path": "public/products/foods/kerala-food-081.webp"
+    },
+    {
+      "id": "kerala-food-082",
+      "path": "public/products/foods/kerala-food-082.webp"
+    },
+    {
+      "id": "kerala-food-083",
+      "path": "public/products/foods/kerala-food-083.webp"
+    },
+    {
+      "id": "kerala-food-084",
+      "path": "public/products/foods/kerala-food-084.webp"
+    },
+    {
+      "id": "kerala-food-085",
+      "path": "public/products/foods/kerala-food-085.webp"
+    },
+    {
+      "id": "kerala-food-086",
+      "path": "public/products/foods/kerala-food-086.webp"
+    },
+    {
+      "id": "kerala-food-087",
+      "path": "public/products/foods/kerala-food-087.webp"
+    },
+    {
+      "id": "kerala-food-088",
+      "path": "public/products/foods/kerala-food-088.webp"
+    },
+    {
+      "id": "kerala-food-089",
+      "path": "public/products/foods/kerala-food-089.webp"
+    },
+    {
+      "id": "kerala-food-090",
+      "path": "public/products/foods/kerala-food-090.webp"
+    },
+    {
+      "id": "kerala-food-091",
+      "path": "public/products/foods/kerala-food-091.webp"
+    },
+    {
+      "id": "kerala-food-092",
+      "path": "public/products/foods/kerala-food-092.webp"
+    },
+    {
+      "id": "kerala-food-093",
+      "path": "public/products/foods/kerala-food-093.webp"
+    },
+    {
+      "id": "kerala-food-094",
+      "path": "public/products/foods/kerala-food-094.webp"
+    },
+    {
+      "id": "kerala-food-095",
+      "path": "public/products/foods/kerala-food-095.webp"
+    },
+    {
+      "id": "kerala-food-096",
+      "path": "public/products/foods/kerala-food-096.webp"
+    },
+    {
+      "id": "kerala-food-097",
+      "path": "public/products/foods/kerala-food-097.webp"
+    },
+    {
+      "id": "kerala-food-098",
+      "path": "public/products/foods/kerala-food-098.webp"
+    },
+    {
+      "id": "kerala-food-099",
+      "path": "public/products/foods/kerala-food-099.webp"
+    },
+    {
+      "id": "kerala-food-100",
+      "path": "public/products/foods/kerala-food-100.webp"
+    },
+    {
+      "id": "kerala-food-101",
+      "path": "public/products/foods/kerala-food-101.webp"
+    },
+    {
+      "id": "kerala-food-102",
+      "path": "public/products/foods/kerala-food-102.webp"
+    },
+    {
+      "id": "kerala-food-103",
+      "path": "public/products/foods/kerala-food-103.webp"
+    },
+    {
+      "id": "kerala-food-104",
+      "path": "public/products/foods/kerala-food-104.webp"
+    },
+    {
+      "id": "kerala-food-105",
+      "path": "public/products/foods/kerala-food-105.webp"
+    },
+    {
+      "id": "kerala-food-106",
+      "path": "public/products/foods/kerala-food-106.webp"
+    },
+    {
+      "id": "kerala-food-107",
+      "path": "public/products/foods/kerala-food-107.webp"
+    },
+    {
+      "id": "kerala-food-108",
+      "path": "public/products/foods/kerala-food-108.webp"
+    },
+    {
+      "id": "kerala-food-109",
+      "path": "public/products/foods/kerala-food-109.webp"
+    },
+    {
+      "id": "kerala-food-110",
+      "path": "public/products/foods/kerala-food-110.webp"
+    },
+    {
+      "id": "kerala-food-111",
+      "path": "public/products/foods/kerala-food-111.webp"
+    },
+    {
+      "id": "kerala-food-112",
+      "path": "public/products/foods/kerala-food-112.webp"
+    },
+    {
+      "id": "kerala-food-113",
+      "path": "public/products/foods/kerala-food-113.webp"
+    },
+    {
+      "id": "kerala-food-114",
+      "path": "public/products/foods/kerala-food-114.webp"
+    },
+    {
+      "id": "kerala-food-115",
+      "path": "public/products/foods/kerala-food-115.webp"
+    },
+    {
+      "id": "kerala-food-116",
+      "path": "public/products/foods/kerala-food-116.webp"
+    },
+    {
+      "id": "kerala-food-117",
+      "path": "public/products/foods/kerala-food-117.webp"
+    },
+    {
+      "id": "kerala-food-118",
+      "path": "public/products/foods/kerala-food-118.webp"
+    },
+    {
+      "id": "kerala-food-119",
+      "path": "public/products/foods/kerala-food-119.webp"
+    },
+    {
+      "id": "kerala-food-120",
+      "path": "public/products/foods/kerala-food-120.webp"
+    },
+    {
+      "id": "kerala-food-121",
+      "path": "public/products/foods/kerala-food-121.webp"
+    },
+    {
+      "id": "kerala-food-123",
+      "path": "public/products/bakery/kerala-food-123.webp"
+    },
+    {
+      "id": "kerala-food-124",
+      "path": "public/products/bakery/kerala-food-124.webp"
+    },
+    {
+      "id": "kerala-food-126",
+      "path": "public/products/bakery/kerala-food-126.webp"
+    },
+    {
+      "id": "kerala-food-127",
+      "path": "public/products/bakery/kerala-food-127.webp"
+    },
+    {
+      "id": "kerala-food-128",
+      "path": "public/products/bakery/kerala-food-128.webp"
+    },
+    {
+      "id": "kerala-food-129",
+      "path": "public/products/bakery/kerala-food-129.webp"
+    },
+    {
+      "id": "kerala-food-130",
+      "path": "public/products/bakery/kerala-food-130.webp"
+    },
+    {
+      "id": "kerala-food-131",
+      "path": "public/products/bakery/kerala-food-131.webp"
+    },
+    {
+      "id": "kerala-food-132",
+      "path": "public/products/bakery/kerala-food-132.webp"
+    },
+    {
+      "id": "kerala-food-133",
+      "path": "public/products/bakery/kerala-food-133.webp"
+    },
+    {
+      "id": "kerala-food-134",
+      "path": "public/products/bakery/kerala-food-134.webp"
+    },
+    {
+      "id": "kerala-food-135",
+      "path": "public/products/foods/kerala-food-135.webp"
+    },
+    {
+      "id": "kerala-food-136",
+      "path": "public/products/foods/kerala-food-136.webp"
+    },
+    {
+      "id": "kerala-food-137",
+      "path": "public/products/foods/kerala-food-137.webp"
+    },
+    {
+      "id": "kerala-food-138",
+      "path": "public/products/foods/kerala-food-138.webp"
+    },
+    {
+      "id": "kerala-food-139",
+      "path": "public/products/foods/kerala-food-139.webp"
+    },
+    {
+      "id": "kerala-food-140",
+      "path": "public/products/foods/kerala-food-140.webp"
+    },
+    {
+      "id": "kerala-food-141",
+      "path": "public/products/foods/kerala-food-141.webp"
+    },
+    {
+      "id": "kerala-food-142",
+      "path": "public/products/foods/kerala-food-142.webp"
+    },
+    {
+      "id": "kerala-food-143",
+      "path": "public/products/foods/kerala-food-143.webp"
+    },
+    {
+      "id": "kerala-food-144",
+      "path": "public/products/foods/kerala-food-144.webp"
+    },
+    {
+      "id": "kerala-food-145",
+      "path": "public/products/foods/kerala-food-145.webp"
+    },
+    {
+      "id": "kerala-food-146",
+      "path": "public/products/foods/kerala-food-146.webp"
+    },
+    {
+      "id": "kerala-food-147",
+      "path": "public/products/foods/kerala-food-147.webp"
+    },
+    {
+      "id": "kerala-food-148",
+      "path": "public/products/foods/kerala-food-148.webp"
+    },
+    {
+      "id": "kerala-food-149",
+      "path": "public/products/foods/kerala-food-149.webp"
+    },
+    {
+      "id": "kerala-food-150",
+      "path": "public/products/foods/kerala-food-150.webp"
+    },
+    {
+      "id": "kerala-food-151",
+      "path": "public/products/foods/kerala-food-151.webp"
+    },
+    {
+      "id": "kerala-food-152",
+      "path": "public/products/foods/kerala-food-152.webp"
+    },
+    {
+      "id": "kerala-food-154",
+      "path": "public/products/foods/kerala-food-154.webp"
+    },
+    {
+      "id": "kerala-food-157",
+      "path": "public/products/foods/kerala-food-157.webp"
+    },
+    {
+      "id": "kerala-food-158",
+      "path": "public/products/foods/kerala-food-158.webp"
+    },
+    {
+      "id": "kerala-food-159",
+      "path": "public/products/foods/kerala-food-159.webp"
+    },
+    {
+      "id": "kerala-food-161",
+      "path": "public/products/foods/kerala-food-161.webp"
+    },
+    {
+      "id": "kerala-food-162",
+      "path": "public/products/foods/kerala-food-162.webp"
+    },
+    {
+      "id": "kerala-food-163",
+      "path": "public/products/foods/kerala-food-163.webp"
+    },
+    {
+      "id": "kerala-food-164",
+      "path": "public/products/foods/kerala-food-164.webp"
+    },
+    {
+      "id": "kerala-food-165",
+      "path": "public/products/foods/kerala-food-165.webp"
+    },
+    {
+      "id": "kerala-food-166",
+      "path": "public/products/foods/kerala-food-166.webp"
+    },
+    {
+      "id": "kerala-food-167",
+      "path": "public/products/foods/kerala-food-167.webp"
+    },
+    {
+      "id": "kerala-food-168",
+      "path": "public/products/foods/kerala-food-168.webp"
+    },
+    {
+      "id": "kerala-food-169",
+      "path": "public/products/foods/kerala-food-169.webp"
+    },
+    {
+      "id": "kerala-food-170",
+      "path": "public/products/foods/kerala-food-170.webp"
+    },
+    {
+      "id": "kerala-food-171",
+      "path": "public/products/foods/kerala-food-171.webp"
+    },
+    {
+      "id": "kerala-food-172",
+      "path": "public/products/foods/kerala-food-172.webp"
+    },
+    {
+      "id": "kerala-food-173",
+      "path": "public/products/foods/kerala-food-173.webp"
+    },
+    {
+      "id": "kerala-food-174",
+      "path": "public/products/foods/kerala-food-174.webp"
+    },
+    {
+      "id": "kerala-food-175",
+      "path": "public/products/foods/kerala-food-175.webp"
+    },
+    {
+      "id": "kerala-food-176",
+      "path": "public/products/foods/kerala-food-176.webp"
+    },
+    {
+      "id": "kerala-food-177",
+      "path": "public/products/foods/kerala-food-177.webp"
+    },
+    {
+      "id": "kerala-food-178",
+      "path": "public/products/foods/kerala-food-178.webp"
+    },
+    {
+      "id": "kerala-food-179",
+      "path": "public/products/foods/kerala-food-179.webp"
+    },
+    {
+      "id": "kerala-food-180",
+      "path": "public/products/foods/kerala-food-180.webp"
+    },
+    {
+      "id": "kerala-food-181",
+      "path": "public/products/foods/kerala-food-181.webp"
+    },
+    {
+      "id": "kerala-food-182",
+      "path": "public/products/foods/kerala-food-182.webp"
+    },
+    {
+      "id": "kerala-food-183",
+      "path": "public/products/foods/kerala-food-183.webp"
+    },
+    {
+      "id": "kerala-food-184",
+      "path": "public/products/foods/kerala-food-184.webp"
+    },
+    {
+      "id": "kerala-food-185",
+      "path": "public/products/foods/kerala-food-185.webp"
+    },
+    {
+      "id": "kerala-food-186",
+      "path": "public/products/foods/kerala-food-186.webp"
+    },
+    {
+      "id": "kerala-food-187",
+      "path": "public/products/foods/kerala-food-187.webp"
+    },
+    {
+      "id": "kerala-food-188",
+      "path": "public/products/foods/kerala-food-188.webp"
+    },
+    {
+      "id": "kerala-food-189",
+      "path": "public/products/foods/kerala-food-189.webp"
+    },
+    {
+      "id": "kerala-food-191",
+      "path": "public/products/foods/kerala-food-191.webp"
+    },
+    {
+      "id": "kerala-food-192",
+      "path": "public/products/foods/kerala-food-192.webp"
+    },
+    {
+      "id": "kerala-food-193",
+      "path": "public/products/foods/kerala-food-193.webp"
+    },
+    {
+      "id": "kerala-food-194",
+      "path": "public/products/foods/kerala-food-194.webp"
+    },
+    {
+      "id": "kerala-food-195",
+      "path": "public/products/foods/kerala-food-195.webp"
+    },
+    {
+      "id": "kerala-food-196",
+      "path": "public/products/foods/kerala-food-196.webp"
+    },
+    {
+      "id": "kerala-food-197",
+      "path": "public/products/foods/kerala-food-197.webp"
+    },
+    {
+      "id": "kerala-food-198",
+      "path": "public/products/foods/kerala-food-198.webp"
+    },
+    {
+      "id": "kerala-food-199",
+      "path": "public/products/foods/kerala-food-199.webp"
+    },
+    {
+      "id": "kerala-food-200",
+      "path": "public/products/foods/kerala-food-200.webp"
+    },
+    {
+      "id": "kerala-food-201",
+      "path": "public/products/foods/kerala-food-201.webp"
+    },
+    {
+      "id": "kerala-food-202",
+      "path": "public/products/foods/kerala-food-202.webp"
+    },
+    {
+      "id": "kerala-food-203",
+      "path": "public/products/foods/kerala-food-203.webp"
+    },
+    {
+      "id": "kerala-food-204",
+      "path": "public/products/foods/kerala-food-204.webp"
+    },
+    {
+      "id": "kerala-food-205",
+      "path": "public/products/bakery/kerala-food-205.webp"
+    },
+    {
+      "id": "kerala-food-206",
+      "path": "public/products/bakery/kerala-food-206.webp"
+    },
+    {
+      "id": "kerala-food-207",
+      "path": "public/products/bakery/kerala-food-207.webp"
+    },
+    {
+      "id": "kerala-food-208",
+      "path": "public/products/bakery/kerala-food-208.webp"
+    },
+    {
+      "id": "kerala-food-209",
+      "path": "public/products/bakery/kerala-food-209.webp"
+    },
+    {
+      "id": "kerala-food-210",
+      "path": "public/products/bakery/kerala-food-210.webp"
+    },
+    {
+      "id": "kerala-food-211",
+      "path": "public/products/bakery/kerala-food-211.webp"
+    },
+    {
+      "id": "kerala-food-212",
+      "path": "public/products/foods/kerala-food-212.webp"
+    },
+    {
+      "id": "kerala-food-213",
+      "path": "public/products/foods/kerala-food-213.webp"
+    },
+    {
+      "id": "kerala-food-214",
+      "path": "public/products/foods/kerala-food-214.webp"
+    },
+    {
+      "id": "kerala-food-215",
+      "path": "public/products/foods/kerala-food-215.webp"
+    },
+    {
+      "id": "kerala-food-216",
+      "path": "public/products/foods/kerala-food-216.webp"
+    },
+    {
+      "id": "kerala-food-217",
+      "path": "public/products/foods/kerala-food-217.webp"
+    },
+    {
+      "id": "kerala-food-218",
+      "path": "public/products/foods/kerala-food-218.webp"
+    },
+    {
+      "id": "kerala-food-219",
+      "path": "public/products/foods/kerala-food-219.webp"
+    },
+    {
+      "id": "kerala-food-220",
+      "path": "public/products/foods/kerala-food-220.webp"
+    },
+    {
+      "id": "kerala-food-221",
+      "path": "public/products/foods/kerala-food-221.webp"
+    },
+    {
+      "id": "kerala-food-222",
+      "path": "public/products/foods/kerala-food-222.webp"
+    },
+    {
+      "id": "kerala-food-223",
+      "path": "public/products/foods/kerala-food-223.webp"
+    },
+    {
+      "id": "kerala-food-224",
+      "path": "public/products/foods/kerala-food-224.webp"
+    },
+    {
+      "id": "kerala-food-225",
+      "path": "public/products/foods/kerala-food-225.webp"
+    },
+    {
+      "id": "kerala-food-226",
+      "path": "public/products/foods/kerala-food-226.webp"
+    },
+    {
+      "id": "kerala-food-227",
+      "path": "public/products/foods/kerala-food-227.webp"
+    },
+    {
+      "id": "kerala-food-228",
+      "path": "public/products/foods/kerala-food-228.webp"
+    },
+    {
+      "id": "kerala-food-229",
+      "path": "public/products/foods/kerala-food-229.webp"
+    },
+    {
+      "id": "kerala-food-230",
+      "path": "public/products/foods/kerala-food-230.webp"
+    },
+    {
+      "id": "kerala-food-231",
+      "path": "public/products/foods/kerala-food-231.webp"
+    },
+    {
+      "id": "kerala-food-232",
+      "path": "public/products/foods/kerala-food-232.webp"
+    },
+    {
+      "id": "kerala-food-233",
+      "path": "public/products/foods/kerala-food-233.webp"
+    },
+    {
+      "id": "kerala-food-234",
+      "path": "public/products/foods/kerala-food-234.webp"
+    },
+    {
+      "id": "kerala-food-235",
+      "path": "public/products/foods/kerala-food-235.webp"
+    },
+    {
+      "id": "kerala-food-236",
+      "path": "public/products/foods/kerala-food-236.webp"
+    },
+    {
+      "id": "kerala-food-237",
+      "path": "public/products/foods/kerala-food-237.webp"
+    },
+    {
+      "id": "kerala-food-238",
+      "path": "public/products/foods/kerala-food-238.webp"
+    },
+    {
+      "id": "kerala-food-239",
+      "path": "public/products/foods/kerala-food-239.webp"
+    },
+    {
+      "id": "kerala-food-240",
+      "path": "public/products/foods/kerala-food-240.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-001-single",
+      "path": "public/products/bakery/kerala-v5-bakery-001-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-001-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-001-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-002-single",
+      "path": "public/products/bakery/kerala-v5-bakery-002-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-002-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-002-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-003-single",
+      "path": "public/products/bakery/kerala-v5-bakery-003-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-003-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-003-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-004-single",
+      "path": "public/products/bakery/kerala-v5-bakery-004-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-004-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-004-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-005-single",
+      "path": "public/products/bakery/kerala-v5-bakery-005-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-005-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-005-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-006-single",
+      "path": "public/products/bakery/kerala-v5-bakery-006-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-006-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-006-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-007-single",
+      "path": "public/products/bakery/kerala-v5-bakery-007-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-007-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-007-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-008-single",
+      "path": "public/products/bakery/kerala-v5-bakery-008-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-008-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-008-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-009-single",
+      "path": "public/products/bakery/kerala-v5-bakery-009-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-009-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-009-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-010-single",
+      "path": "public/products/bakery/kerala-v5-bakery-010-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-010-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-010-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-011-single",
+      "path": "public/products/bakery/kerala-v5-bakery-011-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-011-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-011-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-012-single",
+      "path": "public/products/bakery/kerala-v5-bakery-012-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-012-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-012-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-013-single",
+      "path": "public/products/bakery/kerala-v5-bakery-013-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-013-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-013-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-014-single",
+      "path": "public/products/bakery/kerala-v5-bakery-014-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-014-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-014-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-015-single",
+      "path": "public/products/bakery/kerala-v5-bakery-015-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-015-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-015-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-016-single",
+      "path": "public/products/bakery/kerala-v5-bakery-016-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-016-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-016-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-017-single",
+      "path": "public/products/bakery/kerala-v5-bakery-017-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-017-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-017-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-018-single",
+      "path": "public/products/bakery/kerala-v5-bakery-018-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-018-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-018-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-019-single",
+      "path": "public/products/bakery/kerala-v5-bakery-019-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-019-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-019-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-020-single",
+      "path": "public/products/bakery/kerala-v5-bakery-020-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-020-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-020-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-021-single",
+      "path": "public/products/bakery/kerala-v5-bakery-021-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-021-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-021-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-022-single",
+      "path": "public/products/bakery/kerala-v5-bakery-022-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-022-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-022-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-023-single",
+      "path": "public/products/bakery/kerala-v5-bakery-023-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-023-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-023-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-024-single",
+      "path": "public/products/bakery/kerala-v5-bakery-024-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-024-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-024-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-025-single",
+      "path": "public/products/bakery/kerala-v5-bakery-025-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-025-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-025-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-026-single",
+      "path": "public/products/bakery/kerala-v5-bakery-026-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-026-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-026-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-027-single",
+      "path": "public/products/bakery/kerala-v5-bakery-027-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-027-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-027-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-028-single",
+      "path": "public/products/bakery/kerala-v5-bakery-028-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-028-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-028-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-029-single",
+      "path": "public/products/bakery/kerala-v5-bakery-029-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-029-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-029-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-030-single",
+      "path": "public/products/bakery/kerala-v5-bakery-030-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-030-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-030-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-031-single",
+      "path": "public/products/bakery/kerala-v5-bakery-031-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-031-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-031-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-032-single",
+      "path": "public/products/bakery/kerala-v5-bakery-032-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-032-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-032-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-033-single",
+      "path": "public/products/bakery/kerala-v5-bakery-033-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-033-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-033-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-034-single",
+      "path": "public/products/bakery/kerala-v5-bakery-034-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-034-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-034-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-035-single",
+      "path": "public/products/bakery/kerala-v5-bakery-035-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-035-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-035-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-036-single",
+      "path": "public/products/bakery/kerala-v5-bakery-036-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-036-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-036-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-037-single",
+      "path": "public/products/bakery/kerala-v5-bakery-037-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-037-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-037-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-038-single",
+      "path": "public/products/bakery/kerala-v5-bakery-038-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-038-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-038-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-039-single",
+      "path": "public/products/bakery/kerala-v5-bakery-039-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-039-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-039-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-040-single",
+      "path": "public/products/bakery/kerala-v5-bakery-040-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-040-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-040-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-041-single",
+      "path": "public/products/bakery/kerala-v5-bakery-041-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-041-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-041-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-042-single",
+      "path": "public/products/bakery/kerala-v5-bakery-042-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-042-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-042-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-043-single",
+      "path": "public/products/bakery/kerala-v5-bakery-043-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-043-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-043-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-044-single",
+      "path": "public/products/bakery/kerala-v5-bakery-044-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-044-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-044-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-045-single",
+      "path": "public/products/bakery/kerala-v5-bakery-045-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-045-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-045-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-046-single",
+      "path": "public/products/bakery/kerala-v5-bakery-046-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-046-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-046-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-047-single",
+      "path": "public/products/bakery/kerala-v5-bakery-047-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-047-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-047-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-048-single",
+      "path": "public/products/bakery/kerala-v5-bakery-048-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-048-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-048-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-049-single",
+      "path": "public/products/bakery/kerala-v5-bakery-049-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-049-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-049-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-050-single",
+      "path": "public/products/bakery/kerala-v5-bakery-050-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-050-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-050-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-051-single",
+      "path": "public/products/bakery/kerala-v5-bakery-051-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-051-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-051-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-052-single",
+      "path": "public/products/bakery/kerala-v5-bakery-052-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-052-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-052-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-053-single",
+      "path": "public/products/bakery/kerala-v5-bakery-053-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-053-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-053-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-054-single",
+      "path": "public/products/bakery/kerala-v5-bakery-054-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-054-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-054-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-055-single",
+      "path": "public/products/bakery/kerala-v5-bakery-055-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-055-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-055-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-056-single",
+      "path": "public/products/bakery/kerala-v5-bakery-056-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-056-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-056-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-057-single",
+      "path": "public/products/bakery/kerala-v5-bakery-057-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-057-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-057-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-058-single",
+      "path": "public/products/bakery/kerala-v5-bakery-058-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-058-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-058-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-059-single",
+      "path": "public/products/bakery/kerala-v5-bakery-059-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-059-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-059-pack.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-060-single",
+      "path": "public/products/bakery/kerala-v5-bakery-060-single.webp"
+    },
+    {
+      "id": "kerala-v5-bakery-060-pack",
+      "path": "public/products/bakery/kerala-v5-bakery-060-pack.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-001-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-001-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-001-box",
+      "path": "public/products/sweets/kerala-v5-sweet-001-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-002-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-002-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-002-box",
+      "path": "public/products/sweets/kerala-v5-sweet-002-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-003-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-003-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-003-box",
+      "path": "public/products/sweets/kerala-v5-sweet-003-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-004-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-004-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-004-box",
+      "path": "public/products/sweets/kerala-v5-sweet-004-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-005-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-005-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-005-box",
+      "path": "public/products/sweets/kerala-v5-sweet-005-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-006-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-006-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-006-box",
+      "path": "public/products/sweets/kerala-v5-sweet-006-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-007-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-007-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-007-box",
+      "path": "public/products/sweets/kerala-v5-sweet-007-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-008-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-008-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-008-box",
+      "path": "public/products/sweets/kerala-v5-sweet-008-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-009-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-009-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-009-box",
+      "path": "public/products/sweets/kerala-v5-sweet-009-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-010-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-010-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-010-box",
+      "path": "public/products/sweets/kerala-v5-sweet-010-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-011-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-011-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-011-box",
+      "path": "public/products/sweets/kerala-v5-sweet-011-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-012-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-012-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-012-box",
+      "path": "public/products/sweets/kerala-v5-sweet-012-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-013-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-013-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-013-box",
+      "path": "public/products/sweets/kerala-v5-sweet-013-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-014-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-014-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-014-box",
+      "path": "public/products/sweets/kerala-v5-sweet-014-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-015-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-015-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-015-box",
+      "path": "public/products/sweets/kerala-v5-sweet-015-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-016-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-016-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-016-box",
+      "path": "public/products/sweets/kerala-v5-sweet-016-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-017-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-017-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-017-box",
+      "path": "public/products/sweets/kerala-v5-sweet-017-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-018-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-018-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-018-box",
+      "path": "public/products/sweets/kerala-v5-sweet-018-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-019-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-019-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-019-box",
+      "path": "public/products/sweets/kerala-v5-sweet-019-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-020-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-020-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-020-box",
+      "path": "public/products/sweets/kerala-v5-sweet-020-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-021-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-021-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-021-box",
+      "path": "public/products/sweets/kerala-v5-sweet-021-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-022-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-022-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-022-box",
+      "path": "public/products/sweets/kerala-v5-sweet-022-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-023-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-023-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-023-box",
+      "path": "public/products/sweets/kerala-v5-sweet-023-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-024-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-024-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-024-box",
+      "path": "public/products/sweets/kerala-v5-sweet-024-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-025-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-025-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-025-box",
+      "path": "public/products/sweets/kerala-v5-sweet-025-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-026-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-026-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-026-box",
+      "path": "public/products/sweets/kerala-v5-sweet-026-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-027-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-027-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-027-box",
+      "path": "public/products/sweets/kerala-v5-sweet-027-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-028-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-028-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-028-box",
+      "path": "public/products/sweets/kerala-v5-sweet-028-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-029-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-029-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-029-box",
+      "path": "public/products/sweets/kerala-v5-sweet-029-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-030-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-030-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-030-box",
+      "path": "public/products/sweets/kerala-v5-sweet-030-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-031-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-031-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-031-box",
+      "path": "public/products/sweets/kerala-v5-sweet-031-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-032-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-032-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-032-box",
+      "path": "public/products/sweets/kerala-v5-sweet-032-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-033-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-033-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-033-box",
+      "path": "public/products/sweets/kerala-v5-sweet-033-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-034-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-034-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-034-box",
+      "path": "public/products/sweets/kerala-v5-sweet-034-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-035-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-035-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-035-box",
+      "path": "public/products/sweets/kerala-v5-sweet-035-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-036-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-036-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-036-box",
+      "path": "public/products/sweets/kerala-v5-sweet-036-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-037-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-037-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-037-box",
+      "path": "public/products/sweets/kerala-v5-sweet-037-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-038-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-038-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-038-box",
+      "path": "public/products/sweets/kerala-v5-sweet-038-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-039-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-039-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-039-box",
+      "path": "public/products/sweets/kerala-v5-sweet-039-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-040-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-040-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-040-box",
+      "path": "public/products/sweets/kerala-v5-sweet-040-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-041-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-041-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-041-box",
+      "path": "public/products/sweets/kerala-v5-sweet-041-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-042-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-042-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-042-box",
+      "path": "public/products/sweets/kerala-v5-sweet-042-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-043-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-043-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-043-box",
+      "path": "public/products/sweets/kerala-v5-sweet-043-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-044-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-044-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-044-box",
+      "path": "public/products/sweets/kerala-v5-sweet-044-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-045-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-045-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-045-box",
+      "path": "public/products/sweets/kerala-v5-sweet-045-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-046-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-046-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-046-box",
+      "path": "public/products/sweets/kerala-v5-sweet-046-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-047-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-047-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-047-box",
+      "path": "public/products/sweets/kerala-v5-sweet-047-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-048-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-048-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-048-box",
+      "path": "public/products/sweets/kerala-v5-sweet-048-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-049-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-049-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-049-box",
+      "path": "public/products/sweets/kerala-v5-sweet-049-box.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-050-loose",
+      "path": "public/products/sweets/kerala-v5-sweet-050-loose.webp"
+    },
+    {
+      "id": "kerala-v5-sweet-050-box",
+      "path": "public/products/sweets/kerala-v5-sweet-050-box.webp"
+    },
+    {
+      "id": "kerala-v5-snack-001-regular",
+      "path": "public/products/brands/kerala-v5-snack-001-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-001-value",
+      "path": "public/products/brands/kerala-v5-snack-001-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-002-regular",
+      "path": "public/products/brands/kerala-v5-snack-002-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-002-value",
+      "path": "public/products/brands/kerala-v5-snack-002-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-003-regular",
+      "path": "public/products/brands/kerala-v5-snack-003-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-003-value",
+      "path": "public/products/brands/kerala-v5-snack-003-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-004-regular",
+      "path": "public/products/brands/kerala-v5-snack-004-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-004-value",
+      "path": "public/products/brands/kerala-v5-snack-004-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-005-regular",
+      "path": "public/products/brands/kerala-v5-snack-005-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-005-value",
+      "path": "public/products/brands/kerala-v5-snack-005-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-006-regular",
+      "path": "public/products/brands/kerala-v5-snack-006-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-006-value",
+      "path": "public/products/brands/kerala-v5-snack-006-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-007-regular",
+      "path": "public/products/brands/kerala-v5-snack-007-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-007-value",
+      "path": "public/products/brands/kerala-v5-snack-007-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-008-regular",
+      "path": "public/products/brands/kerala-v5-snack-008-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-008-value",
+      "path": "public/products/brands/kerala-v5-snack-008-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-009-regular",
+      "path": "public/products/brands/kerala-v5-snack-009-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-009-value",
+      "path": "public/products/brands/kerala-v5-snack-009-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-010-regular",
+      "path": "public/products/brands/kerala-v5-snack-010-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-010-value",
+      "path": "public/products/brands/kerala-v5-snack-010-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-011-regular",
+      "path": "public/products/brands/kerala-v5-snack-011-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-011-value",
+      "path": "public/products/brands/kerala-v5-snack-011-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-012-regular",
+      "path": "public/products/brands/kerala-v5-snack-012-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-012-value",
+      "path": "public/products/brands/kerala-v5-snack-012-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-013-regular",
+      "path": "public/products/brands/kerala-v5-snack-013-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-013-value",
+      "path": "public/products/brands/kerala-v5-snack-013-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-014-regular",
+      "path": "public/products/brands/kerala-v5-snack-014-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-014-value",
+      "path": "public/products/brands/kerala-v5-snack-014-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-015-regular",
+      "path": "public/products/brands/kerala-v5-snack-015-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-015-value",
+      "path": "public/products/brands/kerala-v5-snack-015-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-016-regular",
+      "path": "public/products/brands/kerala-v5-snack-016-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-016-value",
+      "path": "public/products/brands/kerala-v5-snack-016-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-017-regular",
+      "path": "public/products/brands/kerala-v5-snack-017-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-017-value",
+      "path": "public/products/brands/kerala-v5-snack-017-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-018-regular",
+      "path": "public/products/brands/kerala-v5-snack-018-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-018-value",
+      "path": "public/products/brands/kerala-v5-snack-018-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-019-regular",
+      "path": "public/products/brands/kerala-v5-snack-019-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-019-value",
+      "path": "public/products/brands/kerala-v5-snack-019-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-020-regular",
+      "path": "public/products/brands/kerala-v5-snack-020-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-020-value",
+      "path": "public/products/brands/kerala-v5-snack-020-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-021-regular",
+      "path": "public/products/brands/kerala-v5-snack-021-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-021-value",
+      "path": "public/products/brands/kerala-v5-snack-021-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-022-regular",
+      "path": "public/products/brands/kerala-v5-snack-022-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-022-value",
+      "path": "public/products/brands/kerala-v5-snack-022-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-023-regular",
+      "path": "public/products/brands/kerala-v5-snack-023-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-023-value",
+      "path": "public/products/brands/kerala-v5-snack-023-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-024-regular",
+      "path": "public/products/brands/kerala-v5-snack-024-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-024-value",
+      "path": "public/products/brands/kerala-v5-snack-024-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-025-regular",
+      "path": "public/products/brands/kerala-v5-snack-025-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-025-value",
+      "path": "public/products/brands/kerala-v5-snack-025-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-026-regular",
+      "path": "public/products/brands/kerala-v5-snack-026-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-026-value",
+      "path": "public/products/brands/kerala-v5-snack-026-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-027-regular",
+      "path": "public/products/brands/kerala-v5-snack-027-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-027-value",
+      "path": "public/products/brands/kerala-v5-snack-027-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-028-regular",
+      "path": "public/products/brands/kerala-v5-snack-028-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-028-value",
+      "path": "public/products/brands/kerala-v5-snack-028-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-029-regular",
+      "path": "public/products/brands/kerala-v5-snack-029-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-029-value",
+      "path": "public/products/brands/kerala-v5-snack-029-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-030-regular",
+      "path": "public/products/brands/kerala-v5-snack-030-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-030-value",
+      "path": "public/products/brands/kerala-v5-snack-030-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-031-regular",
+      "path": "public/products/brands/kerala-v5-snack-031-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-031-value",
+      "path": "public/products/brands/kerala-v5-snack-031-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-032-regular",
+      "path": "public/products/brands/kerala-v5-snack-032-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-032-value",
+      "path": "public/products/brands/kerala-v5-snack-032-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-033-regular",
+      "path": "public/products/brands/kerala-v5-snack-033-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-033-value",
+      "path": "public/products/brands/kerala-v5-snack-033-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-034-regular",
+      "path": "public/products/brands/kerala-v5-snack-034-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-034-value",
+      "path": "public/products/brands/kerala-v5-snack-034-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-035-regular",
+      "path": "public/products/brands/kerala-v5-snack-035-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-035-value",
+      "path": "public/products/brands/kerala-v5-snack-035-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-036-regular",
+      "path": "public/products/brands/kerala-v5-snack-036-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-036-value",
+      "path": "public/products/brands/kerala-v5-snack-036-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-037-regular",
+      "path": "public/products/brands/kerala-v5-snack-037-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-037-value",
+      "path": "public/products/brands/kerala-v5-snack-037-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-038-regular",
+      "path": "public/products/brands/kerala-v5-snack-038-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-038-value",
+      "path": "public/products/brands/kerala-v5-snack-038-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-039-regular",
+      "path": "public/products/brands/kerala-v5-snack-039-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-039-value",
+      "path": "public/products/brands/kerala-v5-snack-039-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-040-regular",
+      "path": "public/products/brands/kerala-v5-snack-040-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-040-value",
+      "path": "public/products/brands/kerala-v5-snack-040-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-041-regular",
+      "path": "public/products/brands/kerala-v5-snack-041-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-041-value",
+      "path": "public/products/brands/kerala-v5-snack-041-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-042-regular",
+      "path": "public/products/brands/kerala-v5-snack-042-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-042-value",
+      "path": "public/products/brands/kerala-v5-snack-042-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-043-regular",
+      "path": "public/products/brands/kerala-v5-snack-043-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-043-value",
+      "path": "public/products/brands/kerala-v5-snack-043-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-044-regular",
+      "path": "public/products/brands/kerala-v5-snack-044-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-044-value",
+      "path": "public/products/brands/kerala-v5-snack-044-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-045-regular",
+      "path": "public/products/brands/kerala-v5-snack-045-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-045-value",
+      "path": "public/products/brands/kerala-v5-snack-045-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-046-regular",
+      "path": "public/products/brands/kerala-v5-snack-046-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-046-value",
+      "path": "public/products/brands/kerala-v5-snack-046-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-047-regular",
+      "path": "public/products/brands/kerala-v5-snack-047-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-047-value",
+      "path": "public/products/brands/kerala-v5-snack-047-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-048-regular",
+      "path": "public/products/brands/kerala-v5-snack-048-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-048-value",
+      "path": "public/products/brands/kerala-v5-snack-048-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-049-regular",
+      "path": "public/products/brands/kerala-v5-snack-049-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-049-value",
+      "path": "public/products/brands/kerala-v5-snack-049-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-050-regular",
+      "path": "public/products/brands/kerala-v5-snack-050-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-050-value",
+      "path": "public/products/brands/kerala-v5-snack-050-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-051-regular",
+      "path": "public/products/brands/kerala-v5-snack-051-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-051-value",
+      "path": "public/products/brands/kerala-v5-snack-051-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-052-regular",
+      "path": "public/products/brands/kerala-v5-snack-052-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-052-value",
+      "path": "public/products/brands/kerala-v5-snack-052-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-053-regular",
+      "path": "public/products/brands/kerala-v5-snack-053-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-053-value",
+      "path": "public/products/brands/kerala-v5-snack-053-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-054-regular",
+      "path": "public/products/brands/kerala-v5-snack-054-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-054-value",
+      "path": "public/products/brands/kerala-v5-snack-054-value.webp"
+    },
+    {
+      "id": "kerala-v5-snack-055-regular",
+      "path": "public/products/brands/kerala-v5-snack-055-regular.webp"
+    },
+    {
+      "id": "kerala-v5-snack-055-value",
+      "path": "public/products/brands/kerala-v5-snack-055-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-001-regular",
+      "path": "public/products/brands/kerala-v5-grocery-001-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-001-value",
+      "path": "public/products/brands/kerala-v5-grocery-001-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-002-regular",
+      "path": "public/products/brands/kerala-v5-grocery-002-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-002-value",
+      "path": "public/products/brands/kerala-v5-grocery-002-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-003-regular",
+      "path": "public/products/brands/kerala-v5-grocery-003-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-003-value",
+      "path": "public/products/brands/kerala-v5-grocery-003-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-004-regular",
+      "path": "public/products/brands/kerala-v5-grocery-004-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-004-value",
+      "path": "public/products/brands/kerala-v5-grocery-004-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-005-regular",
+      "path": "public/products/brands/kerala-v5-grocery-005-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-005-value",
+      "path": "public/products/brands/kerala-v5-grocery-005-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-006-regular",
+      "path": "public/products/brands/kerala-v5-grocery-006-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-006-value",
+      "path": "public/products/brands/kerala-v5-grocery-006-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-007-regular",
+      "path": "public/products/brands/kerala-v5-grocery-007-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-007-value",
+      "path": "public/products/brands/kerala-v5-grocery-007-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-008-regular",
+      "path": "public/products/brands/kerala-v5-grocery-008-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-008-value",
+      "path": "public/products/brands/kerala-v5-grocery-008-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-009-regular",
+      "path": "public/products/brands/kerala-v5-grocery-009-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-009-value",
+      "path": "public/products/brands/kerala-v5-grocery-009-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-010-regular",
+      "path": "public/products/brands/kerala-v5-grocery-010-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-010-value",
+      "path": "public/products/brands/kerala-v5-grocery-010-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-011-regular",
+      "path": "public/products/brands/kerala-v5-grocery-011-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-011-value",
+      "path": "public/products/brands/kerala-v5-grocery-011-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-012-regular",
+      "path": "public/products/brands/kerala-v5-grocery-012-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-012-value",
+      "path": "public/products/brands/kerala-v5-grocery-012-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-013-regular",
+      "path": "public/products/brands/kerala-v5-grocery-013-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-013-value",
+      "path": "public/products/brands/kerala-v5-grocery-013-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-014-regular",
+      "path": "public/products/brands/kerala-v5-grocery-014-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-014-value",
+      "path": "public/products/brands/kerala-v5-grocery-014-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-015-regular",
+      "path": "public/products/brands/kerala-v5-grocery-015-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-015-value",
+      "path": "public/products/brands/kerala-v5-grocery-015-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-016-regular",
+      "path": "public/products/brands/kerala-v5-grocery-016-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-016-value",
+      "path": "public/products/brands/kerala-v5-grocery-016-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-017-regular",
+      "path": "public/products/brands/kerala-v5-grocery-017-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-017-value",
+      "path": "public/products/brands/kerala-v5-grocery-017-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-018-regular",
+      "path": "public/products/brands/kerala-v5-grocery-018-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-018-value",
+      "path": "public/products/brands/kerala-v5-grocery-018-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-019-regular",
+      "path": "public/products/brands/kerala-v5-grocery-019-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-019-value",
+      "path": "public/products/brands/kerala-v5-grocery-019-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-020-regular",
+      "path": "public/products/brands/kerala-v5-grocery-020-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-020-value",
+      "path": "public/products/brands/kerala-v5-grocery-020-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-021-regular",
+      "path": "public/products/brands/kerala-v5-grocery-021-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-021-value",
+      "path": "public/products/brands/kerala-v5-grocery-021-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-022-regular",
+      "path": "public/products/brands/kerala-v5-grocery-022-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-022-value",
+      "path": "public/products/brands/kerala-v5-grocery-022-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-023-regular",
+      "path": "public/products/brands/kerala-v5-grocery-023-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-023-value",
+      "path": "public/products/brands/kerala-v5-grocery-023-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-024-regular",
+      "path": "public/products/brands/kerala-v5-grocery-024-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-024-value",
+      "path": "public/products/brands/kerala-v5-grocery-024-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-025-regular",
+      "path": "public/products/brands/kerala-v5-grocery-025-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-025-value",
+      "path": "public/products/brands/kerala-v5-grocery-025-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-026-regular",
+      "path": "public/products/brands/kerala-v5-grocery-026-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-026-value",
+      "path": "public/products/brands/kerala-v5-grocery-026-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-027-regular",
+      "path": "public/products/brands/kerala-v5-grocery-027-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-027-value",
+      "path": "public/products/brands/kerala-v5-grocery-027-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-028-regular",
+      "path": "public/products/brands/kerala-v5-grocery-028-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-028-value",
+      "path": "public/products/brands/kerala-v5-grocery-028-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-029-regular",
+      "path": "public/products/brands/kerala-v5-grocery-029-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-029-value",
+      "path": "public/products/brands/kerala-v5-grocery-029-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-030-regular",
+      "path": "public/products/brands/kerala-v5-grocery-030-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-030-value",
+      "path": "public/products/brands/kerala-v5-grocery-030-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-031-regular",
+      "path": "public/products/brands/kerala-v5-grocery-031-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-031-value",
+      "path": "public/products/brands/kerala-v5-grocery-031-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-032-regular",
+      "path": "public/products/brands/kerala-v5-grocery-032-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-032-value",
+      "path": "public/products/brands/kerala-v5-grocery-032-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-033-regular",
+      "path": "public/products/brands/kerala-v5-grocery-033-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-033-value",
+      "path": "public/products/brands/kerala-v5-grocery-033-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-034-regular",
+      "path": "public/products/brands/kerala-v5-grocery-034-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-034-value",
+      "path": "public/products/brands/kerala-v5-grocery-034-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-035-regular",
+      "path": "public/products/brands/kerala-v5-grocery-035-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-035-value",
+      "path": "public/products/brands/kerala-v5-grocery-035-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-036-regular",
+      "path": "public/products/brands/kerala-v5-grocery-036-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-036-value",
+      "path": "public/products/brands/kerala-v5-grocery-036-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-037-regular",
+      "path": "public/products/brands/kerala-v5-grocery-037-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-037-value",
+      "path": "public/products/brands/kerala-v5-grocery-037-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-038-regular",
+      "path": "public/products/brands/kerala-v5-grocery-038-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-038-value",
+      "path": "public/products/brands/kerala-v5-grocery-038-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-039-regular",
+      "path": "public/products/brands/kerala-v5-grocery-039-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-039-value",
+      "path": "public/products/brands/kerala-v5-grocery-039-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-040-regular",
+      "path": "public/products/brands/kerala-v5-grocery-040-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-040-value",
+      "path": "public/products/brands/kerala-v5-grocery-040-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-041-regular",
+      "path": "public/products/brands/kerala-v5-grocery-041-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-041-value",
+      "path": "public/products/brands/kerala-v5-grocery-041-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-042-regular",
+      "path": "public/products/brands/kerala-v5-grocery-042-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-042-value",
+      "path": "public/products/brands/kerala-v5-grocery-042-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-043-regular",
+      "path": "public/products/brands/kerala-v5-grocery-043-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-043-value",
+      "path": "public/products/brands/kerala-v5-grocery-043-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-044-regular",
+      "path": "public/products/brands/kerala-v5-grocery-044-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-044-value",
+      "path": "public/products/brands/kerala-v5-grocery-044-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-045-regular",
+      "path": "public/products/brands/kerala-v5-grocery-045-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-045-value",
+      "path": "public/products/brands/kerala-v5-grocery-045-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-046-regular",
+      "path": "public/products/brands/kerala-v5-grocery-046-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-046-value",
+      "path": "public/products/brands/kerala-v5-grocery-046-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-047-regular",
+      "path": "public/products/brands/kerala-v5-grocery-047-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-047-value",
+      "path": "public/products/brands/kerala-v5-grocery-047-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-048-regular",
+      "path": "public/products/brands/kerala-v5-grocery-048-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-048-value",
+      "path": "public/products/brands/kerala-v5-grocery-048-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-049-regular",
+      "path": "public/products/brands/kerala-v5-grocery-049-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-049-value",
+      "path": "public/products/brands/kerala-v5-grocery-049-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-050-regular",
+      "path": "public/products/brands/kerala-v5-grocery-050-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-050-value",
+      "path": "public/products/brands/kerala-v5-grocery-050-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-051-regular",
+      "path": "public/products/brands/kerala-v5-grocery-051-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-051-value",
+      "path": "public/products/brands/kerala-v5-grocery-051-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-052-regular",
+      "path": "public/products/brands/kerala-v5-grocery-052-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-052-value",
+      "path": "public/products/brands/kerala-v5-grocery-052-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-053-regular",
+      "path": "public/products/brands/kerala-v5-grocery-053-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-053-value",
+      "path": "public/products/brands/kerala-v5-grocery-053-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-054-regular",
+      "path": "public/products/brands/kerala-v5-grocery-054-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-054-value",
+      "path": "public/products/brands/kerala-v5-grocery-054-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-055-regular",
+      "path": "public/products/brands/kerala-v5-grocery-055-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-055-value",
+      "path": "public/products/brands/kerala-v5-grocery-055-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-056-regular",
+      "path": "public/products/brands/kerala-v5-grocery-056-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-056-value",
+      "path": "public/products/brands/kerala-v5-grocery-056-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-057-regular",
+      "path": "public/products/brands/kerala-v5-grocery-057-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-057-value",
+      "path": "public/products/brands/kerala-v5-grocery-057-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-058-regular",
+      "path": "public/products/brands/kerala-v5-grocery-058-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-058-value",
+      "path": "public/products/brands/kerala-v5-grocery-058-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-059-regular",
+      "path": "public/products/brands/kerala-v5-grocery-059-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-059-value",
+      "path": "public/products/brands/kerala-v5-grocery-059-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-060-regular",
+      "path": "public/products/brands/kerala-v5-grocery-060-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-060-value",
+      "path": "public/products/brands/kerala-v5-grocery-060-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-061-regular",
+      "path": "public/products/brands/kerala-v5-grocery-061-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-061-value",
+      "path": "public/products/brands/kerala-v5-grocery-061-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-062-regular",
+      "path": "public/products/brands/kerala-v5-grocery-062-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-062-value",
+      "path": "public/products/brands/kerala-v5-grocery-062-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-063-regular",
+      "path": "public/products/brands/kerala-v5-grocery-063-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-063-value",
+      "path": "public/products/brands/kerala-v5-grocery-063-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-064-regular",
+      "path": "public/products/brands/kerala-v5-grocery-064-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-064-value",
+      "path": "public/products/brands/kerala-v5-grocery-064-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-065-regular",
+      "path": "public/products/brands/kerala-v5-grocery-065-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-065-value",
+      "path": "public/products/brands/kerala-v5-grocery-065-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-066-regular",
+      "path": "public/products/brands/kerala-v5-grocery-066-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-066-value",
+      "path": "public/products/brands/kerala-v5-grocery-066-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-067-regular",
+      "path": "public/products/brands/kerala-v5-grocery-067-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-067-value",
+      "path": "public/products/brands/kerala-v5-grocery-067-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-068-regular",
+      "path": "public/products/brands/kerala-v5-grocery-068-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-068-value",
+      "path": "public/products/brands/kerala-v5-grocery-068-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-069-regular",
+      "path": "public/products/brands/kerala-v5-grocery-069-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-069-value",
+      "path": "public/products/brands/kerala-v5-grocery-069-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-070-regular",
+      "path": "public/products/brands/kerala-v5-grocery-070-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-070-value",
+      "path": "public/products/brands/kerala-v5-grocery-070-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-071-regular",
+      "path": "public/products/brands/kerala-v5-grocery-071-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-071-value",
+      "path": "public/products/brands/kerala-v5-grocery-071-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-072-regular",
+      "path": "public/products/brands/kerala-v5-grocery-072-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-072-value",
+      "path": "public/products/brands/kerala-v5-grocery-072-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-073-regular",
+      "path": "public/products/brands/kerala-v5-grocery-073-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-073-value",
+      "path": "public/products/brands/kerala-v5-grocery-073-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-074-regular",
+      "path": "public/products/brands/kerala-v5-grocery-074-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-074-value",
+      "path": "public/products/brands/kerala-v5-grocery-074-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-075-regular",
+      "path": "public/products/brands/kerala-v5-grocery-075-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-075-value",
+      "path": "public/products/brands/kerala-v5-grocery-075-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-076-regular",
+      "path": "public/products/brands/kerala-v5-grocery-076-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-076-value",
+      "path": "public/products/brands/kerala-v5-grocery-076-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-077-regular",
+      "path": "public/products/brands/kerala-v5-grocery-077-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-077-value",
+      "path": "public/products/brands/kerala-v5-grocery-077-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-078-regular",
+      "path": "public/products/brands/kerala-v5-grocery-078-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-078-value",
+      "path": "public/products/brands/kerala-v5-grocery-078-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-079-regular",
+      "path": "public/products/brands/kerala-v5-grocery-079-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-079-value",
+      "path": "public/products/brands/kerala-v5-grocery-079-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-080-regular",
+      "path": "public/products/brands/kerala-v5-grocery-080-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-080-value",
+      "path": "public/products/brands/kerala-v5-grocery-080-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-081-regular",
+      "path": "public/products/brands/kerala-v5-grocery-081-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-081-value",
+      "path": "public/products/brands/kerala-v5-grocery-081-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-082-regular",
+      "path": "public/products/brands/kerala-v5-grocery-082-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-082-value",
+      "path": "public/products/brands/kerala-v5-grocery-082-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-083-regular",
+      "path": "public/products/brands/kerala-v5-grocery-083-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-083-value",
+      "path": "public/products/brands/kerala-v5-grocery-083-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-084-regular",
+      "path": "public/products/brands/kerala-v5-grocery-084-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-084-value",
+      "path": "public/products/brands/kerala-v5-grocery-084-value.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-085-regular",
+      "path": "public/products/brands/kerala-v5-grocery-085-regular.webp"
+    },
+    {
+      "id": "kerala-v5-grocery-085-value",
+      "path": "public/products/brands/kerala-v5-grocery-085-value.webp"
+    }
+  ],
+  "failed_products": [],
+  "successful_pushes": [
+    {
+      "batch": "031-040 missing-image repair",
+      "commit": "99e8d17fa4f9914067eeebfe6dad515e307a0515",
+      "branch": "main",
+      "newly_added_product_ids": [
+        "kerala-veg-031",
+        "kerala-veg-034",
+        "kerala-veg-038"
+      ],
+      "batch_verified_product_ids": [
+        "kerala-veg-031",
+        "kerala-veg-032",
+        "kerala-veg-033",
+        "kerala-veg-034",
+        "kerala-veg-035",
+        "kerala-veg-036",
+        "kerala-veg-037",
+        "kerala-veg-038",
+        "kerala-veg-039",
+        "kerala-veg-040"
+      ]
+    }
+  ],
+  "next_batch": [
+    {
+      "id": "kerala-veg-041",
+      "path": "public/products/vegetables/kerala-veg-041.webp"
+    },
+    {
+      "id": "kerala-veg-042",
+      "path": "public/products/vegetables/kerala-veg-042.webp"
+    },
+    {
+      "id": "kerala-veg-043",
+      "path": "public/products/vegetables/kerala-veg-043.webp"
+    },
+    {
+      "id": "kerala-veg-046",
+      "path": "public/products/vegetables/kerala-veg-046.webp"
+    },
+    {
+      "id": "kerala-veg-047",
+      "path": "public/products/vegetables/kerala-veg-047.webp"
+    },
+    {
+      "id": "kerala-veg-048",
+      "path": "public/products/vegetables/kerala-veg-048.webp"
+    },
+    {
+      "id": "kerala-veg-049",
+      "path": "public/products/vegetables/kerala-veg-049.webp"
+    },
+    {
+      "id": "kerala-fruit-001",
+      "path": "public/products/fruits/kerala-fruit-001.webp"
+    },
+    {
+      "id": "kerala-fruit-002",
+      "path": "public/products/fruits/kerala-fruit-002.webp"
+    },
+    {
+      "id": "kerala-fruit-003",
+      "path": "public/products/fruits/kerala-fruit-003.webp"
+    }
+  ],
+  "quality_note": "Image path existence verified in the GitHub tree. Earlier committed images were not all audited for 1200x1200 resolution, photorealism or product identity; the 3 newly added files were locally verified as 1200x1200 WebP.",
+  "git_head_at_last_scan": "99e8d17fa4f9914067eeebfe6dad515e307a0515",
+  "updated_at": "2026-10-27"
+}
