@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "Tracks images committed individually to GitHub (not generic images unpacked at build). Existing product records and bundled fallbacks remain untouched.",
   "total_products": 850,
-  "committed_product_image_count": 81,
+  "committed_product_image_count": 88,
   "completed_product_ids": [
     "kerala-veg-001",
     "kerala-veg-002",
@@ -44,8 +44,15 @@
     "kerala-veg-038",
     "kerala-veg-039",
     "kerala-veg-040",
+    "kerala-veg-041",
+    "kerala-veg-042",
+    "kerala-veg-043",
     "kerala-veg-044",
     "kerala-veg-045",
+    "kerala-veg-046",
+    "kerala-veg-047",
+    "kerala-veg-048",
+    "kerala-veg-049",
     "kerala-veg-050",
     "kerala-fruit-004",
     "kerala-fruit-007",
@@ -127,8 +134,15 @@
     "public/products/vegetables/kerala-veg-038.webp",
     "public/products/vegetables/kerala-veg-039.webp",
     "public/products/vegetables/kerala-veg-040.webp",
+    "public/products/vegetables/kerala-veg-041.webp",
+    "public/products/vegetables/kerala-veg-042.webp",
+    "public/products/vegetables/kerala-veg-043.webp",
     "public/products/vegetables/kerala-veg-044.webp",
     "public/products/vegetables/kerala-veg-045.webp",
+    "public/products/vegetables/kerala-veg-046.webp",
+    "public/products/vegetables/kerala-veg-047.webp",
+    "public/products/vegetables/kerala-veg-048.webp",
+    "public/products/vegetables/kerala-veg-049.webp",
     "public/products/vegetables/kerala-veg-050.webp",
     "public/products/fruits/kerala-fruit-004.webp",
     "public/products/fruits/kerala-fruit-007.webp",
@@ -170,34 +184,6 @@
     "public/products/foods/kerala-food-190.webp"
   ],
   "pending_products": [
-    {
-      "id": "kerala-veg-041",
-      "path": "public/products/vegetables/kerala-veg-041.webp"
-    },
-    {
-      "id": "kerala-veg-042",
-      "path": "public/products/vegetables/kerala-veg-042.webp"
-    },
-    {
-      "id": "kerala-veg-043",
-      "path": "public/products/vegetables/kerala-veg-043.webp"
-    },
-    {
-      "id": "kerala-veg-046",
-      "path": "public/products/vegetables/kerala-veg-046.webp"
-    },
-    {
-      "id": "kerala-veg-047",
-      "path": "public/products/vegetables/kerala-veg-047.webp"
-    },
-    {
-      "id": "kerala-veg-048",
-      "path": "public/products/vegetables/kerala-veg-048.webp"
-    },
-    {
-      "id": "kerala-veg-049",
-      "path": "public/products/vegetables/kerala-veg-049.webp"
-    },
     {
       "id": "kerala-fruit-001",
       "path": "public/products/fruits/kerala-fruit-001.webp"
@@ -3270,37 +3256,35 @@
         "kerala-veg-039",
         "kerala-veg-040"
       ]
+    },
+    {
+      "batch": "041-050",
+      "commit": "53b6baf547184df7e42a1df4ddb12c81d7948232",
+      "branch": "main",
+      "newly_added_product_ids": [
+        "kerala-veg-041",
+        "kerala-veg-042",
+        "kerala-veg-043",
+        "kerala-veg-046",
+        "kerala-veg-047",
+        "kerala-veg-048",
+        "kerala-veg-049"
+      ],
+      "batch_verified_product_ids": [
+        "kerala-veg-041",
+        "kerala-veg-042",
+        "kerala-veg-043",
+        "kerala-veg-044",
+        "kerala-veg-045",
+        "kerala-veg-046",
+        "kerala-veg-047",
+        "kerala-veg-048",
+        "kerala-veg-049",
+        "kerala-veg-050"
+      ]
     }
   ],
   "next_batch": [
-    {
-      "id": "kerala-veg-041",
-      "path": "public/products/vegetables/kerala-veg-041.webp"
-    },
-    {
-      "id": "kerala-veg-042",
-      "path": "public/products/vegetables/kerala-veg-042.webp"
-    },
-    {
-      "id": "kerala-veg-043",
-      "path": "public/products/vegetables/kerala-veg-043.webp"
-    },
-    {
-      "id": "kerala-veg-046",
-      "path": "public/products/vegetables/kerala-veg-046.webp"
-    },
-    {
-      "id": "kerala-veg-047",
-      "path": "public/products/vegetables/kerala-veg-047.webp"
-    },
-    {
-      "id": "kerala-veg-048",
-      "path": "public/products/vegetables/kerala-veg-048.webp"
-    },
-    {
-      "id": "kerala-veg-049",
-      "path": "public/products/vegetables/kerala-veg-049.webp"
-    },
     {
       "id": "kerala-fruit-001",
       "path": "public/products/fruits/kerala-fruit-001.webp"
@@ -3312,9 +3296,37 @@
     {
       "id": "kerala-fruit-003",
       "path": "public/products/fruits/kerala-fruit-003.webp"
+    },
+    {
+      "id": "kerala-fruit-005",
+      "path": "public/products/fruits/kerala-fruit-005.webp"
+    },
+    {
+      "id": "kerala-fruit-006",
+      "path": "public/products/fruits/kerala-fruit-006.webp"
+    },
+    {
+      "id": "kerala-fruit-009",
+      "path": "public/products/fruits/kerala-fruit-009.webp"
+    },
+    {
+      "id": "kerala-fruit-010",
+      "path": "public/products/fruits/kerala-fruit-010.webp"
+    },
+    {
+      "id": "kerala-fruit-012",
+      "path": "public/products/fruits/kerala-fruit-012.webp"
+    },
+    {
+      "id": "kerala-fruit-014",
+      "path": "public/products/fruits/kerala-fruit-014.webp"
+    },
+    {
+      "id": "kerala-fruit-020",
+      "path": "public/products/fruits/kerala-fruit-020.webp"
     }
   ],
-  "quality_note": "Image path existence verified in the GitHub tree. Earlier committed images were not all audited for 1200x1200 resolution, photorealism or product identity; the 3 newly added files were locally verified as 1200x1200 WebP.",
-  "git_head_at_last_scan": "99e8d17fa4f9914067eeebfe6dad515e307a0515",
+  "quality_note": "New 041,042,043,046,047,048,049 files validated locally as unique 1200x1200 WebP photos. Existing 044,045,050 retained unchanged. Other previously committed images have only been verified for path presence in GitHub tree, not independent product-identity or dimension audit.",
+  "git_head_at_last_scan": "53b6baf547184df7e42a1df4ddb12c81d7948232",
   "updated_at": "2026-10-27"
 }
