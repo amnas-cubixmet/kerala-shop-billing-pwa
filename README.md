@@ -1,9 +1,13 @@
+# V11 — Sales-only release (1.5.0)
+
+The app tracks daily sales, products, expenses, and optional receipts. It no longer asks for or tracks stock quantities, low-stock alerts, or inventory adjustments. All sale quantities are allowed for active, priced products. Older IndexedDB data and backups are preserved; legacy inventory records are only retained for backward compatibility.
+
 ## V8 quick start — 1.2.0
 
 This release is for a shopkeeper who wants **daily sales tracking** without collecting customer details.
 Choose **മ** or **EN** in the always-visible mobile header. Product Add/Edit asks for only one name in the selected language. Store language selection is saved in browser localStorage.
 
-The **Record Sale** action saves a dated internal sale and adjusts stock without downloading or printing a bill. Optionally choose **Save & download bill** or export the receipt later from Reports. Daily and monthly views are available, with **Daily** selected by default.
+The **Record Sale** action saves a dated sale without requiring a printed bill or any inventory data. Optionally choose **Save & download bill** or export the receipt later from Reports. Daily and monthly views are available, with **Daily** selected by default.
 
 Existing IndexedDB schema and invoices are preserved. Older customer records are not exposed to the app UI; old customer data remains in compatible backups to avoid destructive migration. Export a full backup before upgrading.
 
@@ -30,7 +34,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 and choose Products & Stock. Use category presets or **Add All 850 Products**. For price and stock, edit each item and save.
+Open http://localhost:3000 and choose Products. Use category presets or **Add All 850 Products**. Set a selling price, then record sales immediately.
 
 ## QA
 
@@ -46,7 +50,7 @@ Brand examples were selected with reference to Kerala supermarkets and manufactu
 
 # Free Shop Billing — Kerala Catalog Edition V4 (Next.js Offline PWA)
 
-A **single-device, offline-first** daily sales + optional receipts + stock + expenses + reports application. The data is stored on the user's own device in **IndexedDB (Dexie)**. A server/database account is **not** required to use the app.
+A **single-device, offline-first** daily sales + optional receipts + product catalog + expenses + reports application. The data is stored on the user's own device in **IndexedDB (Dexie)**. A server/database account is **not** required to use the app.
 
 > **Status:** Functional starter MVP source, not certified production accounting / GST billing software. Dependencies cannot be installed or the browser tested inside the artifact-generation environment; run the commands and checklist below before deploying to a real shop.
 
@@ -83,22 +87,22 @@ The Next.js static export is produced in **`out/`**. Host that folder on an HTTP
 - Ready-to-add **50 vegetables, 60 fruits and 240 grocery / prepared food items** (350 total). Each has an editable Malayalam name, English name, emoji icon and unit. They are starter examples, **not a verified real-time trending ranking**.
 - Updated V4 preserves 50 vegetable and 60 fruit presets and adds 78 extra food/grocery presets; 350 distinct product slots total. Existing V3 user-edited items are not overwritten.
 - Tap **+ Add All 350 Products** once, or tap a category's **+ Add** button on the Products page. Catalog entries are copied into **this installation's own IndexedDB**, not a global account. Existing entries and user modifications are not overwritten by repeated clicks.
-- Prices are **intentionally blank**, inventory is zero and new presets are inactive. Set the actual current selling price and stock per product before billing. Tax classifications must be verified by the shop owner.
+- Prices are **intentionally blank** and new presets are inactive. Set the actual selling price before billing. Tax classifications must be verified by the shop owner.
 - Tap **Add My Product** to enter a custom Malayalam/English name and upload a JPG/PNG/WebP product photo (up to 5 MB input, compressed into a small local data URL), or choose an emoji icon.
 - The **My Custom Products** filter distinguishes local custom records from the starter catalog. Images and custom data live in the same local IndexedDB and are included in full JSON backups.
-- **CSV Import** supports up to **1,000 products per file** (not a claim of 1,000 prepopulated Kerala products). Download a sample CSV on the Products screen. Existing products are not replaced by CSV import. Column headers: `malayalamName,englishName,category,unit,price,stock,icon`. A zero/empty price leaves the item inactive.
+- **CSV Import** supports up to **1,000 products per file** (not a claim of 1,000 prepopulated Kerala products). Download a sample CSV on the Products screen. Existing products are not replaced by CSV import. Column headers: `malayalamName,englishName,category,unit,price,icon,brand,packSize`. Older 7/9-column CSVs are still accepted but their former inventory column is ignored. A zero/empty price leaves the item inactive.
 - Opening the site on a different device/browser/install gives an **independent database**. No shared cloud product publishing occurs. **Anyone who can use the same unlocked browser profile/PWA can see its local products**; there is no account-level isolation or PIN.
 - Images are not automatically fetched from the internet. Presets use emoji placeholders. User-selected images stay on device unless the user shares a backup.
 
 ## Functional modules
 
-- **Dashboard**: Today's / monthly sales, recorded expenses, warnings for low-stock products.
-- **Products**: Malayalam + English names, optional private product images, editable emoji, 350 Kerala catalog presets, CSV bulk import up to 1,000 rows, SKU, category, pieces/kg/litres/metres, price/cost, exclusive tax percentage, quantity and low-stock threshold, hide/show products, stock movements.
-- **Billing**: Cart, fractional quantities (3 decimals), discounts, GST applied *on top of* the selling price, payment-method status, atomic invoices/items/stock/counters, sequential invoice numbers per financial year, no customer input or registration. Receipt optional.
+- **Dashboard**: Today's / monthly sales, recorded expenses, quick actions and recent sales.
+- **Products**: Malayalam + English names, optional private product images, editable emoji, 350 Kerala catalog presets, CSV bulk import up to 1,000 rows, SKU, category, pieces/kg/litres/metres, price/cost, exclusive tax percentage, hide/show products. There is no inventory/low-stock management.
+- **Billing**: Cart, fractional quantities (3 decimals), discounts, GST applied *on top of* the selling price, payment-method status, atomic invoices/items/counters, sequential invoice numbers per financial year, no customer input or registration. Receipt optional.
 - **Receipt PDF**: Direct download to PDF using a browser Canvas + `pdf-lib`, including Malayalam text as a raster image. 80mm receipt layout.
 - **Expenses**: Categories, dates, amount and notes, deletion.
 - **Customer management removed**: The new UI does not collect customer details; legacy data remains only for compatibility with existing backups.
-- **Reports**: Monthly sales, payments, expenses, CSV export (escaped to mitigate spreadsheet formula injection), receipt downloads, invoice voiding / stock restoration.
+- **Reports**: Monthly sales, payments, expenses, CSV export (escaped to mitigate spreadsheet formula injection), receipt downloads and invoice cancellation (without inventory side effects).
 - **Backup**: Full JSON export, SHA-256 checksum verification on restore; transactional replacement with a confirmation + current-backup first.
 - **PWA**: Manifest + icons + service-worker caching of exported Next.js HTML/JS/CSS, home-screen installation, offline use after a complete successful initial load.
 
@@ -119,12 +123,12 @@ The Next.js static export is produced in **`out/`**. Host that folder on an HTTP
 
 - [ ] On a clean test browser, visit the deployed site online, then fully close and reopen in Airplane Mode.
 - [ ] Add products and save 50 bills in Airplane Mode; restart the phone and check data persists.
-- [ ] Trigger a failed bill (insufficient stock) and verify no stock, counter or invoice changes.
+- [ ] Trigger a failed bill (missing product) and verify no counter or invoice changes.
 - [ ] Download receipt PDFs and CSV reports offline.
 - [ ] Export a backup, verify the downloaded file in Files/Downloads, restore in another fresh test browser, and compare totals.
-- [ ] Confirm a bill void restores inventory and cannot be repeated.
+- [ ] Confirm a bill void updates reports, preserves invoice lines, and cannot be repeated.
 - [ ] Verify iPhone Safari Add to Home Screen and Android Chrome installation behavior.
-- [ ] Test fractional stock, zero tax, discount > subtotal, and currency rounding.
+- [ ] Test fractional sale quantities, zero tax, discount > subtotal, and currency rounding.
 - [ ] Test a full/blocked storage scenario and retention after an app version update.
 
 ## Next steps before real-money rollout
@@ -146,9 +150,9 @@ All monetary values are stored as **integer paise**, and quantities as **integer
 
 ## Kerala vegetable catalog (50 common shop items)
 
-Open **Products & Stock** and click **Add 50 Vegetables**. It installs 50 editable Malayalam/English presets with an emoji placeholder and commonly used sales unit (`kg`, `pcs`, or `bundle`). This operation is idempotent, and it **never overwrites** products that have already been edited. It does not start automatically for non-vegetable shops.
+Open **Products** and click **Add 50 Vegetables**. It installs 50 editable Malayalam/English presets with an emoji placeholder and commonly used sales unit (`kg`, `pcs`, or `bundle`). This operation is idempotent, and it **never overwrites** products that have already been edited. It does not start automatically for non-vegetable shops.
 
-The product selling price, stock and buying price are deliberately **not pre-filled** because prices and availability vary by shop/date. Every preset starts hidden from billing until the user edits the record and enters a selling price. After editing it, the product becomes active, but remains non-purchasable until stock is greater than zero. The owner can set tax classification and changes to units.
+Product selling price and buying price are not pre-filled because prices vary by shop/date. Every preset starts hidden from billing until the user edits the record and enters a selling price. After setting a selling price, the product becomes available for billing; inventory quantities are not required. The owner can set tax classification and changes to units.
 
 For each product, choose an emoji or upload a JPG, PNG or WebP photo. Photos are compressed locally (up to 256 px, usually WebP) and saved in IndexedDB together with products. They are included in the existing JSON Backup/Restore. No photo uploads are sent to servers. Keep backups safe because IndexedDB is not permanent guaranteed device storage.
 
@@ -175,7 +179,7 @@ The source files were syntax-parsed during ZIP creation, but a full dependency i
 - Mobile header and 5-item floating bottom navigation with visible active state and safe-area spacing.
 - Product catalog shows responsive 2-column category cards and stacked product rows on phones instead of requiring a wide table scroll.
 - More readable 16px base font; mobile buttons, inputs and forms sized for touch; dark text on white surfaces.
-- All 850 product presets, editable prices and images, IndexedDB offline storage, receipts, expenses, stock and local backup logic preserved from V5.
+- All 850 product presets, editable prices and images, IndexedDB offline storage, receipts, expenses and local backup logic preserved from V5. Inventory tracking was removed in V11.
 
 **Theme file:** `src/app/premium.css`. **Change color tokens:** top of this file. **Theme color:** `src/app/layout.tsx`, `src/app/manifest.ts`. This is a styling update, not a new database: migrate on the same origin/PWA installation and **export a backup first**.
 
@@ -186,7 +190,7 @@ Follow [DEPLOYMENT.md](./DEPLOYMENT.md). Source code is hosted on Vercel, while 
 ## V7 — Automatic PWA updates and product photographs
 
 - **One code update → all online installations:** Push to `main`, Vercel deploys; `prebuild` stamps a new Service Worker release id and `/version.json` based on the Git commit/content digest. The app checks on focus, reconnection and periodically.
-- **Safe update:** it downloads the new code before activating. Unsaved bills and forms pause reloading. Cart items are also stored as a recoverable draft in localStorage. Completed bills, shop settings, custom product photos, prices, stock etc. remain in IndexedDB.
+- **Safe update:** it downloads the new code before activating. Unsaved bills and forms pause reloading. Cart items are also stored as a recoverable draft in localStorage. Completed bills, shop settings, custom product photos and prices remain in IndexedDB. Older inventory fields may remain in old records for compatibility but are not read or updated.
 - **850 photos:** individual AI-generated, *illustrative* WebP files in `public/products/{vegetables,fruits,foods,bakery,sweets,brands}/`, mapped by product preset ID. They are **not verified retail product/packaging photographs**. Image upload from the merchant overrides the static image for that merchant only.
 - **Fully offline product photos:** visit Settings → Product photo library → Download 850 product photos for offline to cache image files in Cache Storage. Without this, photos are cached individually when first viewed online.
 - **New product:** Upload your own photo, and it is stored as a compressed base64 image in this browser's IndexedDB and included in the JSON backup. Static catalog images are public, merchant-specific images are not.

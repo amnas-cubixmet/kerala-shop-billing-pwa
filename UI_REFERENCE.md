@@ -4,12 +4,12 @@ This update implements the supplied four-screen reference as *working applicatio
 
 ## Mobile flow
 
-- **Home:** greeting, daily sales, sale count, expenses, sales-minus-expenses (not accounting profit), low-stock alert and six quick actions.
-- **Products:** searchable photo-led list, bilingual selection from the global language switch, category chips, stock badges, explicit Edit button; extra catalog/CSV tools are in the collapsible library below the list.
+- **Home:** greeting, daily sales, sale count, expenses, sales-minus-expenses (not accounting profit), six quick actions and recent sales.
+- **Products:** searchable photo-led list, bilingual selection from the global language switch, category chips, prices, explicit Edit button; extra catalog/CSV tools are in the collapsible library below the list.
 - **Sale:** swipeable product cards on narrow screens, photo-led cart rows, quantity, discount, payment method and total. Saving a sale is supported without issuing a PDF; PDF is a separate option.
-- **Add / Edit:** photo picker, one displayed product name in the selected language, price/unit/stock/category, expandable fields for tax/brand/barcode/etc, clear Save and Cancel.
+- **Add / Edit:** photo picker, one displayed product name in the selected language, price/unit/category, expandable fields for tax/brand/barcode/etc, clear Save and Cancel.
 - **More:** the existing Settings / backup / iOS install guide / IndexedDB storage panel uses the same white/green responsive visual treatment. No customer collection feature is present.
-- **Bottom navigation:** Home, Products, raised central Sale action, Reports, More. Expenses and Stock remain available through Home quick actions or the desktop/slide-out sidebar.
+- **Bottom navigation:** Home, Products, raised central Sale action, Reports, More. Expenses remain available through Home quick actions or the desktop/slide-out sidebar.
 
 ## Release / safety
 

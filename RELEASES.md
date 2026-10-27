@@ -1,3 +1,11 @@
+## V11 — 1.5.0 (Sales-only update)
+
+- Removed Product Stock and Low Stock fields, Stock button, list badges and dashboard alerts.
+- Selling a product no longer requires stock availability; billing and invoice cancellation do not adjust inventory.
+- Product CSV template no longer has a stock column; older templates can still be imported while ignoring their obsolete inventory data.
+- Existing IndexedDB bills, products, photos and old backup formats remain accessible without clearing storage.
+- GitHub/Vercel PWA updates install new app code while keeping local records.
+
 # PWA release and data-safety process
 
 ## How automatic updates work
