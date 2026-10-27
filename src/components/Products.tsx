@@ -19,7 +19,7 @@ import type { Product, Unit } from '@/types/models';
 const ICONS = ['📦','🍬','🍭','🍫','🥐','🥯','🎂','🍟','🥬','🍅','🥕','🧅','🥔','🌶️','🍆','🍌','🥭','🍎','🍊','🍇','🍍','🍉','🥥','🍚','🌾','🥛','🧈','🥚','🍞','🍪','🍗','🐟','🥜','🌿','🧃','🫖','🧂'];
 const blank: ProductInput = {
   name:'',malayalamName:'',englishName:'',brand:'',packSize:'', icon:'📦', imageDataUrl:'',sku:'', category:'General / മറ്റു സാധനങ്ങൾ',
-  unit:'kg',price:'',cost:'0',tax:'0',stock:'0',lowStock:'5',
+  unit:'kg',price:'',cost:'0',tax:'0',stock:'',lowStock:'5',
 };
 const categories: {group:PresetGroup;emoji:string;label:string;count:number}[] = [
   {group:'vegetables',emoji:'🥦',label:'Vegetables / പച്ചക്കറികൾ',count:KERALA_VEGETABLES.length},
@@ -123,7 +123,7 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
           <Field label={`${t('productName')} *`}><input required maxLength={100} autoComplete="off" value={language==='ml'?editing.malayalamName:editing.englishName} onChange={e=>update(language==='ml'?'malayalamName':'englishName',e.target.value)} placeholder={language==='ml'?'ഉദാ: തക്കാളി':'e.g. Tomato'}/></Field>
           <div className="ref-form-two"><Field label={`${t('sellingPrice')} *`}><input type="number" inputMode="decimal" min="0.01" step="0.01" required value={editing.price} onChange={e=>update('price',e.target.value)} placeholder="₹ 40.00"/></Field>
             <Field label={`${t('unit')} *`}><select value={editing.unit} onChange={e=>update('unit',e.target.value as Unit)}><option value="kg">{language==='ml'?'കിലോ':'Kilogram'} (kg)</option><option value="pcs">{language==='ml'?'എണ്ണം':'Piece (pcs)'}</option><option value="bundle">{language==='ml'?'കെട്ട്':'Bundle'}</option><option value="ltr">{language==='ml'?'ലിറ്റർ':'Litre'}</option><option value="m">{language==='ml'?'മീറ്റർ':'Metre'}</option></select></Field></div>
-          <div className="ref-form-two"><Field label={`${t('stockQty')} *`}><input type="number" inputMode="decimal" min="0" step="0.001" required value={editing.stock} onChange={e=>update('stock',e.target.value)}/></Field>
+          <div className="ref-form-two"><Field label={t('stockQty')}><input type="number" inputMode="decimal" min="0" step="0.001" value={editing.stock} onChange={e=>update('stock',e.target.value)} placeholder={language==='ml'?'വേണമെങ്കിൽ മാത്രം':'Optional'}/></Field>
             <Field label={t('category')}><select value={editing.category} onChange={e=>update('category',e.target.value)}>
               {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].includes(editing.category)?null:<option value={editing.category}>{categoryName(editing.category)}</option>}
               {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].map(c=><option key={c} value={c}>{categoryName(c)}</option>)}
