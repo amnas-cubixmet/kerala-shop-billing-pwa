@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { CheckCircle2, FileDown, Minus, Plus, Search, Trash2 } from 'lucide-react';
+import { CheckCircle2, FileDown, Minus, Plus, Search, ShoppingBasket, Trash2 } from 'lucide-react';
 import { db } from '@/db/database';
 import {useLanguage} from '@/lib/language';
 import { useUpdateHold } from '@/lib/update-guard';
@@ -22,8 +22,9 @@ function readDraft(): BillingDraft | null {
   } catch {return null;}
 }
 export default function Billing({notify}: {notify:(message:string,kind?:'error'|'success')=>void}) {
-  const {t,productName}=useLanguage();
-  const products = useLiveQuery(()=>db.products.toArray().then(rows => rows.filter(p => p.active)),[]) ?? [];
+  const {t,productName,language}=useLanguage();
+  const queriedProducts = useLiveQuery(()=>db.products.toArray().then(rows => rows.filter(p => p.active)),[]);
+  const products = useMemo(()=>queriedProducts ?? [],[queriedProducts]);
   const shop = useLiveQuery(()=>db.shops.toCollection().first(),[]);
   const [search,setSearch]=useState(''),[cart,setCart]=useState<CartEntry[]>(() => typeof window !== 'undefined' ? readDraft()?.cart ?? [] : []);
   const [discount,setDiscount]=useState(() => typeof window !== 'undefined' ? readDraft()?.discount ?? '0' : '0'),[payment,setPayment]=useState<PaymentMethod>(()=>typeof window !== 'undefined' ? readDraft()?.payment ?? 'cash':'cash');
@@ -60,24 +61,28 @@ export default function Billing({notify}: {notify:(message:string,kind?:'error'|
     if(!last || !shop) return;
     try {const items=await db.invoiceItems.where('invoiceId').equals(last.id).toArray();await downloadReceipt(last,items,shop);}catch(e){notify(safeError(e),'error')}
   }
-  return <div className="stack">
-    <div className="page-heading"><div><h1>{t('recordSale')}</h1><p>{t('saleIntro')}</p></div><div className="pill green"><CheckCircle2 size={15}/> {t('localSave')}</div></div>
-    {last && <div className="notice good"><CheckCircle2 size={21}/><span className="grow"><strong>{last.number} · {t('saleSaved')}</strong><br/><span className="small">Total {fmt(last.totalPaise)} · {last.paymentMethod.toUpperCase()}</span></span><button className="button secondary" onClick={receipt}><FileDown size={16}/> {t('receiptOptional')}</button><button className="icon-button" aria-label="Close receipt notice" onClick={()=>setLast(null)}>×</button></div>}
-    <div className="billing-grid">
-      <Panel title={t('selectProducts')} sub={t('selectHint')} action={<div className="search"><Search size={16}/><input aria-label="Find product" placeholder={t('findProduct')} value={search} onChange={e=>setSearch(e.target.value)}/></div>}>
-        {!shown.length ? <Empty label={t('noProducts')}/> : <div className="product-grid">{shown.map(p=><button key={p.id} disabled={p.stockMilli<=0} onClick={()=>add(p.id)} className="product-tile"><ProductVisual product={p} large/><strong>{productName(p)}</strong><span className="muted small">{qtyText(p.stockMilli)} {p.unit} in stock</span><div className="product-price">{fmt(p.pricePaise)} <Plus size={16}/></div></button>)}</div>}
-      </Panel>
-      <Panel title={`${t('currentSale')} (${cart.length})`}>
-        {!cart.length ? <Empty label={t('cartEmpty')}/> : <div className="cart-list">{cart.map(item=>{
+  return <div className="stack ref-billing-page">
+    <div className="ref-page-heading"><div><h1>{t('recordSale')}</h1><p>{t('saleIntro')}</p></div><span className="ref-private-label"><CheckCircle2 size={15}/>{t('localSave')}</span></div>
+    {last && <div className="notice good ref-last-sale"><CheckCircle2 size={21}/><span className="grow"><strong>{last.number} · {t('saleSaved')}</strong><br/><span className="small">{fmt(last.totalPaise)} · {last.paymentMethod.toUpperCase()}</span></span><button className="button secondary" onClick={()=>void receipt()}><FileDown size={16}/>{t('receiptOptional')}</button><button className="icon-button" aria-label="Close receipt notice" onClick={()=>setLast(null)}>×</button></div>}
+    <div className="ref-billing-layout">
+      <section className="ref-billing-catalog">
+        <label className="ref-product-search"><Search size={19}/><input aria-label={t('findProduct')} placeholder={t('findProduct')} value={search} onChange={e=>setSearch(e.target.value)}/></label>
+        <div className="ref-section-title"><h2>{t('selectProducts')}</h2><small>{t('selectHint')}</small></div>
+        {!shown.length?<Empty label={t('noProducts')}/>:<div className="ref-billing-products">{shown.map(p=><button type="button" key={p.id} disabled={p.stockMilli<=0} onClick={()=>add(p.id)} className="ref-billing-product"><ProductVisual product={p} large/><strong>{productName(p)}</strong><span>{fmt(p.pricePaise)}/{p.unit}</span><span className="ref-billing-plus"><Plus size={15}/></span></button>)}</div>}
+      </section>
+      <section className="ref-cart-panel">
+        <div className="ref-cart-heading"><h2>{t('currentSale')} <span>({cart.length})</span></h2>{cart.length>0&&<button type="button" onClick={()=>setCart([])}><Trash2 size={16}/>{language==='ml'?'എല്ലാം ഒഴിവാക്കുക':'Clear all'}</button>}</div>
+        {!cart.length?<div className="ref-cart-empty"><ShoppingBasket size={36}/><p>{t('cartEmpty')}</p></div>:
+          <div className="ref-cart-list">{cart.map(item=>{
           const p=products.find(x=>x.id===item.productId);
-          if(!p) return <div key={item.productId} className="danger-text">Product missing — remove this line.</div>;
-          return <div key={item.productId} className="cart-row"><div className="grow"><strong>{productName(p)}</strong><div className="muted small">{fmt(p.pricePaise)}/{p.unit} · {p.taxBps/100}% GST</div></div><div className="qty-control"><button aria-label={`Decrease ${productName(p)}`} onClick={()=>setCart(prev=>prev.map(c=>c.productId===p.id?{...c,quantityMilli:Math.max(0,c.quantityMilli-1000)}:c).filter(c=>c.quantityMilli>0))}><Minus size={14}/></button><input aria-label={`Quantity ${p.name}`} type="number" min="0.001" step="0.001" value={item.quantityMilli/1000} onChange={e=>changeQty(p.id,e.target.value)}/><button aria-label={`Increase ${productName(p)}`} onClick={()=>add(p.id)}><Plus size={14}/></button></div><button className="icon-button" aria-label={`Remove ${productName(p)}`} onClick={()=>setCart(prev=>prev.filter(c=>c.productId!==p.id))}><Trash2 size={16}/></button></div>})}</div>}
-        <div className="bill-fields"><div className="inline-fields"><Field label={t('discount')}><input type="number" min="0" step="0.01" value={discount} onChange={e=>setDiscount(e.target.value)}/></Field><Field label={t('payment')}><select value={payment} onChange={e=>setPayment(e.target.value as PaymentMethod)}><option value="cash">{t('cash')}</option><option value="upi">{t('upi')}</option><option value="card">{t('card')}</option><option value="other">{t('other')}</option><option value="unpaid">{t('unpaid')}</option></select></Field></div></div>
-        <div className="totals"><div><span>{t('subtotal')}</span><span>{fmt(quote.data?.subtotalPaise??0)}</span></div><div><span>{t('discount')}</span><span>- {fmt(quote.data?.discountPaise??0)}</span></div><div><span>{t('tax')}</span><span>{fmt(quote.data?.taxPaise??0)}</span></div><div className="grand-total"><strong>{t('total')}</strong><strong>{fmt(quote.data?.totalPaise??0)}</strong></div></div>
-        {quote.error && cart.length>0 && <p className="danger-text small">{quote.error}</p>}
-        <div className="sale-actions"><button className="button primary wide big" disabled={busy||!cart.length||!quote.data} onClick={()=>void finalize(false)}><CheckCircle2 size={19}/>{busy?t('saving'):t('recordSale')}</button><button className="button secondary wide" disabled={busy||!cart.length||!quote.data} onClick={()=>void finalize(true)}><FileDown size={18}/>{t('saveAndPdf')}</button></div>
-        <p className="muted small">{t('receiptHint')}</p>
-      </Panel>
+          if(!p)return <div key={item.productId} className="danger-text">Product missing — remove this line.</div>;
+          return <div key={item.productId} className="ref-cart-item"><ProductVisual product={p}/><div className="ref-cart-item-name"><strong>{productName(p)}</strong><small>{fmt(p.pricePaise)}/{p.unit}</small></div><div className="ref-cart-item-controls"><div className="qty-control"><button type="button" aria-label={`Decrease ${productName(p)}`} onClick={()=>setCart(prev=>prev.map(c=>c.productId===p.id?{...c,quantityMilli:Math.max(0,c.quantityMilli-1000)}:c).filter(c=>c.quantityMilli>0))}><Minus size={15}/></button><input aria-label={`Quantity ${p.name}`} type="number" inputMode="decimal" min="0.001" step="0.001" value={item.quantityMilli/1000} onChange={e=>changeQty(p.id,e.target.value)}/><button type="button" aria-label={`Increase ${productName(p)}`} onClick={()=>add(p.id)}><Plus size={15}/></button></div><button type="button" className="ref-cart-remove" aria-label={`Remove ${productName(p)}`} onClick={()=>setCart(prev=>prev.filter(c=>c.productId!==p.id))}><Trash2 size={15}/></button></div><strong className="ref-cart-item-total">{fmt(Math.round(p.pricePaise*item.quantityMilli/1000))}</strong></div>})}</div>}
+        <div className="ref-bill-inputs"><Field label={t('discount')}><input type="number" inputMode="decimal" min="0" step="0.01" value={discount} onChange={e=>setDiscount(e.target.value)}/></Field><Field label={t('payment')}><select value={payment} onChange={e=>setPayment(e.target.value as PaymentMethod)}><option value="cash">{t('cash')}</option><option value="upi">{t('upi')}</option><option value="card">{t('card')}</option><option value="other">{t('other')}</option><option value="unpaid">{t('unpaid')}</option></select></Field></div>
+        <div className="ref-bill-totals"><div><span>{t('subtotal')}</span><strong>{fmt(quote.data?.subtotalPaise??0)}</strong></div><div><span>{t('discount')}</span><strong>- {fmt(quote.data?.discountPaise??0)}</strong></div><div><span>{t('tax')}</span><strong>{fmt(quote.data?.taxPaise??0)}</strong></div><div className="ref-bill-grand"><span>{t('total')}</span><strong>{fmt(quote.data?.totalPaise??0)}</strong></div></div>
+        {quote.error&&cart.length>0&&<p role="alert" className="danger-text small">{quote.error}</p>}
+        <div className="sale-actions ref-sale-actions"><button className="button primary wide big" disabled={busy||!cart.length||!quote.data} onClick={()=>void finalize(false)}><CheckCircle2 size={20}/>{busy?t('saving'):t('recordSale')}</button><button className="button secondary wide" disabled={busy||!cart.length||!quote.data} onClick={()=>void finalize(true)}><FileDown size={19}/>{t('saveAndPdf')}</button></div>
+        <p className="ref-bill-footnote">{t('receiptHint')}</p>
+      </section>
     </div>
   </div>;
 }

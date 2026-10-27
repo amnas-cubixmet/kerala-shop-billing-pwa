@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './premium.css';
+import './reference-ui.css';
 
 export const metadata: Metadata = {
   title: 'Kerala Shop Billing | Offline Sales',

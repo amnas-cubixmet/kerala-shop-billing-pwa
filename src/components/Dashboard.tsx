@@ -1,47 +1,59 @@
 'use client';
 import {useLiveQuery} from 'dexie-react-hooks';
-import {CalendarDays, PackageX, Plus, TrendingUp, Wallet, Receipt, IndianRupee} from 'lucide-react';
+import {BarChart3, CalendarDays, CirclePlus, Package, PackageX, Receipt, Settings2, ShoppingBasket, TrendingUp, Wallet} from 'lucide-react';
 import {db} from '@/db/database';
 import {fmt, localDate, monthKey} from '@/lib/money';
 import {useLanguage} from '@/lib/language';
-import {Metric, Panel, Empty} from '@/components/ui';
-import type {Invoice, Expense, Product} from '@/types/models';
+import {Panel, Empty} from '@/components/ui';
+import type {Invoice, Expense} from '@/types/models';
 
 export default function Dashboard({navigate}:{navigate:(next:string)=>void}) {
-  const {t,productName,categoryName,language}=useLanguage();
+  const {t,language}=useLanguage();
   const data=useLiveQuery(async()=>{
     const [invoices,expenses,products]=await Promise.all([db.invoices.toArray(),db.expenses.toArray(),db.products.toArray()]);
     return {invoices,expenses,products};
   },[]);
-  if(!data)return <p className="muted">…</p>;
+  if(!data)return <div className="ref-loading">{language==='ml'?'കണക്കുകൾ തുറക്കുന്നു…':'Loading today’s totals…'}</div>;
   const {invoices,expenses,products}=data;
   const today=localDate(),month=monthKey();
   const active=(rows:Invoice[])=>rows.filter(x=>x.status==='final');
   const sumSales=(rows:Invoice[])=>active(rows).reduce((s,i)=>s+i.totalPaise,0);
   const sumExpenses=(rows:Expense[])=>rows.reduce((s,i)=>s+i.amountPaise,0);
   const todays=active(invoices.filter(i=>i.date===today));
-  const todaySales=sumSales(todays), todayExpenses=sumExpenses(expenses.filter(e=>e.date===today));
+  const todaySales=sumSales(todays),todayExpenses=sumExpenses(expenses.filter(e=>e.date===today));
   const monthlySales=sumSales(invoices.filter(i=>i.date.startsWith(month)));
-  const low=products.filter(p=>p.active&&p.stockMilli<=p.lowStockMilli);
-  const recent=active([...invoices]).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,6);
-  return <div className="stack">
-    <div className="welcome"><div><h1>{t('welcome')}</h1><p>{t('welcomeSub')}</p><div className="dashboard-date"><CalendarDays size={15}/>{new Date().toLocaleDateString(language==='ml'?'ml-IN':'en-IN',{day:'numeric',month:'long',year:'numeric'})}</div></div><button className="button primary dashboard-cta" onClick={()=>navigate('billing')}><Plus size={19}/>{t('newSale')}</button></div>
-    <div className="metrics">
-      <Metric label={t('todaySales')} value={fmt(todaySales)} icon={<TrendingUp size={19}/>} variant="primary"/>
-      <Metric label={t('todayCount')} value={String(todays.length)} icon={<Receipt size={19}/>}/>
-      <Metric label={t('todayExpenses')} value={fmt(todayExpenses)} icon={<Wallet size={19}/>}/>
-      <Metric label={t('todayBalance')} value={fmt(todaySales-todayExpenses)} icon={<IndianRupee size={19}/>}/>
-    </div>
-    <div className="notice good"><TrendingUp size={19}/><span>{t('monthlySales')}: <strong>{fmt(monthlySales)}</strong></span></div>
-    <div className="two-columns">
-      <Panel title={t('recentSales')} sub={t('storedHere')} action={<button className="text-button" onClick={()=>navigate('reports')}>{t('seeReports')} →</button>}>
-        {!recent.length?<Empty label={t('noSales')}/>:<div className="list">{recent.map(i=><div className="list-row" key={i.id}><span className="list-icon"><Receipt size={18}/></span><div className="grow"><strong>{i.number}</strong><div className="muted small">{i.date} · {t(i.paymentMethod)}</div></div><strong>{fmt(i.totalPaise)}</strong></div>)}</div>}
-      </Panel>
-      <Panel title={t('stockAlerts')} action={<button className="text-button" onClick={()=>navigate('products')}>{t('manageStock')} →</button>}>
-        {!low.length?<div className="notice good"><TrendingUp size={19}/>{t('noStockAlerts')}</div>:<div className="list">{low.slice(0,7).map((p:Product)=><div className="list-row" key={p.id}><span className="list-icon warn"><PackageX size={18}/></span><div className="grow"><strong>{productName(p)}</strong><div className="muted small">{categoryName(p.category||'General')}</div></div><span className="pill danger">{p.stockMilli/1000} {p.unit}</span></div>)}</div>}
-      </Panel>
-    </div>
-    <div className="notice"><CalendarDays size={19}/><span>{t('backupReminder')}</span><button className="text-button" onClick={()=>navigate('settings')}>{t('backupTitle')}</button></div>
-    <p className="muted small disclaimer">{t('cashflowNote')}</p>
+  const low=products.filter(p=>p.active && p.stockMilli<=p.lowStockMilli);
+  const recent=active([...invoices]).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,5);
+  const hour=new Date().getHours();
+  const greeting=language==='ml'?'നമസ്കാരം!':hour<12?'Good Morning!':hour<17?'Good Afternoon!':'Good Evening!';
+  const actions=[
+    {id:'billing',label:language==='ml'?'പുതിയ ബിൽ':'New Sale',icon:ShoppingBasket},
+    {id:'product-add',label:t('addProduct'),icon:CirclePlus},
+    {id:'products',label:language==='ml'?'സ്റ്റോക്ക്':'Manage Stock',icon:Package},
+    {id:'reports',label:t('seeReports'),icon:BarChart3},
+    {id:'expenses',label:t('expenses'),icon:Wallet},
+    {id:'settings',label:language==='ml'?'ബാക്കപ്പ്':'Settings / Backup',icon:Settings2},
+  ];
+  return <div className="stack ref-dashboard">
+    <section className="ref-welcome-card">
+      <div className="ref-welcome-content"><div className="ref-hello">{greeting}</div>
+        <h1>{language==='ml'?'ഇന്ന് നല്ലൊരു കച്ചവടദിനമാകട്ടെ!':'Here’s how your shop is doing.'}</h1>
+        <div className="ref-welcome-date"><CalendarDays size={16}/>{new Date().toLocaleDateString(language==='ml'?'ml-IN':'en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}</div>
+      </div><div className="ref-welcome-art" aria-hidden="true"><span className="ref-sun">☀</span><i/><i/><i/></div>
+    </section>
+    <section aria-label={language==='ml'?'ഇന്നത്തെ കണക്കുകൾ':'Today’s overview'} className="ref-stat-grid">
+      <div className="ref-stat-card"><div className="ref-stat-icon mint"><span>₹</span></div><div className="ref-stat-copy"><span>{t('todaySales')}</span><strong>{fmt(todaySales)}</strong></div></div>
+      <div className="ref-stat-card"><div className="ref-stat-icon sky"><Receipt size={21}/></div><div className="ref-stat-copy"><span>{t('todayCount')}</span><strong>{todays.length}</strong></div></div>
+      <div className="ref-stat-card"><div className="ref-stat-icon rose"><Wallet size={21}/></div><div className="ref-stat-copy"><span>{t('todayExpenses')}</span><strong>{fmt(todayExpenses)}</strong></div></div>
+      <div className="ref-stat-card"><div className="ref-stat-icon green"><TrendingUp size={21}/></div><div className="ref-stat-copy"><span>{t('todayBalance')}</span><strong>{fmt(todaySales-todayExpenses)}</strong></div></div>
+    </section>
+    {low.length>0&&<button className="ref-low-stock" onClick={()=>navigate('products')}><span className="ref-low-stock-icon"><PackageX size={21}/></span><span><strong>{language==='ml'?'സ്റ്റോക്ക് കുറവാണ്!':'Low Stock Alert'}</strong><small>{low.length} {language==='ml'?'ഉൽപ്പന്നങ്ങളിൽ സ്റ്റോക്ക് കുറഞ്ഞു':'products need restocking'}</small></span><span aria-hidden="true">›</span></button>}
+    <div className="ref-section-title"><h2>{language==='ml'?'വേഗത്തിലുള്ള പ്രവർത്തനങ്ങൾ':'Quick Actions'}</h2></div>
+    <section className="ref-actions-grid" aria-label={language==='ml'?'വേഗത്തിലുള്ള പ്രവർത്തനങ്ങൾ':'Quick Actions'}>{actions.map((a,i)=>{const Icon=a.icon;return <button key={a.id} className={`ref-action-card ref-action-${i}`} onClick={()=>navigate(a.id)}><span className="ref-action-icon"><Icon size={25} strokeWidth={2.2}/></span><strong>{a.label}</strong></button>})}</section>
+    <div className="ref-section-title"><h2>{language==='ml'?'ഇന്നത്തെ കണക്കുകൾ':'Daily Summary'}</h2><button className="ref-text-link" onClick={()=>navigate('reports')}>{t('seeReports')} →</button></div>
+    <section className="ref-summary-card"><div><span>{t('todaySales')}</span><strong>{fmt(todaySales)}</strong></div><div><span>{t('todayExpenses')}</span><strong>{fmt(todayExpenses)}</strong></div><div className="ref-summary-total"><span>{t('todayBalance')}</span><strong>{fmt(todaySales-todayExpenses)}</strong></div><small>{t('cashflowNote')}</small></section>
+    <div className="ref-section-title"><h2>{t('recentSales')}</h2><button className="ref-text-link" onClick={()=>navigate('reports')}>{t('seeReports')} →</button></div>
+    <Panel>{recent.length===0?<Empty label={t('noSales')}/>:<div className="list ref-recent-list">{recent.map(i=><div className="list-row" key={i.id}><span className="list-icon"><Receipt size={18}/></span><div className="grow"><strong>{i.number}</strong><div className="muted small">{i.date} · {t(i.paymentMethod)}</div></div><strong>{fmt(i.totalPaise)}</strong></div>)}</div>}</Panel>
+    <div className="ref-dashboard-footnote"><span>{t('monthlySales')}: <strong>{fmt(monthlySales)}</strong></span><span>{t('storedHere')}</span></div>
   </div>;
 }
