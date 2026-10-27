@@ -57,7 +57,7 @@ export default function ShopApp(){
       <div className="sidebar-bottom"><div className="device-private-note"><ShieldCheck size={19}/><div><strong>{t('storedHere')}</strong><span>Private · IndexedDB</span></div></div><button className="ref-sidebar-backup" onClick={()=>navigate('settings')}><HardDriveDownload size={18}/>{t('backupTitle')}</button></div>
     </aside>
     <div className="content-area"><header className="topbar ref-topbar">
-      <div className="topbar-left"><button className="hamburger icon-button" onClick={()=>setSidebar(true)} aria-label="Open menu"><Menu size={23}/></button><div className="mobile-brand-mark"><ShoppingBasket size={24}/></div><div className="topbar-titles"><div className="ref-store-title">{shop?.name||'Shop Billing'}</div><div className="ref-store-subtitle">{language==='ml'?'ബില്ലിംഗ് & സ്റ്റോക്ക്':'Grocery & Shop Manager'}</div></div></div>
+      <div className="topbar-left"><button className="hamburger icon-button" onClick={()=>setSidebar(true)} aria-label="Open menu"><Menu size={23}/></button><div className="mobile-brand-mark"><ShoppingBasket size={24}/></div><div className="topbar-titles"><div className="ref-store-title">{shop?.name||'Shop Billing'}</div><div className="ref-store-subtitle">{language==='ml'?'ബില്ലിംഗും കണക്കുകളും':'Grocery & Shop Manager'}</div></div></div>
       <div className="topbar-actions">
         <div className="language-switch" role="group" aria-label={t('langToggle')}>
           <button type="button" aria-label="മലയാളം" aria-pressed={language==='ml'} className={language==='ml'?'chosen':''} onClick={()=>setLanguage('ml')}>മ</button>

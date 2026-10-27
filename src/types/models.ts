@@ -28,8 +28,6 @@ export interface Product {
   pricePaise: number;
   costPaise: number;
   taxBps: number;
-  stockMilli: number;
-  lowStockMilli: number;
   active: boolean;
   createdAt: string;
   updatedAt: string;
@@ -70,6 +68,7 @@ export interface InvoiceItem {
   taxPaise: number;
   totalPaise: number;
 }
+/** Kept for reading old backups only; the application no longer tracks inventory. */
 export interface StockMovement {
   id: string;
   productId: string;

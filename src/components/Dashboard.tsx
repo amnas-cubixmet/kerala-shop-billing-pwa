@@ -1,6 +1,6 @@
 'use client';
 import {useLiveQuery} from 'dexie-react-hooks';
-import {BarChart3, CalendarDays, CirclePlus, Package, PackageX, Receipt, Settings2, ShoppingBasket, TrendingUp, Wallet} from 'lucide-react';
+import {BarChart3, CalendarDays, CirclePlus, Package, Receipt, Settings2, ShoppingBasket, TrendingUp, Wallet} from 'lucide-react';
 import {db} from '@/db/database';
 import {fmt, localDate, monthKey} from '@/lib/money';
 import {useLanguage} from '@/lib/language';
@@ -10,11 +10,11 @@ import type {Invoice, Expense} from '@/types/models';
 export default function Dashboard({navigate}:{navigate:(next:string)=>void}) {
   const {t,language}=useLanguage();
   const data=useLiveQuery(async()=>{
-    const [invoices,expenses,products]=await Promise.all([db.invoices.toArray(),db.expenses.toArray(),db.products.toArray()]);
-    return {invoices,expenses,products};
+    const [invoices,expenses]=await Promise.all([db.invoices.toArray(),db.expenses.toArray()]);
+    return {invoices,expenses};
   },[]);
   if(!data)return <div className="ref-loading">{language==='ml'?'കണക്കുകൾ തുറക്കുന്നു…':'Loading today’s totals…'}</div>;
-  const {invoices,expenses,products}=data;
+  const {invoices,expenses}=data;
   const today=localDate(),month=monthKey();
   const active=(rows:Invoice[])=>rows.filter(x=>x.status==='final');
   const sumSales=(rows:Invoice[])=>active(rows).reduce((s,i)=>s+i.totalPaise,0);
@@ -22,14 +22,13 @@ export default function Dashboard({navigate}:{navigate:(next:string)=>void}) {
   const todays=active(invoices.filter(i=>i.date===today));
   const todaySales=sumSales(todays),todayExpenses=sumExpenses(expenses.filter(e=>e.date===today));
   const monthlySales=sumSales(invoices.filter(i=>i.date.startsWith(month)));
-  const low=products.filter(p=>p.active && p.stockMilli<=p.lowStockMilli);
   const recent=active([...invoices]).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,5);
   const hour=new Date().getHours();
   const greeting=language==='ml'?'നമസ്കാരം!':hour<12?'Good Morning!':hour<17?'Good Afternoon!':'Good Evening!';
   const actions=[
     {id:'billing',label:language==='ml'?'പുതിയ ബിൽ':'New Sale',icon:ShoppingBasket},
     {id:'product-add',label:t('addProduct'),icon:CirclePlus},
-    {id:'products',label:language==='ml'?'സ്റ്റോക്ക്':'Manage Stock',icon:Package},
+    {id:'products',label:t('products'),icon:Package},
     {id:'reports',label:t('seeReports'),icon:BarChart3},
     {id:'expenses',label:t('expenses'),icon:Wallet},
     {id:'settings',label:language==='ml'?'ബാക്കപ്പ്':'Settings / Backup',icon:Settings2},
@@ -47,7 +46,6 @@ export default function Dashboard({navigate}:{navigate:(next:string)=>void}) {
       <div className="ref-stat-card"><div className="ref-stat-icon rose"><Wallet size={21}/></div><div className="ref-stat-copy"><span>{t('todayExpenses')}</span><strong>{fmt(todayExpenses)}</strong></div></div>
       <div className="ref-stat-card"><div className="ref-stat-icon green"><TrendingUp size={21}/></div><div className="ref-stat-copy"><span>{t('todayBalance')}</span><strong>{fmt(todaySales-todayExpenses)}</strong></div></div>
     </section>
-    {low.length>0&&<button className="ref-low-stock" onClick={()=>navigate('products')}><span className="ref-low-stock-icon"><PackageX size={21}/></span><span><strong>{language==='ml'?'സ്റ്റോക്ക് കുറവാണ്!':'Low Stock Alert'}</strong><small>{low.length} {language==='ml'?'ഉൽപ്പന്നങ്ങളിൽ സ്റ്റോക്ക് കുറഞ്ഞു':'products need restocking'}</small></span><span aria-hidden="true">›</span></button>}
     <div className="ref-section-title"><h2>{language==='ml'?'വേഗത്തിലുള്ള പ്രവർത്തനങ്ങൾ':'Quick Actions'}</h2></div>
     <section className="ref-actions-grid" aria-label={language==='ml'?'വേഗത്തിലുള്ള പ്രവർത്തനങ്ങൾ':'Quick Actions'}>{actions.map((a,i)=>{const Icon=a.icon;return <button key={a.id} className={`ref-action-card ref-action-${i}`} onClick={()=>navigate(a.id)}><span className="ref-action-icon"><Icon size={25} strokeWidth={2.2}/></span><strong>{a.label}</strong></button>})}</section>
     <div className="ref-section-title"><h2>{language==='ml'?'ഇന്നത്തെ കണക്കുകൾ':'Daily Summary'}</h2><button className="ref-text-link" onClick={()=>navigate('reports')}>{t('seeReports')} →</button></div>
