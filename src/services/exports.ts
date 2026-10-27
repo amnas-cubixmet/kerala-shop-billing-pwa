@@ -39,7 +39,6 @@ export async function downloadReceipt(invoice: Invoice, lines: InvoiceItem[], sh
   if (shop.gstin) { line(`GSTIN: ${shop.gstin}`, 21); y += 42; }
   line(`Invoice: ${invoice.number}`, 22, true); y += 34;
   line(`Date: ${invoice.date}`, 21); y += 34;
-  line(`Customer: ${invoice.customerName}`, 21); y += 44;
   ctx.strokeStyle = '#d3ded9'; ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(width - pad, y); ctx.stroke(); y += 20;
   for (const item of lines) {
     line(item.name, 23, true); y += 30;

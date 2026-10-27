@@ -1,6 +1,19 @@
-# Shop Billing PWA — Kerala Catalog V5 (850 product templates)
+## V8 quick start — 1.2.0
 
-**500 newly added product templates:** 120 bakery, 100 sweets, 110 branded snacks/chocolates/biscuits, 170 branded grocery. Together with the earlier 350 catalog products, total = **850 presets**.
+This release is for a shopkeeper who wants **daily sales tracking** without collecting customer details.
+Choose **മ** or **EN** in the always-visible mobile header. Product Add/Edit asks for only one name in the selected language. Store language selection is saved in browser localStorage.
+
+The **Record Sale** action saves a dated internal sale and adjusts stock without downloading or printing a bill. Optionally choose **Save & download bill** or export the receipt later from Reports. Daily and monthly views are available, with **Daily** selected by default.
+
+Existing IndexedDB schema and invoices are preserved. Older customer records are not exposed to the app UI; old customer data remains in compatible backups to avoid destructive migration. Export a full backup before upgrading.
+
+Run `npm install`, `npm run typecheck`, `npm test`, `npm run build`. Vercel uses `framework: null` and `outputDirectory: out` for the static Next.js export.
+
+---
+
+# Kerala Shop Billing PWA — V8 (Shopkeeper Daily Sales)
+
+**Catalog includes 500 branded/bakery/sweet templates:** 120 bakery, 100 sweets, 110 branded snacks/chocolates/biscuits, 170 branded grocery. Together with the earlier 350 catalog products, total = **850 presets**.
 
 - Two names (Malayalam / English), category, brand and editable pack/variant fields.
 - Add category or Add All 850 copies presets to **this device's IndexedDB only**; it does not overwrite existing edits or local custom products.
@@ -33,7 +46,7 @@ Brand examples were selected with reference to Kerala supermarkets and manufactu
 
 # Free Shop Billing — Kerala Catalog Edition V4 (Next.js Offline PWA)
 
-A **single-device, offline-first** billing + stock + expenses + customers + reports application. The data is stored on the user's own device in **IndexedDB (Dexie)**. A server/database account is **not** required to use the app.
+A **single-device, offline-first** daily sales + optional receipts + stock + expenses + reports application. The data is stored on the user's own device in **IndexedDB (Dexie)**. A server/database account is **not** required to use the app.
 
 > **Status:** Functional starter MVP source, not certified production accounting / GST billing software. Dependencies cannot be installed or the browser tested inside the artifact-generation environment; run the commands and checklist below before deploying to a real shop.
 
@@ -81,10 +94,10 @@ The Next.js static export is produced in **`out/`**. Host that folder on an HTTP
 
 - **Dashboard**: Today's / monthly sales, recorded expenses, warnings for low-stock products.
 - **Products**: Malayalam + English names, optional private product images, editable emoji, 350 Kerala catalog presets, CSV bulk import up to 1,000 rows, SKU, category, pieces/kg/litres/metres, price/cost, exclusive tax percentage, quantity and low-stock threshold, hide/show products, stock movements.
-- **Billing**: Cart, fractional quantities (3 decimals), discounts, GST applied *on top of* the selling price, payment-method status, atomic invoices/items/stock/counters, sequential invoice numbers per financial year, walk-in or existing customer.
+- **Billing**: Cart, fractional quantities (3 decimals), discounts, GST applied *on top of* the selling price, payment-method status, atomic invoices/items/stock/counters, sequential invoice numbers per financial year, no customer input or registration. Receipt optional.
 - **Receipt PDF**: Direct download to PDF using a browser Canvas + `pdf-lib`, including Malayalam text as a raster image. 80mm receipt layout.
 - **Expenses**: Categories, dates, amount and notes, deletion.
-- **Customers**: Add and select on invoices.
+- **Customer management removed**: The new UI does not collect customer details; legacy data remains only for compatibility with existing backups.
 - **Reports**: Monthly sales, payments, expenses, CSV export (escaped to mitigate spreadsheet formula injection), receipt downloads, invoice voiding / stock restoration.
 - **Backup**: Full JSON export, SHA-256 checksum verification on restore; transactional replacement with a confirmation + current-backup first.
 - **PWA**: Manifest + icons + service-worker caching of exported Next.js HTML/JS/CSS, home-screen installation, offline use after a complete successful initial load.
@@ -93,12 +106,12 @@ The Next.js static export is produced in **`out/`**. Host that folder on an HTTP
 
 1. **Single device only**. No synchronization across phones or users. Opening the same domain on a second phone creates its own isolated data set and independent invoice sequence.
 2. **Browser data is not a user-accessible database file**. IndexedDB uses device storage but clearing browser data, deleting an installation, browser eviction or device failure can lose it. Download backup files and move them to a second location frequently.
-3. **A backup is only as trustworthy as its storage**. SHA-256 guards against accidental file modification, not malicious tampering. Backups are unencrypted JSON and contain customer and shop data: keep them private.
+3. **A backup is only as trustworthy as its storage**. SHA-256 guards against accidental file modification, not malicious tampering. Backups are unencrypted JSON and can contain legacy customer records and shop data: keep them private.
 4. **Tax**: Only product-specific **tax-exclusive** rates are included; this is not a substitute for GST-compliant tax invoices, CGST/SGST/IGST logic, HSN/SAC rules, returns, tax filing or accounting advice.
 5. **Payment status**: Cash/UPI/Card/Other treated as paid; Unpaid treated as entirely unpaid. No installment or collection ledger in the MVP. Do not treat the dashboard as a formal profit-and-loss report.
 6. **Offline after initial visit**: the app shell and required chunks must be cached while online; test by installing and *reopening* the PWA with Airplane Mode. The app does not require network calls to save records.
 7. **Device date/clock** drives invoice dates and financial-year counters. For legally sensitive invoicing, a trusted synchronized clock and stronger anti-tampering controls are necessary.
-8. **Shared device**: no PIN, login or local encryption. Do not save highly sensitive customer details on unlocked shared phones.
+8. **Shared device**: no PIN, login or local encryption. Do not store sensitive business data on unlocked shared phones.
 9. **PDF**: receipt text is rasterized for Malayalam font support, so it is not searchable/selectable. The embedded bitmap will enlarge very long receipts.
 10. **GSTIN** is a free-form shop setting in this MVP; configure and verify it separately before issuing formal invoices.
 
@@ -157,7 +170,7 @@ The source files were syntax-parsed during ZIP creation, but a full dependency i
 ## V6 — Premium white theme and mobile-first redesign
 
 - White `#FFFFFF` background, subtle soft-gray borders and emerald primary actions.
-- Premium **DM Sans** for English and **Noto Sans Malayalam** for Malayalam, with sensible system fallbacks. These fonts are loaded through Google Fonts **only when network access permits**. Offline mode falls back to fonts available on the device; no customer/business records are sent to font providers. To avoid remote font requests entirely, remove the first `@import` line of `src/app/premium.css`.
+- Premium **DM Sans** for English and **Noto Sans Malayalam** for Malayalam, with sensible system fallbacks. These fonts are loaded through Google Fonts **only when network access permits**. Offline mode falls back to fonts available on the device; no local sales/product records are sent to font providers. To avoid remote font requests entirely, remove the first `@import` line of `src/app/premium.css`.
 - Dashboard welcome header, refreshed metric cards, redesigned desktop navigation and sticky desktop toolbar.
 - Mobile header and 5-item floating bottom navigation with visible active state and safe-area spacing.
 - Product catalog shows responsive 2-column category cards and stacked product rows on phones instead of requiring a wide table scroll.

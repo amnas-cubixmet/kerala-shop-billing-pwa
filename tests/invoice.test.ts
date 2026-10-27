@@ -9,19 +9,27 @@ beforeEach(async()=>{
 });
 describe('billing transactions',()=>{
   it('saves sale, lines, stock changes and counter',async()=>{
-    const sale=await saveInvoice({cart:[{productId:'rice',quantityMilli:1000}],discount:'0',paymentMethod:'cash',customerId:''});
+    const sale=await saveInvoice({cart:[{productId:'rice',quantityMilli:1000}],discount:'0',paymentMethod:'cash'});
     expect(sale.totalPaise).toBe(10000);
     expect((await db.products.get('rice'))?.stockMilli).toBe(4000);
     expect(await db.invoiceItems.where('invoiceId').equals(sale.id).count()).toBe(1);
     expect((await db.counters.toArray())[0].nextNumber).toBe(2);
   });
+  it('records a sale without creating or linking a customer',async()=>{
+    await db.customers.add({id:'legacy-customer',name:'Old Customer',phone:'',createdAt:'2026-01-01'});
+    const sale=await saveInvoice({cart:[{productId:'rice',quantityMilli:1000}],discount:'0',paymentMethod:'upi'});
+    expect(sale.customerId).toBeNull();
+    expect(sale.customerName).toBe('');
+    expect(sale.paidPaise).toBe(sale.totalPaise);
+    expect(await db.customers.count()).toBe(1);
+  });
   it('rejects overselling without creating an invoice',async()=>{
-    await expect(saveInvoice({cart:[{productId:'rice',quantityMilli:10000}],discount:'0',paymentMethod:'cash',customerId:''})).rejects.toThrow(/stock/);
+    await expect(saveInvoice({cart:[{productId:'rice',quantityMilli:10000}],discount:'0',paymentMethod:'cash'})).rejects.toThrow(/stock/);
     expect(await db.invoices.count()).toBe(0);
     expect((await db.products.get('rice'))?.stockMilli).toBe(5000);
   });
   it('voids an invoice once and restores stock',async()=>{
-    const sale=await saveInvoice({cart:[{productId:'rice',quantityMilli:2500}],discount:'0',paymentMethod:'upi',customerId:''});
+    const sale=await saveInvoice({cart:[{productId:'rice',quantityMilli:2500}],discount:'0',paymentMethod:'upi'});
     await voidInvoice(sale.id);
     expect((await db.products.get('rice'))?.stockMilli).toBe(5000);
     expect((await db.invoices.get(sale.id))?.status).toBe('void');

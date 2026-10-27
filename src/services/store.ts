@@ -3,7 +3,7 @@ import { KERALA_VEGETABLES } from '@/lib/vegetables';
 import { KERALA_FRUITS, KERALA_FOODS, type FoodPreset } from '@/lib/food-catalog';
 import { KERALA_BRANDED_PRESETS } from '@/lib/branded-catalog';
 import { calculateQuote, localDate, rupeeToPaise, unitsToMilli } from '@/lib/money';
-import type { CartEntry, Customer, Expense, Invoice, InvoiceItem, PaymentMethod, Product, Shop, StockMovement, Unit } from '@/types/models';
+import type { CartEntry, Expense, Invoice, InvoiceItem, PaymentMethod, Product, Shop, StockMovement, Unit } from '@/types/models';
 
 export async function initShop(): Promise<Shop> {
   const first = await db.shops.toCollection().first();
@@ -89,12 +89,6 @@ export async function toggleProduct(id: string): Promise<void> {
     await db.products.update(id, { active: !p.active, updatedAt: new Date().toISOString() });
   });
 }
-export async function addCustomer(name: string, phone: string): Promise<Customer> {
-  if (!name.trim()) throw new Error('Customer name required.');
-  const entry: Customer = { id: crypto.randomUUID(), name: name.trim(), phone: phone.trim(), createdAt: new Date().toISOString() };
-  await db.customers.add(entry);
-  return entry;
-}
 export async function addExpense(category: string, amount: string, notes: string, date: string): Promise<void> {
   if (!category.trim()) throw new Error('Select expense category.');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Invalid expense date.');
@@ -116,18 +110,15 @@ export async function saveInvoice(args: {
   cart: CartEntry[];
   discount: string;
   paymentMethod: PaymentMethod;
-  customerId: string;
 }): Promise<Invoice> {
   if (!args.cart.length) throw new Error('Cart is empty.');
   const discountPaise = rupeeToPaise(args.discount || '0');
   const shop = await initShop();
-  return db.transaction('rw', [db.products, db.invoices, db.invoiceItems, db.stockMovements, db.counters, db.customers], async () => {
+  return db.transaction('rw', [db.products, db.invoices, db.invoiceItems, db.stockMovements, db.counters], async () => {
     // Read product stock WITHIN transaction to prevent race with another tab.
     const products = await db.products.bulkGet(args.cart.map((c) => c.productId));
     if (products.some((p) => !p)) throw new Error('A product was removed.');
     const quote = calculateQuote(args.cart, products as Product[], discountPaise);
-    const customer = args.customerId ? await db.customers.get(args.customerId) : undefined;
-    if (args.customerId && !customer) throw new Error('Customer not found.');
     const date = localDate();
     const fy = financialYear(date);
     const counterId = `${shop.id}:${fy}`;
@@ -137,7 +128,7 @@ export async function saveInvoice(args: {
     const now = new Date().toISOString();
     const invoice: Invoice = {
       id: crypto.randomUUID(), shopId: shop.id, number: formattedNumber, date,
-      customerId: customer?.id ?? null, customerName: customer?.name ?? 'Walk-in Customer',
+      customerId: null, customerName: '',
       subtotalPaise: quote.subtotalPaise, discountPaise: quote.discountPaise,
       taxPaise: quote.taxPaise, totalPaise: quote.totalPaise,
       paymentMethod: args.paymentMethod, paidPaise: args.paymentMethod === 'unpaid' ? 0 : quote.totalPaise,

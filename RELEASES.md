@@ -42,3 +42,11 @@ git push origin main
 ```
 
 `npm version patch` is optional. Vercel builds a unique **release ID** per new Git commit/source digest even if the semver field remains `1.1.0`.
+
+## v1.2.0: Shopkeeper-first daily sales
+- Customer list and create-customer workflow removed from the interface. New sales do not ask for customer details.
+- Sale is saved to IndexedDB and stock reduced regardless of whether a receipt is requested. PDF receipt is optional.
+- Daily and monthly sales summaries and expenses; daily report is the default. Legacy invoices and legacy customer records remain in local backups, but no longer appear in the UI.
+- Malayalam/English app-wide switch is visible on mobile top bar and persisted per browser installation.
+- Product Add/Edit shows one name field based on selected language; catalog products continue using bilingual names internally for translation.
+- Existing local schema stays at version 1 to avoid destructive migrations. Backup first before updating; a service-worker update does not wipe IndexedDB.

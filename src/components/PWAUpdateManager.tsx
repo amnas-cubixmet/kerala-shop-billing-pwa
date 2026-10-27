@@ -2,6 +2,7 @@
 import {useEffect, useState} from 'react';
 import {DownloadCloud, RefreshCcw, X} from 'lucide-react';
 import {hasPendingShopChanges, UPDATE_GUARD_CHANGED} from '@/lib/update-guard';
+import {useLanguage} from '@/lib/language';
 
 /**
  * Automatic on next safe opportunity: never force a reload during a live bill.
@@ -9,6 +10,7 @@ import {hasPendingShopChanges, UPDATE_GUARD_CHANGED} from '@/lib/update-guard';
  * Installed SW controls static app code only; IndexedDB remains untouched.
  */
 export default function PWAUpdateManager() {
+  const {language}=useLanguage();
   const [waiting,setWaiting] = useState(false);
   const [blocked,setBlocked] = useState(false);
   const [working,setWorking] = useState(false);
@@ -97,11 +99,11 @@ export default function PWAUpdateManager() {
   if (!waiting || !visible) return null;
   return <section className="pwa-update-banner" role="status" aria-live="polite">
     <div className="pwa-update-mark"><DownloadCloud size={20}/></div>
-    <div className="pwa-update-copy"><strong>New app update is ready</strong><span>{blocked ? 'Finish or save your current bill/form first. Your local data is safe.' : `Updating automatically… ${version ? `Version ${version}`:''}`}</span></div>
+    <div className="pwa-update-copy"><strong>{language==='ml'?'പുതിയ ആപ്പ് അപ്ഡേറ്റ് തയ്യാറാണ്':'New app update is ready'}</strong><span>{blocked ? (language==='ml'?'നിലവിലെ വിൽപ്പന / ഫോം ആദ്യം സേവ് ചെയ്യുക. ഡാറ്റ സുരക്ഷിതമാണ്.':'Finish or save your current sale/form first. Your local data is safe.') : `${language==='ml'?'പുതുക്കുന്നു…':'Updating automatically…'} ${version ? `Version ${version}`:''}`}</span></div>
     <button className="button secondary" disabled={blocked||working} onClick={()=>{
       navigator.serviceWorker.getRegistration().then(r=>r?.waiting?.postMessage({type:'SKIP_WAITING'})).catch(()=>{});
       setWorking(true);
-    }}><RefreshCcw size={15}/>{blocked?'Finish first':'Update now'}</button>
+    }}><RefreshCcw size={15}/>{blocked?(language==='ml'?'ആദ്യം സേവ് ചെയ്യുക':'Finish first'):(language==='ml'?'അപ്ഡേറ്റ്':'Update now')}</button>
     <button aria-label="Hide update notice" className="icon-button" onClick={()=>setVisible(false)}><X size={17}/></button>
   </section>;
 }

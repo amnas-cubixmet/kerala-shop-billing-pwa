@@ -4,7 +4,7 @@ export const dynamic = 'force-static';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Free Shop Billing - Offline POS', short_name: 'Shop Billing',
-    description: 'Offline-first billing, inventory, customers and expenses.',
+    description: 'Offline-first sales, inventory and expenses.',
     start_url: '/', scope: '/', display: 'standalone',
     background_color: '#ffffff', theme_color: '#ffffff',
     icons: [

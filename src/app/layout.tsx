@@ -3,7 +3,7 @@ import './globals.css';
 import './premium.css';
 
 export const metadata: Metadata = {
-  title: 'Free Shop Billing | Offline POS',
+  title: 'Kerala Shop Billing | Offline Sales',
   description: 'Free, offline-first shop billing, inventory and expenses. Your data stays on this device.',
   applicationName: 'Free Shop Billing',
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Shop Billing' },

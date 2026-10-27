@@ -303,3 +303,30 @@ td {font-size:12px;color:#3e5347;}
 .pwa-update-banner .button{white-space:nowrap}
 @media(max-width:690px){.pwa-update-banner{bottom:calc(86px + env(safe-area-inset-bottom));flex-wrap:wrap}.pwa-update-copy{flex-basis:65%}.pwa-update-banner .button{margin-left:49px}}
 .product-photo-placeholder{display:block;background:#f4f7f5;width:100%;height:100%;object-fit:cover}
+/* v8: Language switch stays visible on compact mobile headers. */
+.language-switch { display:flex;align-items:center;gap:2px;padding:3px;border:1px solid #d9e9e0;border-radius:12px;background:#f5f9f6;flex-shrink:0; }
+.language-switch button { min-width:35px;height:31px;padding:3px 7px;border:0;background:transparent;border-radius:9px;font-family:inherit;color:#38614e;font-size:12px;font-weight:800;cursor:pointer; }
+.language-switch button.chosen {background:#0b755e;color:white;box-shadow:0 1px 5px #07573b22;}
+.language-switch button:focus-visible {outline:2px solid #0b755e;outline-offset:2px;}
+@media (max-width:750px) {
+  .topbar {gap:5px;}
+  .topbar-titles {min-width:0;}
+  .topbar-left,.topbar-actions {gap:5px;}
+  .topbar-new-bill {display:none;}
+  .language-switch {padding:2px;border-radius:10px;}
+  .language-switch button {min-width:31px;height:31px;padding:3px 6px;font-size:11px;}
+  .connection {margin-left:2px;flex-shrink:0;}
+  .bottom-nav button {font-size:10px;}
+}
+@media (max-width:390px) {
+  .mobile-brand-mark {display:none;}
+  .topbar-overline {max-width:84px;}
+  .breadcrumb {max-width:120px;font-size:12px;}
+  .topbar-left {gap:4px;}
+}
+
+.sale-actions {display:flex; flex-direction:column; gap:10px;}
+.sale-actions .button {justify-content:center;}
+
+.report-period {width:max-content; margin:4px 0;}
+.report-period button {width:auto; min-width:68px; padding:6px 12px;}

@@ -3,6 +3,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Database, Download, HardDrive, ImagePlus, PackagePlus, Pencil, Search, ToggleLeft, ToggleRight, Upload, X } from 'lucide-react';
 import { db } from '@/db/database';
+import {useLanguage} from '@/lib/language';
 import { useUpdateHold } from '@/lib/update-guard';
 import { fmt, qtyText } from '@/lib/money';
 import { KERALA_VEGETABLES } from '@/lib/vegetables';
@@ -35,6 +36,7 @@ function names(p:Product):{ml:string;en:string} {
 }
 
 export default function Products({notify}: {notify:(text:string,kind?:'error'|'success')=>void}) {
+  const {language,t,productName,categoryName}=useLanguage();
   const products = useLiveQuery(()=>db.products.orderBy('name').toArray(),[]) ?? [];
   const [editing,setEditing] = useState<ProductInput|null>(null);
   const [search,setSearch] = useState('');
@@ -106,58 +108,57 @@ export default function Products({notify}: {notify:(text:string,kind?:'error'|'s
   }
   return <div className="stack">
     <div className="page-heading">
-      <div><h1>Products / സാധനങ്ങൾ</h1><p>Ready-made Kerala catalog + your own private products. All changes are saved on this device.</p></div>
-      <button className="button primary" onClick={()=>{setEditing({...blank});window.scrollTo({top:0,behavior:'smooth'});}}><PackagePlus size={17}/> Add My Product / പുതിയത്</button>
+      <div><h1>{t('productCatalog')}</h1><p>{t('productsIntro')}</p></div>
+      <button className="button primary" onClick={()=>{setEditing({...blank});window.scrollTo({top:0,behavior:'smooth'});}}><PackagePlus size={17}/> {t('addProduct')}</button>
     </div>
-    <div className="notice good"><HardDrive size={19}/><span><strong>Local Storage / എന്റെ ഫോണിൽ മാത്രം:</strong> പുതിയ പേര്, വില, ചിത്രം, സ്റ്റോക്ക് എന്നിവ ഈ browser/PWA-യുടെ IndexedDB-ലാണ് സൂക്ഷിക്കുന്നത്. മറ്റൊരു ഫോണിലോ മറ്റൊരു ഉപയോക്താവിനോ സ്വയം കാണില്ല. <strong>ഒരേ ഫോൺ/browser ഉപയോഗിക്കുന്ന ആൾക്ക് കാണാൻ കഴിയും.</strong> Backup എടുക്കാൻ മറക്കരുത്.</span></div>
-    <div className="notice"><span>📦 <strong>Brand catalog = editable suggestions.</strong> Verify actual product, pack weight, MRP, barcode and tax from its packaging. No brand-owned photos or official barcode data are included.</span></div>
-    <div className="csv-toolbar"><button className="button primary" disabled={busy} onClick={()=>void insertAllPresets()}><PackagePlus size={17}/> + Add All 850 Products / 850 സാധനങ്ങൾ ചേർക്കുക</button><span className="small muted">350 existing + 500 new: bakery, sweets, popular branded products. No verified barcodes/prices; existing edits are preserved.</span></div>
+    <div className="notice good"><HardDrive size={19}/><span><strong>IndexedDB:</strong> {t('localPrivacy')}</span></div>
+    <div className="notice"><span>📦 <strong>{language==='ml'?'ബ്രാൻഡ് ലിസ്റ്റ് മാതൃകയാണ്. സാധനത്തിന്റെ പാക്കറ്റ്, വില, ബാർകോഡ്, നികുതി എന്നിവ ശരിയായി പരിശോധിക്കുക. ഔദ്യോഗിക ബ്രാൻഡ് ഫോട്ടോകൾ ഉൾപ്പെടുത്തിയിട്ടില്ല.':'Brand catalog is a suggestion. Verify actual product, pack size, MRP, barcode and tax. Official brand photos are not included.'}</strong></span></div>
+    <div className="csv-toolbar"><button className="button primary" disabled={busy} onClick={()=>void insertAllPresets()}><PackagePlus size={17}/> {t('addAll')}</button><span className="small muted">{language==='ml'?'350 പഴയതും 500 പുതിയതും. പഴയ വിലയും ചിത്രങ്ങളും മാറ്റില്ല.':'350 existing + 500 new templates. Existing prices and images are preserved.'}</span></div>
     <div className="catalog-cards">{categories.map(row=>{
       const count= row.group==='vegetables'?KERALA_VEGETABLES.filter(v=>present.has(v.id)).length:row.group==='fruits'?KERALA_FRUITS.filter(v=>present.has(v.id)).length:row.group==='foods'?KERALA_FOODS.filter(v=>present.has(v.id)).length:KERALA_BRANDED_PRESETS.filter(v=>present.has(v.id) && (row.group==='bakery'?v.category.startsWith('Bakery'):row.group==='sweets'?v.category.startsWith('Sweets'):v.category.startsWith('Branded'))).length;
-      return <div className="catalog-card" key={row.group}><span className="catalog-card-icon" aria-hidden="true">{row.emoji}</span><strong>{row.label}</strong><p>{count} / {row.count} added</p><button className="button secondary" disabled={busy||count===row.count} onClick={()=>void insertPresets(row.group)}>{count===row.count?'Added ✓':`+ Add ${row.count-count}`}</button></div>;
+      return <div className="catalog-card" key={row.group}><span className="catalog-card-icon" aria-hidden="true">{row.emoji}</span><strong>{row.label.split(' / ')[language==='en'?0:1]||row.label}</strong><p>{count} / {row.count} {t('alreadyAdded')}</p><button className="button secondary" disabled={busy||count===row.count} onClick={()=>void insertPresets(row.group)}>{count===row.count?t('alreadyAdded'):`${t('add')} ${row.count-count}`}</button></div>;
     })}</div>
-    <Panel title="Add many products / ഒരുമിച്ച് ചേർക്കാം" sub="Download the CSV template, fill Malayalam + English names, then import up to 1,000 products per import. Local storage only.">
-      <div className="csv-toolbar"><button className="button secondary" onClick={downloadCsvTemplate}><Download size={16}/> CSV Template</button>
+    <Panel title={t('csvTools')} sub={t('csvIntro')}>
+      <div className="csv-toolbar"><button className="button secondary" onClick={downloadCsvTemplate}><Download size={16}/> {t('template')}</button>
         <input className="sr-only" ref={csvRef} type="file" accept=".csv,text/csv" onChange={e=>void importCsv(e.target.files?.[0])}/>
-        <button className="button secondary" disabled={busy} onClick={()=>csvRef.current?.click()}><Upload size={16}/> Import CSV (max 1,000)</button></div>
-      <p className="small muted">Columns: malayalamName, englishName, category, unit, price, stock, icon, brand, packSize. Older seven-column CSVs are supported. Missing prices remain inactive until edited. No file is uploaded to a server.</p>
+        <button className="button secondary" disabled={busy} onClick={()=>csvRef.current?.click()}><Upload size={16}/> {t('importCsv')} (1,000)</button></div>
+      <p className="small muted">{language==='ml'?'CSV-യിൽ മലയാളം/ഇംഗ്ലീഷ് പേര്, വിഭാഗം, വില, സ്റ്റോക്ക്, ബ്രാൻഡ് എന്നിവ ചേർക്കാം. ഫയൽ സെർവറിലേക്ക് അപ്‌ലോഡ് ചെയ്യില്ല.':'CSV supports Malayalam/English names, category, price, stock and brand. Nothing is uploaded to a server.'}</p>
     </Panel>
-    {editing&&<Panel title={editing.id?'Edit product / മാറ്റം വരുത്തുക':'My New Product / പുതിയ സാധനം'} sub="Enter both names, or just one. Price is per kg / piece / bundle / litre. Photos are compressed and stored locally.">
+    {editing&&<Panel title={editing.id?t('editProduct'):t('addProduct')} sub={t('nameHint')}>
       <form onSubmit={submit} className="form-grid">
-        <Field label="Malayalam Name / മലയാളം പേര്"><input maxLength={100} value={editing.malayalamName} onChange={e=>update('malayalamName',e.target.value)} placeholder="ഉദാ: ആപ്പിൾ"/></Field>
-        <Field label="English Name / ഇംഗ്ലീഷ് പേര്"><input maxLength={100} value={editing.englishName} onChange={e=>update('englishName',e.target.value)} placeholder="e.g. Apple"/></Field>
-        <Field label="Brand / ബ്രാൻഡ് (optional)"><input maxLength={100} value={editing.brand} onChange={e=>update('brand',e.target.value)} placeholder="Britannia / Parle / Local Bakery"/></Field>
-        <Field label="Pack / Variant (optional)"><input maxLength={100} value={editing.packSize} onChange={e=>update('packSize',e.target.value)} placeholder="e.g. 200 g — verify on actual packet"/></Field>
-        <Field label="Category / വിഭാഗം"><select value={editing.category} onChange={e=>update('category',e.target.value)}>
-          {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].includes(editing.category)?null:<option value={editing.category}>{editing.category}</option>}
-          {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].map(c=><option key={c} value={c}>{c}</option>)}
+        <Field label={`${t('productName')} *`}><input required maxLength={100} value={language==='ml'?editing.malayalamName:editing.englishName} onChange={e=>update(language==='ml'?'malayalamName':'englishName',e.target.value)} placeholder={language==='ml'?'ഉദാ: ആപ്പിൾ':'e.g. Apple'}/></Field>
+        <Field label={t('brand')}><input maxLength={100} value={editing.brand} onChange={e=>update('brand',e.target.value)} placeholder="Britannia / Parle / Local Bakery"/></Field>
+        <Field label={t('pack')}><input maxLength={100} value={editing.packSize} onChange={e=>update('packSize',e.target.value)} placeholder="e.g. 200 g — verify on actual packet"/></Field>
+        <Field label={t('category')}><select value={editing.category} onChange={e=>update('category',e.target.value)}>
+          {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].includes(editing.category)?null:<option value={editing.category}>{categoryName(editing.category)}</option>}
+          {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].map(c=><option key={c} value={c}>{categoryName(c)}</option>)}
         </select></Field>
-        <Field label="Emoji Icon / ഐക്കൺ"><div className="icon-picker"><input maxLength={16} value={editing.icon} onChange={e=>update('icon',e.target.value)} placeholder="📦"/>
+        <Field label={t('icon')}><div className="icon-picker"><input maxLength={16} value={editing.icon} onChange={e=>update('icon',e.target.value)} placeholder="📦"/>
           <div className="emoji-options" aria-label="Choose product emoji">{ICONS.map((icon,i)=><button key={i} type="button" className={editing.icon===icon?'chosen':''} onClick={()=>update('icon',icon)} title={`Choose ${icon}`}>{icon}</button>)}</div></div></Field>
-        <Field label="Product Image / ചിത്രം"><div className="product-photo-editor"><ProductVisual product={{id:editing.id,name:[editing.malayalamName,editing.englishName].filter(Boolean).join(' / '),imageDataUrl:editing.imageDataUrl}} large/>
-          <div className="grow"><label className="button secondary upload-button"><ImagePlus size={17}/>{loadingImage?'Processing…':'Upload Image'}<input disabled={loadingImage} type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>{void chooseImage(e.target.files?.[0]);e.target.value='';}}/></label>
-          {editing.imageDataUrl&&<button type="button" className="text-button" onClick={()=>update('imageDataUrl','')}><X size={14}/> Remove</button>}
-          <p className="tiny muted">JPG/PNG/WebP, max 5 MB before compression. Compressed photo stays on this device and in JSON backups.</p></div></div></Field>
-        <Field label="Unit / അളവ്"><select value={editing.unit} onChange={e=>update('unit',e.target.value as Unit)}><option value="kg">Kilogram / കിലോ (kg)</option><option value="pcs">Piece / എണ്ണം</option><option value="bundle">Bundle / കെട്ട്</option><option value="ltr">Litre / ലിറ്റർ</option><option value="m">Metre / മീറ്റർ</option></select></Field>
-        <Field label={`Selling Price per ${editing.unit} (₹) *`}><input type="number" min="0.01" step="0.01" required value={editing.price} onChange={e=>update('price',e.target.value)} placeholder="Current selling price"/></Field>
-        <Field label="Buying / Cost Price (₹)"><input type="number" min="0" step="0.01" required value={editing.cost} onChange={e=>update('cost',e.target.value)}/></Field>
-        <Field label="Stock / സ്റ്റോക്ക്"><input type="number" min="0" step="0.001" required value={editing.stock} onChange={e=>update('stock',e.target.value)}/></Field>
-        <Field label="Low Stock Alert"><input type="number" min="0" step="0.001" required value={editing.lowStock} onChange={e=>update('lowStock',e.target.value)}/></Field>
-        <Field label="Tax rate (verify locally)"><select value={editing.tax} onChange={e=>update('tax',e.target.value)}>{['0','3','5','12','18','28'].map(t=><option value={t} key={t}>{t}%</option>)}</select></Field>
-        <Field label="SKU / Barcode (optional)"><input maxLength={80} value={editing.sku} onChange={e=>update('sku',e.target.value)}/></Field>
-        <div className="form-actions"><button className="button primary" disabled={busy||loadingImage}>{busy?'Saving…':'Save to My Phone'}</button><button type="button" className="button ghost" onClick={()=>setEditing(null)}>Cancel</button></div>
+        <Field label={t('image')}><div className="product-photo-editor"><ProductVisual product={{id:editing.id,name:[editing.malayalamName,editing.englishName].filter(Boolean).join(' / '),imageDataUrl:editing.imageDataUrl}} large/>
+          <div className="grow"><label className="button secondary upload-button"><ImagePlus size={17}/>{loadingImage?t('saving'):t('uploadImage')}<input disabled={loadingImage} type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>{void chooseImage(e.target.files?.[0]);e.target.value='';}}/></label>
+          {editing.imageDataUrl&&<button type="button" className="text-button" onClick={()=>update('imageDataUrl','')}><X size={14}/> {t('remove')}</button>}
+          <p className="tiny muted">{language==='ml'?'JPG/PNG/WebP (5 MB വരെ). ചിത്രം ഈ ഫോണിൽ സേവ് ചെയ്ത് ബാക്കപ്പിൽ ഉൾപ്പെടുത്തും.':'JPG/PNG/WebP up to 5 MB. The compressed photo stays on this phone and in backups.'}</p></div></div></Field>
+        <Field label={t('unit')}><select value={editing.unit} onChange={e=>update('unit',e.target.value as Unit)}><option value="kg">{language==='ml'?'കിലോ':'Kilogram'} (kg)</option><option value="pcs">{language==='ml'?'എണ്ണം':'Piece'}</option><option value="bundle">{language==='ml'?'കെട്ട്':'Bundle'}</option><option value="ltr">{language==='ml'?'ലിറ്റർ':'Litre'}</option><option value="m">{language==='ml'?'മീറ്റർ':'Metre'}</option></select></Field>
+        <Field label={`${t('sellingPrice')} / ${editing.unit} *`}><input type="number" min="0.01" step="0.01" required value={editing.price} onChange={e=>update('price',e.target.value)} placeholder={language==='ml'?'ഇപ്പോഴത്തെ വില':'Current selling price'}/></Field>
+        <Field label={t('buyingPrice')}><input type="number" min="0" step="0.01" required value={editing.cost} onChange={e=>update('cost',e.target.value)}/></Field>
+        <Field label={t('stockQty')}><input type="number" min="0" step="0.001" required value={editing.stock} onChange={e=>update('stock',e.target.value)}/></Field>
+        <Field label={t('lowStock')}><input type="number" min="0" step="0.001" required value={editing.lowStock} onChange={e=>update('lowStock',e.target.value)}/></Field>
+        <Field label={t('taxRate')}><select value={editing.tax} onChange={e=>update('tax',e.target.value)}>{['0','3','5','12','18','28'].map(t=><option value={t} key={t}>{t}%</option>)}</select></Field>
+        <Field label={t('barcode')}><input maxLength={80} value={editing.sku} onChange={e=>update('sku',e.target.value)}/></Field>
+        <div className="form-actions"><button className="button primary" disabled={busy||loadingImage}>{busy?t('saving'):t('saveProduct')}</button><button type="button" className="button ghost" onClick={()=>setEditing(null)}>{t('cancel')}</button></div>
       </form>
     </Panel>}
-    <Panel title={`My Product Database (${products.length})`} action={<div className="search"><Search size={16}/><input aria-label="Search products" placeholder="Search Malayalam / English / SKU" value={search} onChange={e=>{setSearch(e.target.value);setVisibleCount(60);}}/></div>}>
+    <Panel title={`${t('myProducts')} (${products.length})`} action={<div className="search"><Search size={16}/><input aria-label={t('searchProducts')} placeholder={t('searchProducts')} value={search} onChange={e=>{setSearch(e.target.value);setVisibleCount(60);}}/></div>}>
       <div className="catalog-filters" aria-label="Filter products">{[
-        ['all','All'],['vegetables','Vegetables'],['fruits','Fruits'],['foods','Foods'],['bakery','Bakery'],['sweets','Sweets'],['branded','Branded'],['mine','My Custom Products']
+        ['all',t('all')],['vegetables',t('vegetables')],['fruits',t('fruits')],['foods',t('foods')],['bakery',t('bakery')],['sweets',t('sweets')],['branded',t('branded')],['mine',t('mine')]
       ].map(([value,label])=><button key={value} className={`catalog-filter ${filter===value?'active':''}`} onClick={()=>{setFilter(value);setVisibleCount(60);}}>{value==='mine'&&<Database size={14}/>} {label}</button>)}</div>
-      <div className="csv-toolbar"><label className="small" htmlFor="brand-filter">Filter Brand / ബ്രാൻഡ്</label><select id="brand-filter" value={brandFilter} onChange={e=>{setBrandFilter(e.target.value);setVisibleCount(60);}}><option value="all">All Brands</option>{brandChoices.map(b=><option key={b} value={b}>{b}</option>)}</select></div>
-      {!filtered.length?<Empty label="No matching products. Choose a catalog above, or add your own product."/>:<div className="table-wrap product-table-wrap"><table className="product-data-table"><thead><tr><th>Product / ചിത്രം</th><th>Source</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead><tbody>{filtered.slice(0,visibleCount).map(p=><tr key={p.id}><td data-label="Product"><div className="product-cell"><ProductVisual product={p}/><div><strong>{names(p).ml||p.name}</strong><div className="small muted">{names(p).en}</div><div className="small muted">{p.brand && p.brand!=='Unbranded / Local'?`${p.brand} · `:''}{p.packSize?`${p.packSize} · `:''}{p.category||'General'} · {p.unit}</div></div></div></td>
-        <td data-label="Source"><span className="pill neutral"><HardDrive size={12}/> {p.source==='catalog'?'Catalog':'My Local'}</span></td>
-        <td data-label="Price">{p.isTemplate?<span className="pill danger">Set price</span>:<strong>{fmt(p.pricePaise)}/{p.unit}</strong>}</td>
+      <div className="csv-toolbar"><label className="small" htmlFor="brand-filter">{t('brand')}</label><select id="brand-filter" value={brandFilter} onChange={e=>{setBrandFilter(e.target.value);setVisibleCount(60);}}><option value="all">{language==='ml'?'എല്ലാ ബ്രാൻഡുകളും':'All brands'}</option>{brandChoices.map(b=><option key={b} value={b}>{b}</option>)}</select></div>
+      {!filtered.length?<Empty label="No matching products. Choose a catalog above, or add your own product."/>:<div className="table-wrap product-table-wrap"><table className="product-data-table"><thead><tr><th>{t('productName')}</th><th>{t('storage')}</th><th>{t('price')}</th><th>{t('stock')}</th><th>{t('status')}</th><th>{t('actions')}</th></tr></thead><tbody>{filtered.slice(0,visibleCount).map(p=><tr key={p.id}><td data-label="Product"><div className="product-cell"><ProductVisual product={p}/><div><strong>{productName(p)}</strong><div className="small muted">{p.brand && p.brand!=='Unbranded / Local'?`${p.brand} · `:''}{p.packSize?`${p.packSize} · `:''}{categoryName(p.category||'General')} · {p.unit}</div></div></div></td>
+        <td data-label="Source"><span className="pill neutral"><HardDrive size={12}/> {p.source==='catalog'?t('productCatalog'):t('myLocal')}</span></td>
+        <td data-label="Price">{p.isTemplate?<span className="pill danger">{language==='ml'?'വില നൽകുക':'Set price'}</span>:<strong>{fmt(p.pricePaise)}/{p.unit}</strong>}</td>
         <td data-label="Stock"><span className={p.stockMilli<=p.lowStockMilli?'danger-text':''}>{qtyText(p.stockMilli)} {p.unit}</span></td>
-        <td data-label="Status"><span className={`pill ${p.active?'green':'neutral'}`}>{p.active?'Active':'Inactive'}</span></td>
+        <td data-label="Status"><span className={`pill ${p.active?'green':'neutral'}`}>{p.active?t('active'):t('inactive')}</span></td>
         <td data-label="Actions"><div className="actions"><button title="Edit name, picture, price, stock" aria-label={`Edit ${p.name}`} className="icon-button" onClick={()=>edit(p)}><Pencil size={17}/></button><button disabled={p.isTemplate} title={p.isTemplate?'Set price first':'Hide/show'} aria-label={`Toggle ${p.name}`} className="icon-button" onClick={async()=>{try{await toggleProduct(p.id)}catch(e){notify(safeError(e),'error')}}}>{p.active?<ToggleRight size={19}/>:<ToggleLeft size={19}/>}</button></div></td>
       </tr>)}</tbody></table><div className="csv-toolbar"><span className="small muted">Showing {Math.min(visibleCount,filtered.length)} of {filtered.length} products</span>{visibleCount<filtered.length && <button className="button secondary" onClick={()=>setVisibleCount(n=>n+60)}>Show more / കൂടുതൽ കാണുക</button>}</div></div>}
     </Panel>
