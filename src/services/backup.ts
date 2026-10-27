@@ -52,7 +52,7 @@ function validateData(data: unknown): asserts data is Data {
   }
   if ((obj.shops as unknown[]).length !== 1) throw new Error('Backup must have exactly one shop.');
   const products = obj.products as Product[];
-  if (products.some(p => !p.name || !Number.isSafeInteger(p.pricePaise) || p.pricePaise < 0 || !Number.isSafeInteger(p.stockMilli) || p.stockMilli < 0)) throw new Error('Invalid products.');
+  if (products.some(p => !p.name || !Number.isSafeInteger(p.pricePaise) || p.pricePaise < 0)) throw new Error('Invalid products.');
   const invoices = obj.invoices as Invoice[];
   if (invoices.some(i => !i.number || !Number.isSafeInteger(i.totalPaise) || i.totalPaise < 0 || !['final','void'].includes(i.status))) throw new Error('Invalid invoices.');
   const invoiceIds = new Set(invoices.map(i => i.id));

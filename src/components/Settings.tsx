@@ -41,7 +41,7 @@ export default function Settings({notify}:{notify:(text:string,kind?:'error'|'su
       <div className="stack settings-primary">
         <section id="local-backup" className="backup-primary-panel"><Panel title={t('backupTitle')} sub={ml?'iPhone Files / Android Downloads-ൽ സുരക്ഷിതമായി സൂക്ഷിക്കുക.':'Keep the JSON file in iPhone Files / Android Downloads.'}>
           <div className="stack compact">
-            <div className="notice good"><HardDriveDownload size={20}/><span>{ml?'ബില്ലുകൾ, സ്റ്റോക്ക്, ചെലവുകൾ, സ്വന്തമായി Upload ചെയ്ത Product Images എന്നിവ ഈ ബാക്കപ്പിൽ ഉൾപ്പെടും.':'Bills, stock, expenses and your uploaded product photos are included in this backup.'}</span></div>
+            <div className="notice good"><HardDriveDownload size={20}/><span>{ml?'ബില്ലുകൾ, സാധനങ്ങൾ, ചെലവുകൾ, സ്വന്തമായി Upload ചെയ്ത Product Images എന്നിവ ഈ ബാക്കപ്പിൽ ഉൾപ്പെടും.':'Bills, products, expenses and your uploaded product photos are included in this backup.'}</span></div>
             <button type="button" className="button primary wide" disabled={busy} onClick={()=>void prepare()}><Download size={18}/>{busy?(ml?'തയ്യാറാക്കുന്നു…':'Preparing…'):(ml?'1. ബാക്കപ്പ് തയ്യാറാക്കുക':'1. Prepare backup file')}</button>
             {backupFile&&<div className="backup-ready" role="status"><div className="backup-ready-text"><CheckCircle2 size={17}/><span>{backupFile.name} · {mb(backupFile.size)} MB</span></div>
               <div className="backup-action-row">
