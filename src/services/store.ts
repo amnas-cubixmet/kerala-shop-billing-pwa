@@ -83,6 +83,23 @@ export async function saveProduct(data: ProductInput): Promise<void> {
     }
   });
 }
+/** Stock is adjusted separately, so product edits do not overwrite quantities. */
+export async function setProductStock(id:string, quantity:string):Promise<void> {
+  const stockMilli=unitsToMilli(quantity);
+  await db.transaction('rw',db.products,db.stockMovements,async()=>{
+    const product=await db.products.get(id);
+    if(!product)throw new Error('Product not found.');
+    const difference=stockMilli-product.stockMilli;
+    if(difference===0)return;
+    const now=new Date().toISOString();
+    await db.products.update(id,{stockMilli,updatedAt:now});
+    await db.stockMovements.add({
+      id:crypto.randomUUID(),productId:id,changeMilli:difference,
+      reason:'adjustment',refId:id,date:now,
+    });
+  });
+}
+
 export async function toggleProduct(id: string): Promise<void> {
   await db.transaction('rw', db.products, async () => {
     const p = await db.products.get(id);

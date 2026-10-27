@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Check, ChevronLeft, ChevronDown, Database, Download, Edit3, HardDrive, ImagePlus, PackagePlus, Pencil, Plus, Search, ToggleLeft, ToggleRight, Upload, X } from 'lucide-react';
+import { Boxes, Check, ChevronLeft, ChevronDown, Database, Download, Edit3, HardDrive, ImagePlus, PackagePlus, Pencil, Plus, Search, ToggleLeft, ToggleRight, Upload, X } from 'lucide-react';
 import { db } from '@/db/database';
 import {useLanguage} from '@/lib/language';
 import { useUpdateHold } from '@/lib/update-guard';
@@ -10,7 +10,7 @@ import { KERALA_VEGETABLES } from '@/lib/vegetables';
 import { KERALA_FRUITS, KERALA_FOODS } from '@/lib/food-catalog';
 import { KERALA_BRANDED_PRESETS } from '@/lib/branded-catalog';
 import { compressProductImage } from '@/lib/product-image';
-import { addProductPresets, saveProduct, toggleProduct, type PresetGroup, type ProductInput } from '@/services/store';
+import { addProductPresets, saveProduct, setProductStock, toggleProduct, type PresetGroup, type ProductInput } from '@/services/store';
 import { downloadCsvTemplate, importProductCsv } from '@/services/catalog-import';
 import { Empty, Field, Panel, safeError } from '@/components/ui';
 import ProductVisual from '@/components/ProductVisual';
@@ -39,6 +39,7 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
   const {language,t,productName,categoryName}=useLanguage();
   const products = useLiveQuery(()=>db.products.orderBy('name').toArray(),[]) ?? [];
   const [editing,setEditing] = useState<ProductInput|null>(null);
+  const [stockEditing,setStockEditing] = useState<{id:string;name:string;quantity:string;unit:Unit}|null>(null);
   useEffect(()=>{if(openAddToken>0)setEditing({...blank});},[openAddToken]);
   const editorRef=useRef<HTMLDivElement>(null);
   const editorKey=editing?(editing.id||'new'):'';
@@ -50,7 +51,7 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
   const brandChoices = Array.from(new Set(products.map(p=>p.brand).filter((b):b is string=>Boolean(b && b!=='Unbranded / Local')))).sort();
   const [busy,setBusy] = useState(false);
   const [loadingImage,setLoadingImage] = useState(false);
-  useUpdateHold('products',editing!==null || busy || loadingImage);
+  useUpdateHold('products',editing!==null || stockEditing!==null || busy || loadingImage);
   const csvRef=useRef<HTMLInputElement>(null);
   const present = new Set(products.map(p=>p.id));
   const filtered = products.filter(p => {
@@ -67,11 +68,27 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
   const update=(key:keyof ProductInput,value:string)=>setEditing(v=>v?({...v,[key]:value}):null);
 
   function edit(p:Product) {
+    setStockEditing(null);
     const {ml,en}=names(p);
     setEditing({id:p.id,name:p.name,malayalamName:ml,englishName:en,brand:p.brand||'',packSize:p.packSize||'',icon:p.icon||'📦',imageDataUrl:p.imageDataUrl||'',
       sku:p.sku,category:p.category,unit:p.unit,price:p.isTemplate?'':String(p.pricePaise/100),
-      cost:String(p.costPaise/100),tax:String(p.taxBps/100),stock:qtyText(p.stockMilli).replaceAll(',',''),
+      cost:String(p.costPaise/100),tax:String(p.taxBps/100),stock:'',
       lowStock:qtyText(p.lowStockMilli).replaceAll(',','')});
+  }
+  function openStockEditor(p:Product) {
+    setStockEditing({id:p.id,name:productName(p),quantity:qtyText(p.stockMilli).replaceAll(',',''),unit:p.unit});
+    window.requestAnimationFrame(()=>document.getElementById('ref-stock-editor')?.scrollIntoView({behavior:'smooth',block:'center'}));
+  }
+  async function saveStock(event:FormEvent) {
+    event.preventDefault();
+    if (!stockEditing || busy) return;
+    setBusy(true);
+    try {
+      await setProductStock(stockEditing.id,stockEditing.quantity);
+      notify(language==='ml'?'സ്റ്റോക്ക് അപ്ഡേറ്റ് ചെയ്തു.':'Stock updated.');
+      setStockEditing(null);
+    } catch(error) { notify(safeError(error),'error'); }
+    finally { setBusy(false); }
   }
   async function insertPresets(group:PresetGroup) {
     if(busy)return;setBusy(true);
@@ -109,7 +126,7 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
       notify(editing.id?'Product updated in local storage.':'Your private product saved to this phone.');setEditing(null);}
     catch(error){notify(safeError(error),'error');}finally{setBusy(false);}
   }
-  const startAdd=()=>{setEditing({...blank});window.scrollTo({top:0,behavior:'smooth'});};
+  const startAdd=()=>{setStockEditing(null);setEditing({...blank});window.scrollTo({top:0,behavior:'smooth'});};
   const closeForm=()=>{setEditing(null);window.scrollTo({top:0,behavior:'auto'});};
   return <div className="stack ref-products-page">
     {editing ? <>
@@ -123,11 +140,10 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
           <Field label={`${t('productName')} *`}><input required maxLength={100} autoComplete="off" value={language==='ml'?editing.malayalamName:editing.englishName} onChange={e=>update(language==='ml'?'malayalamName':'englishName',e.target.value)} placeholder={language==='ml'?'ഉദാ: തക്കാളി':'e.g. Tomato'}/></Field>
           <div className="ref-form-two"><Field label={`${t('sellingPrice')} *`}><input type="number" inputMode="decimal" min="0.01" step="0.01" required value={editing.price} onChange={e=>update('price',e.target.value)} placeholder="₹ 40.00"/></Field>
             <Field label={`${t('unit')} *`}><select value={editing.unit} onChange={e=>update('unit',e.target.value as Unit)}><option value="kg">{language==='ml'?'കിലോ':'Kilogram'} (kg)</option><option value="pcs">{language==='ml'?'എണ്ണം':'Piece (pcs)'}</option><option value="bundle">{language==='ml'?'കെട്ട്':'Bundle'}</option><option value="ltr">{language==='ml'?'ലിറ്റർ':'Litre'}</option><option value="m">{language==='ml'?'മീറ്റർ':'Metre'}</option></select></Field></div>
-          <div className="ref-form-two"><Field label={t('stockQty')}><input type="number" inputMode="decimal" min="0" step="0.001" value={editing.stock} onChange={e=>update('stock',e.target.value)} placeholder={language==='ml'?'വേണമെങ്കിൽ മാത്രം':'Optional'}/></Field>
-            <Field label={t('category')}><select value={editing.category} onChange={e=>update('category',e.target.value)}>
+          <Field label={t('category')}><select value={editing.category} onChange={e=>update('category',e.target.value)}>
               {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].includes(editing.category)?null:<option value={editing.category}>{categoryName(editing.category)}</option>}
               {['General / മറ്റു സാധനങ്ങൾ','Vegetables / പച്ചക്കറി','Fruits / പഴങ്ങൾ','Foods / ഭക്ഷണം','Rice & Grains / അരിയും ധാന്യങ്ങളും','Prepared Foods / തയ്യാറാക്കിയ ഭക്ഷണം','Bakery / ബേക്കറി','Sweets / മിഠായികൾ','Branded Snacks / ബ്രാൻഡഡ് സ്നാക്സ്','Branded Grocery / ബ്രാൻഡഡ് പലചരക്ക്','Other / മറ്റുള്ളവ'].map(c=><option key={c} value={c}>{categoryName(c)}</option>)}
-            </select></Field></div>
+            </select></Field>
           <details className="ref-advanced-options"><summary>{language==='ml'?'കൂടുതൽ ഓപ്ഷനുകൾ (വില, ബ്രാൻഡ്, ബാർകോഡ്)':'More product options'}<ChevronDown size={19}/></summary>
             <div className="ref-advanced-fields">
               <Field label={t('buyingPrice')}><input type="number" inputMode="decimal" min="0" step="0.01" required value={editing.cost} onChange={e=>update('cost',e.target.value)}/></Field>
@@ -145,6 +161,15 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
       </section>
     </> : <>
       <div className="ref-page-heading"><div><h1>{t('productCatalog')}</h1><p>{products.length} {language==='ml'?'സാധനങ്ങൾ ഈ ഫോണിൽ':'products on this device'}</p></div><button type="button" className="ref-circle-add" aria-label={t('addProduct')} onClick={startAdd}><Plus size={26}/></button></div>
+      {stockEditing&&<section id="ref-stock-editor" className="ref-stock-editor" aria-label={language==='ml'?'സ്റ്റോക്ക് മാറ്റുക':'Update stock'}>
+        <form onSubmit={saveStock}>
+          <div className="ref-stock-editor-heading"><div><strong>{language==='ml'?'സ്റ്റോക്ക് മാറ്റുക':'Update stock'}</strong><p>{stockEditing.name}</p></div><button type="button" className="icon-button" aria-label={t('cancel')} onClick={()=>setStockEditing(null)}><X size={19}/></button></div>
+          <Field label={language==='ml'?`പുതിയ സ്റ്റോക്ക് (${stockEditing.unit})`:`Stock on hand (${stockEditing.unit})`}>
+            <input type="number" inputMode="decimal" min="0" step="0.001" required value={stockEditing.quantity} onChange={e=>setStockEditing(old=>old?({...old,quantity:e.target.value}):null)}/>
+          </Field>
+          <div className="ref-stock-editor-actions"><button className="button primary" disabled={busy}>{language==='ml'?'സേവ് ചെയ്യുക':'Save Stock'}</button><button type="button" className="button ghost" onClick={()=>setStockEditing(null)}>{t('cancel')}</button></div>
+        </form>
+      </section>}
       <section className="ref-products-browser">
         <div className="ref-product-search"><Search size={20}/><input aria-label={t('searchProducts')} placeholder={t('searchProducts')} value={search} onChange={e=>{setSearch(e.target.value);setVisibleCount(60);}}/></div>
         <div className="catalog-filters ref-category-pills" aria-label={language==='ml'?'വിഭാഗങ്ങൾ':'Categories'}>{[
@@ -156,6 +181,7 @@ export default function Products({notify,openAddToken=0}: {notify:(text:string,k
             <div className="ref-product-photo"><ProductVisual product={p} large/></div>
             <div className="ref-product-info"><strong>{productName(p)}</strong><small>{categoryName(p.category||'General')}{p.packSize?` · ${p.packSize}`:''}</small><div className="ref-product-price">{p.isTemplate?<span className="ref-price-empty">{language==='ml'?'വില ചേർക്കുക':'Set price'}</span>:<b>{fmt(p.pricePaise)}</b>}<span> / {p.unit}</span></div></div>
             <div className="ref-product-side"><span className={`ref-stock-pill ${p.stockMilli<=p.lowStockMilli?'low':''}`}>{p.stockMilli<=p.lowStockMilli?(language==='ml'?'കുറഞ്ഞ സ്റ്റോക്ക്':'Low stock'):(language==='ml'?'സ്റ്റോക്കുണ്ട്':'In stock')}</span><small>{qtyText(p.stockMilli)} {p.unit}</small>
+              <button className="ref-edit-product-btn ref-stock-product-btn" type="button" onClick={()=>openStockEditor(p)} aria-label={`${language==='ml'?'സ്റ്റോക്ക് മാറ്റുക':'Update stock'}: ${productName(p)}`}><Boxes size={15}/><span>{language==='ml'?'സ്റ്റോക്ക്':'Stock'}</span></button>
               <button className="ref-edit-product-btn" type="button" onClick={()=>edit(p)} aria-label={`${t('editProduct')}: ${productName(p)}`}><Pencil size={16}/><span>{language==='ml'?'മാറ്റുക':'Edit'}</span></button></div>
             <div className="ref-product-more"><button type="button" disabled={p.isTemplate} title={p.isTemplate?'Set price first':p.active?'Hide product':'Show product'} aria-label={`Toggle ${p.name}`} className="icon-button" onClick={async()=>{try{await toggleProduct(p.id)}catch(e){notify(safeError(e),'error')}}}>{p.active?<ToggleRight size={20}/>:<ToggleLeft size={20}/>}</button></div>
           </article>)}</div>}

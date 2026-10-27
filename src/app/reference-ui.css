@@ -294,3 +294,15 @@
  .ref-cart-item>.vegetable-visual{width:37px;height:43px;}.ref-cart-item-controls .qty-control input{max-width:37px;width:37px;min-width:37px;}.ref-cart-item-controls .qty-control button{width:27px;}
 }
 @media(prefers-reduced-motion:reduce){.ref-action-card,.ref-bottom-nav .bottom-nav-icon{transform:none!important;transition:none!important;}}
+
+/* Stock is managed separately from Add/Edit Product details. */
+.ref-stock-editor{border:1px solid #d3e9df;background:#f5fbf7;border-radius:17px;padding:16px 18px;scroll-margin-top:96px;}
+.ref-stock-editor form{display:grid;gap:13px;max-width:570px;}
+.ref-stock-editor-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.ref-stock-editor-heading strong{font-size:16px;color:#135c47;}
+.ref-stock-editor-heading p{font-size:13px;color:#59756a;margin:2px 0 0;overflow-wrap:anywhere;}
+.ref-stock-editor-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.ref-stock-editor-actions .button{min-height:44px;}
+.ref-stock-product-btn{background:#fff;color:#516b5d;border-color:#e5eee8;}
+.ref-product-side{max-width:125px;}
+@media(max-width:750px){.ref-stock-editor{padding:14px;border-radius:15px;}.ref-product-side{min-width:72px;max-width:105px;}.ref-stock-product-btn{min-height:32px;}.ref-stock-editor-actions .button{flex:1;}}
