@@ -30,7 +30,9 @@ for(let pos=0;pos+512<=archive.length;){
   if(type==='0'||type==='\0'){
     const destination=resolve(root,file);
     mkdirSync(dirname(destination),{recursive:true});
-    writeFileSync(destination,archive.subarray(pos+512,pos+512+size));
+    // Photos committed directly in public/products take priority over bundled defaults.
+    // This protects custom upgrades while keeping the remaining 850 photos offline.
+    if(!existsSync(destination)) writeFileSync(destination,archive.subarray(pos+512,pos+512+size));
     count++;
   }
   pos+=512+Math.ceil(size/512)*512;
