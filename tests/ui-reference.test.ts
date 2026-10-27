@@ -11,19 +11,24 @@ describe('Reference mobile UI essentials',()=>{
     expect(src).toContain('ref-bottom-primary');
     expect(src).toContain('openAddToken');
   });
-  it('shows only individual product add, without catalog category lists',()=>{
+  it('lets each merchant select catalog items and add their own products',()=>{
     const src=read('src/components/Products.tsx');
+    const picker=read('src/components/CatalogPicker.tsx');
     expect(src).toContain('isShopProduct');
     expect(src).toContain('ref-add-product-cta');
-    expect(src).not.toContain('ref-category-pills');
-    expect(src).not.toContain('ref-catalog-library');
+    expect(src).toContain('openCatalog');
+    expect(src).toContain('onCustom={startAdd}');
     expect(src).not.toContain('insertAllPresets');
+    expect(picker).toContain('addSelectedCatalogProducts');
+    expect(picker).toContain('CATALOG_GROUPS');
+    expect(picker).toContain('ref-picker-product');
   });
   it('keeps product edits and pricing visible',()=>{
     const src=read('src/components/Products.tsx');
     expect(src).toContain('ref-edit-product-btn');
     expect(src).toContain('ref-photo-input');
     expect(src).toContain("language==='ml'?'malayalamName':'englishName'");
+    expect(src).toContain("editing.malayalamName||editing.englishName");
   });
   it('allows a sale without a receipt and preserves optional PDF',()=>{
     const src=read('src/components/Billing.tsx');
