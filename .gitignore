@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*
+!.env.example
+*.tsbuildinfo
+coverage
+.DS_Store
+
+# generated at build time to match current release
+public/sw.js
+public/version.json
