@@ -33,6 +33,16 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
+    // Refresh only these ten product photos once; preserve the remaining offline photos.
+    // This cache marker survives later releases and never touches IndexedDB.
+    const photoCache = await caches.open(PHOTO_CACHE);
+    const photoMarker = '/__ksb_photo_revision_vegetables_001_010_20261027';
+    if (!(await photoCache.match(photoMarker))) {
+      await Promise.all(Array.from({length:10},(_,i)=>
+        photoCache.delete('/products/vegetables/kerala-veg-'+String(i+1).padStart(3,'0')+'.webp')
+      ));
+      await photoCache.put(photoMarker,new Response('updated'));
+    }
     const names = await caches.keys();
     const shells = names.filter(n => n.startsWith(SHELL_PREFIX));
     // Retain current and previous release for offline tabs still using old JS/CSS.

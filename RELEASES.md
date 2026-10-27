@@ -1,3 +1,9 @@
+## Version 1.6.2 — Individual vegetable photos (01–10)
+
+- Replaced Tomato, Onion, Shallot, Potato, Carrot, Beetroot, Cabbage, Cauliflower, Green Chilli and Capsicum product photos.
+- 512 × 512 WebP files at `public/products/vegetables/kerala-veg-001.webp` through `kerala-veg-010.webp`.
+- The PWA invalidates only the ten replaced cached photo paths on first activation; other product photos and private IndexedDB data are unchanged.
+
 ## Version 1.6.0 — Shop-specific catalog selection and one-language product creation
 
 - Reinstated the 850-product bilingual **searchable, category-filtered selection catalog**. It is a separate screen, not 850 products automatically appearing in My Shop.
