@@ -5,11 +5,16 @@ This update implements the supplied four-screen reference as *working applicatio
 ## Mobile flow
 
 - **Home:** greeting, daily sales, sale count, expenses, sales-minus-expenses (not accounting profit), six quick actions and recent sales.
-- **Products:** searchable photo-led list, bilingual selection from the global language switch, category chips, prices, explicit Edit button; extra catalog/CSV tools are in the collapsible library below the list.
+- **Products:** searchable photo-led **My Products** list with price and Edit button; a separate searchable 850-item selection catalog with category chips allows merchants to add only relevant products.
 - **Sale:** swipeable product cards on narrow screens, photo-led cart rows, quantity, discount, payment method and total. Saving a sale is supported without issuing a PDF; PDF is a separate option.
 - **Add / Edit:** photo picker, one displayed product name in the selected language, price/unit/category, expandable fields for tax/brand/barcode/etc, clear Save and Cancel.
 - **More:** the existing Settings / backup / iOS install guide / IndexedDB storage panel uses the same white/green responsive visual treatment. No customer collection feature is present.
 - **Bottom navigation:** Home, Products, raised central Sale action, Reports, More. Expenses remain available through Home quick actions or the desktop/slide-out sidebar.
+
+## Version 1.6 additions
+
+- Use Products → Choose from catalog → select one or more → Add to My Shop, or New product to create a missing item.
+- Malayalam or English name suffices; both are not mandatory. Global language switch remains visible.
 
 ## Release / safety
 

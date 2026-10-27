@@ -1,3 +1,13 @@
+## Version 1.6.0 — Shop-specific catalog selection and one-language product creation
+
+- Reinstated the 850-product bilingual **searchable, category-filtered selection catalog**. It is a separate screen, not 850 products automatically appearing in My Shop.
+- Supports selecting individual or multiple items and copying only those items into the current device's IndexedDB.
+- Preserves configured products and old imported templates without duplicates, wiping bills, changing product photos, or modifying existing prices.
+- Provides a **New product** option for items missing from the catalog.
+- A product can be created in Malayalam **or** English; both names are not mandatory, and changing the global language displays the available name.
+- Newly selected ₹0 products appear in My Products with a **Set price** prompt. Setting their first price makes them available in Billing.
+- No customer details, stock-count fields, or low-stock warnings.
+
 ## V11 — 1.5.0 (Sales-only update)
 
 - Removed Product Stock and Low Stock fields, Stock button, list badges and dashboard alerts.

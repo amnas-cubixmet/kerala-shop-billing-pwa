@@ -1,3 +1,11 @@
+# Version 1.6.0 — Select products for your shop
+
+Open **Products → Choose from catalog** to search the **850 preloaded suggestions** in Malayalam or English, filter by category, tick one or several items, and tap **Add to My Shop**. Only selected products are added to that shop's local IndexedDB; unused suggestions are not imported. Choose **New product** to create an item that is not in the catalog. New and edited products require a name in **one language only** (Malayalam OR English). The mobile app-wide language switch controls which name is shown, and existing bilingual data is preserved. Each shopkeeper sets their own selling price before billing; no stock tracking or customer information is required.
+
+**Existing browser data is preserved.** Previously imported but unselected starter templates remain hidden in My Products until chosen, while products already customized/selected stay visible. Keep regular JSON backups. The 850 illustrative images remain bundled with the app.
+
+---
+
 # V11 — Sales-only release (1.5.0)
 
 The app tracks daily sales, products, expenses, and optional receipts. It no longer asks for or tracks stock quantities, low-stock alerts, or inventory adjustments. All sale quantities are allowed for active, priced products. Older IndexedDB data and backups are preserved; legacy inventory records are only retained for backward compatibility.
