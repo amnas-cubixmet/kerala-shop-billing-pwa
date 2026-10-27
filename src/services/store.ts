@@ -121,7 +121,7 @@ export async function saveInvoice(args: {
   if (!args.cart.length) throw new Error('Cart is empty.');
   const discountPaise = rupeeToPaise(args.discount || '0');
   const shop = await initShop();
-  return db.transaction('rw', db.products, db.invoices, db.invoiceItems, db.stockMovements, db.counters, db.customers, async () => {
+  return db.transaction('rw', [db.products, db.invoices, db.invoiceItems, db.stockMovements, db.counters, db.customers], async () => {
     // Read product stock WITHIN transaction to prevent race with another tab.
     const products = await db.products.bulkGet(args.cart.map((c) => c.productId));
     if (products.some((p) => !p)) throw new Error('A product was removed.');
