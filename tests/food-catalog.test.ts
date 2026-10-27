@@ -17,7 +17,7 @@ describe('local CSV parser',()=>{
   it('supports Malayalam and quoted comma/newline fields',()=>{
     const rows=parseCsv('malayalamName,englishName\r\n"മാങ്ങ, നല്ലത്","Mango\nripe"\r\n');
     expect(rows).toEqual([['malayalamName','englishName'],['മാങ്ങ, നല്ലത്','Mango\nripe']]);
-    expect(PRODUCT_CSV_HEADER.split(',')).toHaveLength(7);
+    expect(PRODUCT_CSV_HEADER.split(',')).toHaveLength(9);
   });
   it('rejects incomplete quoted fields',()=>{expect(()=>parseCsv('"broken')).toThrow();});
 });
