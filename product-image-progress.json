@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "Tracks images committed individually to GitHub (not generic images unpacked at build). Existing product records and bundled fallbacks remain untouched.",
   "total_products": 850,
-  "committed_product_image_count": 95,
+  "committed_product_image_count": 98,
   "completed_product_ids": [
     "kerala-veg-001",
     "kerala-veg-002",
@@ -54,16 +54,26 @@
     "kerala-veg-048",
     "kerala-veg-049",
     "kerala-veg-050",
+    "kerala-fruit-001",
+    "kerala-fruit-002",
+    "kerala-fruit-003",
     "kerala-fruit-004",
+    "kerala-fruit-005",
+    "kerala-fruit-006",
     "kerala-fruit-007",
     "kerala-fruit-008",
+    "kerala-fruit-009",
+    "kerala-fruit-010",
     "kerala-fruit-011",
+    "kerala-fruit-012",
     "kerala-fruit-013",
+    "kerala-fruit-014",
     "kerala-fruit-015",
     "kerala-fruit-016",
     "kerala-fruit-017",
     "kerala-fruit-018",
     "kerala-fruit-019",
+    "kerala-fruit-020",
     "kerala-fruit-021",
     "kerala-fruit-023",
     "kerala-fruit-027",
@@ -91,14 +101,7 @@
     "kerala-food-155",
     "kerala-food-156",
     "kerala-food-160",
-    "kerala-food-190",
-    "kerala-fruit-001",
-    "kerala-fruit-002",
-    "kerala-fruit-003",
-    "kerala-fruit-005",
-    "kerala-fruit-006",
-    "kerala-fruit-009",
-    "kerala-fruit-010"
+    "kerala-food-190"
   ],
   "verified_image_file_paths": [
     "public/products/vegetables/kerala-veg-001.webp",
@@ -151,16 +154,26 @@
     "public/products/vegetables/kerala-veg-048.webp",
     "public/products/vegetables/kerala-veg-049.webp",
     "public/products/vegetables/kerala-veg-050.webp",
+    "public/products/fruits/kerala-fruit-001.webp",
+    "public/products/fruits/kerala-fruit-002.webp",
+    "public/products/fruits/kerala-fruit-003.webp",
     "public/products/fruits/kerala-fruit-004.webp",
+    "public/products/fruits/kerala-fruit-005.webp",
+    "public/products/fruits/kerala-fruit-006.webp",
     "public/products/fruits/kerala-fruit-007.webp",
     "public/products/fruits/kerala-fruit-008.webp",
+    "public/products/fruits/kerala-fruit-009.webp",
+    "public/products/fruits/kerala-fruit-010.webp",
     "public/products/fruits/kerala-fruit-011.webp",
+    "public/products/fruits/kerala-fruit-012.webp",
     "public/products/fruits/kerala-fruit-013.webp",
+    "public/products/fruits/kerala-fruit-014.webp",
     "public/products/fruits/kerala-fruit-015.webp",
     "public/products/fruits/kerala-fruit-016.webp",
     "public/products/fruits/kerala-fruit-017.webp",
     "public/products/fruits/kerala-fruit-018.webp",
     "public/products/fruits/kerala-fruit-019.webp",
+    "public/products/fruits/kerala-fruit-020.webp",
     "public/products/fruits/kerala-fruit-021.webp",
     "public/products/fruits/kerala-fruit-023.webp",
     "public/products/fruits/kerala-fruit-027.webp",
@@ -188,28 +201,9 @@
     "public/products/foods/kerala-food-155.webp",
     "public/products/foods/kerala-food-156.webp",
     "public/products/foods/kerala-food-160.webp",
-    "public/products/foods/kerala-food-190.webp",
-    "public/products/fruits/kerala-fruit-001.webp",
-    "public/products/fruits/kerala-fruit-002.webp",
-    "public/products/fruits/kerala-fruit-003.webp",
-    "public/products/fruits/kerala-fruit-005.webp",
-    "public/products/fruits/kerala-fruit-006.webp",
-    "public/products/fruits/kerala-fruit-009.webp",
-    "public/products/fruits/kerala-fruit-010.webp"
+    "public/products/foods/kerala-food-190.webp"
   ],
   "pending_products": [
-    {
-      "id": "kerala-fruit-012",
-      "path": "public/products/fruits/kerala-fruit-012.webp"
-    },
-    {
-      "id": "kerala-fruit-014",
-      "path": "public/products/fruits/kerala-fruit-014.webp"
-    },
-    {
-      "id": "kerala-fruit-020",
-      "path": "public/products/fruits/kerala-fruit-020.webp"
-    },
     {
       "id": "kerala-fruit-022",
       "path": "public/products/fruits/kerala-fruit-022.webp"
@@ -3291,21 +3285,31 @@
         "kerala-fruit-009",
         "kerala-fruit-010"
       ]
+    },
+    {
+      "batch": "Fruit products 011–020 (missing 012,014,020)",
+      "commit": "533da08bddf925b39a680ceb588d776b9f1dea07",
+      "branch": "main",
+      "newly_added_product_ids": [
+        "kerala-fruit-012",
+        "kerala-fruit-014",
+        "kerala-fruit-020"
+      ],
+      "batch_verified_product_ids": [
+        "kerala-fruit-011",
+        "kerala-fruit-012",
+        "kerala-fruit-013",
+        "kerala-fruit-014",
+        "kerala-fruit-015",
+        "kerala-fruit-016",
+        "kerala-fruit-017",
+        "kerala-fruit-018",
+        "kerala-fruit-019",
+        "kerala-fruit-020"
+      ]
     }
   ],
   "next_batch": [
-    {
-      "id": "kerala-fruit-012",
-      "path": "public/products/fruits/kerala-fruit-012.webp"
-    },
-    {
-      "id": "kerala-fruit-014",
-      "path": "public/products/fruits/kerala-fruit-014.webp"
-    },
-    {
-      "id": "kerala-fruit-020",
-      "path": "public/products/fruits/kerala-fruit-020.webp"
-    },
     {
       "id": "kerala-fruit-022",
       "path": "public/products/fruits/kerala-fruit-022.webp"
@@ -3333,9 +3337,21 @@
     {
       "id": "kerala-fruit-032",
       "path": "public/products/fruits/kerala-fruit-032.webp"
+    },
+    {
+      "id": "kerala-fruit-033",
+      "path": "public/products/fruits/kerala-fruit-033.webp"
+    },
+    {
+      "id": "kerala-fruit-034",
+      "path": "public/products/fruits/kerala-fruit-034.webp"
+    },
+    {
+      "id": "kerala-fruit-035",
+      "path": "public/products/fruits/kerala-fruit-035.webp"
     }
   ],
-  "quality_note": "Seven new Kerala fruit photos (001,002,003,005,006,009,010) verified locally as unique 1200×1200 WebP files and confirmed as binary blobs in the GitHub main tree. Other pre-existing photos have not been independently audited for product-identity or dimensions.",
-  "git_head_at_last_scan": "4dbb9d97498c4a5124e305d81180730204307139",
-  "updated_at": "2026-10-27"
+  "quality_note": "Three new 1200×1200 WebP photos for fruit 012, 014 and 020 were validated locally and their paths were verified in the GitHub main tree. Existing bundled fallback images and the other seven photos in 011–020 were left unchanged; remaining photos are not independently quality-audited.",
+  "git_head_at_last_scan": "533da08bddf925b39a680ceb588d776b9f1dea07",
+  "updated_at": "2026-10-27T13:03:20.272Z"
 }
