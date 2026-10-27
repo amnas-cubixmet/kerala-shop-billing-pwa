@@ -43,6 +43,15 @@ self.addEventListener('activate', event => {
       ));
       await photoCache.put(photoMarker,new Response('updated'));
     }
+    // Clear only upgraded product photos once so users see the latest image,
+    // without deleting all other photos cached for offline use.
+    const newVegMarker = '/__ksb_photo_revision_vegetables_011_030_20261027';
+    if (!(await photoCache.match(newVegMarker))) {
+      await Promise.all(Array.from({length:20},(_,i)=>
+        photoCache.delete('/products/vegetables/kerala-veg-'+String(i+11).padStart(3,'0')+'.webp')
+      ));
+      await photoCache.put(newVegMarker,new Response('updated'));
+    }
     const names = await caches.keys();
     const shells = names.filter(n => n.startsWith(SHELL_PREFIX));
     // Retain current and previous release for offline tabs still using old JS/CSS.

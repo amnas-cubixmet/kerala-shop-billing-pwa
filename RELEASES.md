@@ -1,3 +1,9 @@
+## Version 1.6.3 — Vegetables 011–030 product photo upgrade
+
+- Added 20 individually generated, optimized 512×512 WebP product photos under `public/products/vegetables/kerala-veg-011.webp` through `kerala-veg-030.webp`.
+- Correct IDs for Okra, Brinjal, Bitter Gourd, Snake Gourd, Ridge Gourd, Bottle Gourd, Cucumber, Yellow Cucumber, Ash Gourd, Pumpkin, Ivy Gourd, French Beans, Yardlong Beans, Hyacinth Beans, Drumstick, Tapioca, Elephant Foot Yam, Taro, Chinese Potato, Sweet Potato.
+- Refresh only these 20 cached product photos when the upgraded service worker activates; retain offline photo cache and IndexedDB bills, products and expenses.
+
 ## Version 1.6.2 — Individual vegetable photos (01–10)
 
 - Replaced Tomato, Onion, Shallot, Potato, Carrot, Beetroot, Cabbage, Cauliflower, Green Chilli and Capsicum product photos.
