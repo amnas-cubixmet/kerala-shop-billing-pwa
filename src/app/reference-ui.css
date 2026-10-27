@@ -290,3 +290,22 @@
  .ref-cart-item>.vegetable-visual{width:37px;height:43px;}.ref-cart-item-controls .qty-control input{max-width:37px;width:37px;min-width:37px;}.ref-cart-item-controls .qty-control button{width:27px;}
 }
 @media(prefers-reduced-motion:reduce){.ref-action-card,.ref-bottom-nav .bottom-nav-icon{transform:none!important;transition:none!important;}}
+
+/* v1.6: products are added individually, without category/catalog browse panels. */
+.ref-app .ref-add-product-cta{
+  width:auto;min-width:123px;min-height:44px;height:auto;
+  padding:10px 15px;display:inline-flex;align-items:center;
+  justify-content:center;gap:8px;font-size:13px;font-weight:750;
+  white-space:nowrap;
+}
+.ref-app .ref-add-product-cta span{display:inline;line-height:1.15;}
+.ref-products-browser .ref-product-list-heading{margin-top:13px;}
+.ref-products-browser .ref-product-search{margin-bottom:6px;}
+.ref-product-info small:empty{display:none;}
+@media(max-width:750px){
+  .ref-app .ref-add-product-cta{width:auto;min-width:114px;min-height:45px;padding:9px 12px;flex-shrink:0;}
+  .ref-products-page .ref-page-heading{flex-wrap:wrap;align-items:center;}
+}
+@media(max-width:360px){
+  .ref-app .ref-add-product-cta{font-size:12px;min-width:108px;padding:9px;}
+}

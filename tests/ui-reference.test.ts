@@ -11,6 +11,14 @@ describe('Reference mobile UI essentials',()=>{
     expect(src).toContain('ref-bottom-primary');
     expect(src).toContain('openAddToken');
   });
+  it('shows only individual product add, without catalog category lists',()=>{
+    const src=read('src/components/Products.tsx');
+    expect(src).toContain('isShopProduct');
+    expect(src).toContain('ref-add-product-cta');
+    expect(src).not.toContain('ref-category-pills');
+    expect(src).not.toContain('ref-catalog-library');
+    expect(src).not.toContain('insertAllPresets');
+  });
   it('keeps product edits and pricing visible',()=>{
     const src=read('src/components/Products.tsx');
     expect(src).toContain('ref-edit-product-btn');

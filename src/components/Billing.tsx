@@ -8,6 +8,7 @@ import { useUpdateHold } from '@/lib/update-guard';
 import { calculateQuote, fmt, rupeeToPaise, unitsToMilli } from '@/lib/money';
 import { downloadReceipt } from '@/services/exports';
 import { saveInvoice } from '@/services/store';
+import { isShopProduct } from '@/lib/shop-products';
 import { Empty, Field, Panel, safeError } from '@/components/ui';
 import ProductVisual from '@/components/ProductVisual';
 import type { CartEntry, Invoice, PaymentMethod } from '@/types/models';
@@ -23,7 +24,7 @@ function readDraft(): BillingDraft | null {
 }
 export default function Billing({notify}: {notify:(message:string,kind?:'error'|'success')=>void}) {
   const {t,productName,language}=useLanguage();
-  const queriedProducts = useLiveQuery(()=>db.products.toArray().then(rows => rows.filter(p => p.active)),[]);
+  const queriedProducts = useLiveQuery(()=>db.products.toArray().then(rows => rows.filter(p => p.active && isShopProduct(p))),[]);
   const products = useMemo(()=>queriedProducts ?? [],[queriedProducts]);
   const shop = useLiveQuery(()=>db.shops.toCollection().first(),[]);
   const [search,setSearch]=useState(''),[cart,setCart]=useState<CartEntry[]>(() => typeof window !== 'undefined' ? readDraft()?.cart ?? [] : []);
