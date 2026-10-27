@@ -64,7 +64,7 @@ export async function saveProduct(data: ProductInput): Promise<void> {
       source: existing?.source ?? (existing?.isTemplate ? 'catalog' : 'custom'),
       icon: data.icon.trim().slice(0, 16), imageDataUrl: data.imageDataUrl, isTemplate: false,
       sku: data.sku.trim(), category: data.category.trim(),
-      unit: data.unit, pricePaise, costPaise, taxBps: tax * 100, active: existing?.isTemplate ? pricePaise > 0 : existing?.active ?? true,
+      unit: data.unit, pricePaise, costPaise, taxBps: tax * 100, active: existing?.pricePaise === 0 ? pricePaise > 0 : existing?.isTemplate ? pricePaise > 0 : existing?.active ?? true,
       createdAt: existing?.createdAt ?? now, updatedAt: now,
     };
     await db.products.put(product);
@@ -154,6 +154,51 @@ export function productPresets(group: PresetGroup): FoodPreset[] {
     return { id:v.id, malayalamName, englishName:english.join(' / '), icon:v.icon, unit:v.unit, category:'Vegetables / പച്ചക്കറി' };
   });
 }
+/** All 850 photo-backed offline suggestions; no shop records are created just by browsing. */
+export const CATALOG_GROUPS = ['vegetables', 'fruits', 'foods', 'bakery', 'sweets', 'branded'] as const;
+export function allProductPresets(): FoodPreset[] {
+  return CATALOG_GROUPS.flatMap(group => productPresets(group));
+}
+
+/** Only the IDs selected by this shopkeeper are copied into this device's private database. */
+export async function addSelectedCatalogProducts(ids: readonly string[]): Promise<number> {
+  const unique = [...new Set(ids)];
+  if (!unique.length) return 0;
+  const catalog = new Map(allProductPresets().map(product => [product.id, product]));
+  if (unique.some(id => !catalog.has(id))) throw new Error('Unknown catalog product.');
+  const now = new Date().toISOString();
+  return db.transaction('rw', db.products, async () => {
+    const saved = await db.products.bulkGet(unique);
+    const toCreate: Product[] = [];
+    const toSelect: string[] = [];
+    unique.forEach((id, index) => {
+      const preset = catalog.get(id)!;
+      const existing = saved[index];
+      if (!existing) {
+        toCreate.push({
+          id, name:[preset.malayalamName, preset.englishName].filter(Boolean).join(' / '),
+          malayalamName:preset.malayalamName, englishName:preset.englishName,
+          brand:'brand' in preset ? String(preset.brand) : '',
+          packSize:'packSize' in preset ? String(preset.packSize) : '',
+          source:'catalog', icon:preset.icon, imageDataUrl:'', isTemplate:false,
+          sku:'', category:preset.category, unit:preset.unit, pricePaise:0,
+          costPaise:0, taxBps:0, active:false, createdAt:now, updatedAt:now,
+        });
+      } else if (existing.source === 'catalog' && existing.isTemplate === true) {
+        // Old installations may have the full catalog saved as unused templates.
+        // Select only this product; never overwrite its images, price, or other data.
+        toSelect.push(id);
+      }
+    });
+    if (toCreate.length) await db.products.bulkAdd(toCreate);
+    for (const id of toSelect) {
+      const existing = saved[unique.indexOf(id)]!;
+      await db.products.update(id, {isTemplate:false, active:existing.pricePaise>0, updatedAt:now});
+    }
+    return toCreate.length + toSelect.length;
+  });
+}
+
 export async function addProductPresets(group: PresetGroup): Promise<number> {
   const presets = productPresets(group);
   const now = new Date().toISOString();
