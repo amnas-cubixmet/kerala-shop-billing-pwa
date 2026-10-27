@@ -110,7 +110,7 @@
 .ref-product-side>small{font-size:11px;color:#198365;font-weight:750;}
 .ref-edit-product-btn{display:inline-flex;justify-content:center;align-items:center;gap:5px;padding:6px 10px;border-radius:9px;color:#08735b;background:#eef8f2;border:1px solid #d7ede0;font-size:11px;font-weight:750;min-height:32px;}
 .ref-edit-product-btn:hover{background:#e0f4ea;}
-.ref-product-more{position:absolute;top:9px;right:9px;opacity:0;pointer-events:none;}
+.ref-product-more{position:static;opacity:1;pointer-events:auto;align-self:flex-end;flex-shrink:0;margin-right:-4px;}
 .ref-product-row:focus-within .ref-product-more,.ref-product-row:hover .ref-product-more{opacity:1;pointer-events:auto;}
 .ref-product-more .icon-button{padding:2px;width:26px;height:26px;min-height:26px;background:#fff!important;}
 .ref-empty-products{padding:27px 15px;text-align:center;border:1px dashed #d4e6db;border-radius:16px;display:grid;place-items:center;gap:12px;}
@@ -286,7 +286,7 @@
  .ref-topbar{padding:7px 9px!important;}.ref-topbar .topbar-left{gap:5px;}.ref-topbar .topbar-titles{min-width:0;}.ref-store-title{font-size:12px;max-width:135px;}.ref-store-subtitle{font-size:9px;}
  .ref-main{padding:13px 11px calc(111px + env(safe-area-inset-bottom))!important;}
  .ref-app .bottom-nav.ref-bottom-nav{left:7px;right:7px;padding-left:3px;padding-right:3px;}
- .ref-action-card strong{font-size:10px;}.ref-stat-card{padding:11px 9px;gap:7px;}.ref-stat-icon{width:29px;height:29px;}
+ .ref-action-card strong{font-size:10px;}.ref-stat-card{flex-direction:column;gap:5px;padding:11px 9px;min-height:124px;}.ref-stat-copy{gap:5px;width:100%;}.ref-stat-icon{width:29px;height:29px;}
  .ref-product-row{gap:7px;}.ref-product-photo{width:63px;height:66px;}.ref-product-photo .vegetable-visual,.ref-product-photo .vegetable-visual.large{width:62px;height:62px;}
  .ref-product-side{min-width:71px;}.ref-stock-pill{padding:4px 6px;}.ref-product-info strong{font-size:12px;}.ref-edit-product-btn{padding:5px 7px;}
  .ref-form-two{grid-template-columns:1fr;}.ref-advanced-fields{grid-template-columns:1fr;}
