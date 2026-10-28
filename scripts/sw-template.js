@@ -52,6 +52,14 @@ self.addEventListener('activate', event => {
       ));
       await photoCache.put(newVegMarker,new Response('updated'));
     }
+    // Refresh the eleven newly replaced vegetable images without clearing other offline assets.
+    const fullVegMarker = '/__ksb_photo_revision_vegetables_040_050_20261028';
+    if (!(await photoCache.match(fullVegMarker))) {
+      await Promise.all(Array.from({length:11},(_,i)=>
+        photoCache.delete('/products/vegetables/kerala-veg-'+String(i+40).padStart(3,'0')+'.webp')
+      ));
+      await photoCache.put(fullVegMarker,new Response('updated'));
+    }
     const names = await caches.keys();
     const shells = names.filter(n => n.startsWith(SHELL_PREFIX));
     // Retain current and previous release for offline tabs still using old JS/CSS.
